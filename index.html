@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f0c29">
+<title>🐍 Python Revision — Year 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{min-height:100vh;min-height:100dvh;overflow-x:hidden;}
+body{background:linear-gradient(135deg,#0f0c29 0%,#1a1a40 40%,#24243e 100%);font-family:'Nunito','Segoe UI',sans-serif;color:#e8e8f0;}
+.stars{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(2px 2px at 20px 30px,#ffffff33,transparent),radial-gradient(2px 2px at 40px 70px,#ffffff22,transparent),radial-gradient(1px 1px at 90px 40px,#ffffff44,transparent);background-size:200px 100px;pointer-events:none;z-index:0;}
+.wrap{padding:20px 16px;max-width:720px;margin:0 auto;position:relative;z-index:1;padding-bottom:40px;}
+.card{background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 20px;}
+@media(max-width:480px){.card{padding:18px 14px;border-radius:16px;}}
+.btn{border:none;cursor:pointer;font-family:inherit;transition:all 0.2s;-webkit-appearance:none;appearance:none;}
+.btn:active{transform:scale(0.97)!important;}
+.back-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:#e8e8f0;padding:8px 16px;font-weight:700;font-size:14px;}
+.code-block{font-family:'Fira Code','Courier New',monospace;font-size:13px;background:rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px 16px;line-height:1.7;overflow-x:auto;white-space:pre-wrap;color:#e8e8f0;margin:12px 0 4px;}
+@media(max-width:480px){.code-block{font-size:12px;padding:12px;}}
+.code-line{display:flex;gap:10px;}
+.code-num{color:#555;min-width:18px;text-align:right;user-select:none;font-size:12px;}
+.kw{color:#569cd6}.st{color:#ce9178}.nm{color:#b5cea8}.vr{color:#9cdcfe}.cm{color:#6a9955}.op{color:#d4d4d4}
+.progress-bar{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:20px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:3px;transition:width 0.4s ease;}
+.option-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:14px 16px;color:#e8e8f0;font-family:inherit;font-size:14px;font-weight:600;text-align:left;width:100%;transition:all 0.2s;line-height:1.4;cursor:pointer;display:flex;align-items:flex-start;gap:10px;}
+@media(max-width:480px){.option-btn{padding:12px 14px;font-size:13px;}}
+.option-btn:active{transform:scale(0.98);}
+.option-letter{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;min-width:24px;border-radius:7px;font-size:12px;font-weight:800;flex-shrink:0;}
+.topic-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+@media(max-width:400px){.topic-grid{grid-template-columns:1fr 1fr;}}
+.main-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:28px;}
+@media(max-width:400px){.main-grid{grid-template-columns:1fr;}}
+.tab-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.tab-btn{border-radius:10px;padding:6px 12px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;transition:all 0.2s;border-width:1px;border-style:solid;}
+.cheat-item{background:rgba(0,0,0,0.25);border-radius:12px;padding:14px 16px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.06);}
+.cheat-item:last-child{margin-bottom:0;}
+.cheat-term{font-family:'Fira Code',monospace;font-size:14px;font-weight:500;display:block;margin-bottom:5px;}
+@media(max-width:480px){.cheat-term{font-size:13px;}}
+.cheat-desc{font-size:13px;color:#b8b8d0;line-height:1.5;}
+.result-card{text-align:center;}
+.result-pct{font-size:42px;font-weight:900;margin-bottom:8px;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.interp-input{width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:12px 14px;color:#e8e8f0;font-family:'Fira Code',monospace;font-size:14px;resize:vertical;outline:none;min-height:60px;}
+.interp-input:focus{border-color:#339AF0;}
+.fade-in{opacity:1;transform:translateY(0);transition:opacity 0.15s,transform 0.15s;}
+.fade-out{opacity:0;transform:translateY(10px);}
+.hidden{display:none!important;}
+.score-bar{display:flex;gap:16px;font-size:14px;font-weight:700;}
+.nav-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:20px;}
+.review-item{background:rgba(0,0,0,0.2);border-radius:12px;padding:14px 16px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.06);}
+.full-btn{width:100%;padding:14px;border:none;border-radius:14px;color:#fff;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px;}
+@media(max-width:480px){.full-btn{font-size:15px;padding:13px;}}
+.hint-box{margin-top:12px;padding:12px 16px;background:rgba(252,196,25,0.08);border:1px solid rgba(252,196,25,0.2);border-radius:12px;color:#FCC419;font-size:14px;}
+.explanation-box{margin-top:16px;padding:14px 16px;border-radius:14px;border:1px solid;}
+.correct-bg{background:rgba(81,207,102,0.08);border-color:rgba(81,207,102,0.2);}
+.wrong-bg{background:rgba(255,107,107,0.08);border-color:rgba(255,107,107,0.2);}
+.interp-result{margin-top:16px;padding:16px 18px;border-radius:14px;border:1px solid;}
+.answer-block{font-family:'Fira Code',monospace;font-size:14px;background:rgba(0,0,0,0.2);padding:8px 12px;border-radius:8px;margin:6px 0 8px;white-space:pre-wrap;}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap" id="app"></div>
+<script>
+// ===== DATA =====
+const CHEAT_SHEET=[
+{title:"Printing",icon:"🖨️",color:"#FF6B6B",items:[
+{term:'print("hello")',desc:"Outputs text to the screen"},
+{term:'print("""art""")',desc:"Triple quotes for ASCII art (multi-line)"},
+{term:'print("Hi", name)',desc:"Comma includes a variable (any data type)"},
+{term:'print("Hi " + name)',desc:"Concatenation with + (strings only!)"},
+{term:'print("Hi " + str(age))',desc:"Cast integer to string for concatenation"},
+{term:"# This is a comment",desc:"Comments explain code — Python ignores them"}
+]},
+{title:"Variables",icon:"📦",color:"#FFA94D",items:[
+{term:'playerName = "Zara"',desc:"Stores a value that can change"},
+{term:"Descriptive names",desc:"Use clear names like score not x"},
+{term:"No spaces or starting numbers",desc:"my_var ✓  2name ✗  my var ✗"},
+{term:"= is assignment",desc:"score = 10 puts the value 10 into score"}
+]},
+{title:"Data Types",icon:"🏷️",color:"#51CF66",items:[
+{term:'String → "hello"',desc:'Text in speech marks (even "123" is a string)'},
+{term:"Integer → 42",desc:"Whole number, no decimal point"},
+{term:"Float → 3.14",desc:"Number with a decimal point"},
+{term:'int("5") → 5',desc:"Cast string to integer"},
+{term:'str(5) → "5"',desc:"Cast integer to string"},
+{term:"input() is always a string!",desc:"Must cast with int() for maths"}
+]},
+{title:"Operators",icon:"🔢",color:"#339AF0",items:[
+{term:"+ - * /",desc:"Add, subtract, multiply, divide"},
+{term:"% (modulus)",desc:"Gives the remainder: 5 % 2 = 1"},
+{term:"> <",desc:"Greater than, less than"},
+{term:">= <=",desc:"Greater/less than or equal to"},
+{term:"== !=",desc:"Equal to / not equal to"},
+{term:"Even check: n % 2 == 0",desc:"If remainder is 0, number is even"}
+]},
+{title:"Selection (IF)",icon:"🔀",color:"#B197FC",items:[
+{term:"if condition:",desc:"Runs code only if condition is True"},
+{term:"elif condition:",desc:"Checks another condition if first was False"},
+{term:"else:",desc:"Runs if nothing above was True"},
+{term:"= vs ==",desc:"= assigns a value, == checks equality"},
+{term:'if x == "a" or x == "b":',desc:"Correct way to use 'or'"},
+{term:'if x == "a" or "b":  ✗',desc:"WRONG! Must re-reference variable"}
+]},
+{title:"Loops",icon:"🔁",color:"#20C997",items:[
+{term:"while condition:",desc:"Condition controlled — loops while True"},
+{term:"for i in range(5):",desc:"Count controlled — loops 5 times (0,1,2,3,4)"},
+{term:"range(3) → 0, 1, 2",desc:"Starts at 0, stops BEFORE 3"},
+{term:"range(1, 5) → 1, 2, 3, 4",desc:"Custom start and stop"},
+{term:"Indented = inside loop",desc:"Un-indented runs AFTER loop finishes"},
+{term:"Infinite loop danger!",desc:"While loop without updating condition = never stops"}
+]},
+{title:"Random",icon:"🎲",color:"#F06595",items:[
+{term:"import random",desc:"Must import at the top"},
+{term:"random.randint(1, 6)",desc:"Random whole number 1 to 6 (inclusive)"},
+{term:"random.choice(myList)",desc:"Picks one random item from a list"}
+]},
+{title:"Functions",icon:"⚙️",color:"#FCC419",items:[
+{term:"def myFunction():",desc:"Defines a function — doesn't run yet"},
+{term:"myFunction()",desc:"Calls (runs) the function"},
+{term:"Define first, call later",desc:"Function must exist before calling"},
+{term:"Why?",desc:"Avoid repeating code & easier to debug"},
+{term:"Sub-routine",desc:"Another name for a function"}
+]},
+{title:"Time Library",icon:"⏱️",color:"#845EF7",items:[
+{term:"import time",desc:"Must import at the top"},
+{term:"time.sleep(2)",desc:"Pauses the program for 2 seconds"}
+]}
+];
+
+const QUESTIONS=[
+// PRINTING
+{topic:"Printing",question:"What does this code output?",code:'print("Hello World")',options:["Hello World","hello world",'"Hello World"',"print Hello World"],correct:0,explanation:"print() displays what's inside the brackets. Speech marks aren't shown."},
+{topic:"Printing",question:"How do you print ASCII art?",code:null,options:['print("art")','print(art)','print("""art""")','ascii(art)'],correct:2,explanation:'Triple quotes (""") let you print across multiple lines.'},
+{topic:"Printing",question:"What is the output?",code:'name = "Zara"\nprint("Hello", name)',options:["Hello Zara","Helloname","Hello name","An error"],correct:0,explanation:"Commas in print() join with a space and work with any data type."},
+{topic:"Printing",question:"What is the output?",code:'name = "Zara"\nprint("Hello " + name)',options:["Hello Zara","Hello + Zara","Hello name","An error"],correct:0,explanation:'Concatenation (+) joins strings: "Hello " + "Zara" = "Hello Zara".'},
+{topic:"Printing",question:"What happens here?",code:'age = 12\nprint("Age: " + age)',options:["Prints Age: 12","Prints Age: age","An error!","Prints 12"],correct:2,explanation:"Can't concatenate string with integer using +. Need str(age)."},
+{topic:"Printing",question:"How do you fix this?",code:'age = 12\nprint("Age: " + age)',options:['print("Age: " + str(age))','print("Age: " + int(age))','print("Age: " + "age")','print("Age: " - age)'],correct:0,explanation:'str(age) converts integer 12 to string "12", fixing concatenation.'},
+{topic:"Printing",question:"What is the output?",code:'age = 12\nprint("Age:", age)',options:["An error","Age:12","Age: 12","Age: age"],correct:2,explanation:"Commas work with ANY data type and add a space between items."},
+{topic:"Printing",question:"What does # do?",code:'# My program\nprint("Hello")',options:["Prints text after #","Creates heading","Comment — Python ignores it","Error"],correct:2,explanation:"Comments (#) are notes for humans. Python skips them."},
+{topic:"Printing",question:"What is the output?",code:'x = "5"\ny = "3"\nprint(x + y)',options:["8","53","5 3","An error"],correct:1,explanation:'Both are strings. + concatenates: "5" + "3" = "53", not 8!'},
+{topic:"Printing",question:"What is the output?",code:'print("I am " + str(10) + " years old")',options:["I am 10 years old","I am str(10) years old","An error","I am ten years old"],correct:0,explanation:'str(10) converts to string, then all three strings join together.'},
+// VARIABLES
+{topic:"Variables",question:"Which is a VALID variable name?",code:null,options:["2player","player name","player_name","player-name"],correct:2,explanation:"No numbers at start, no spaces, no hyphens. Underscores are fine!"},
+{topic:"Variables",question:"Best variable name for a player's score?",code:null,options:["x","s","playerScore","data"],correct:2,explanation:"playerScore is descriptive — instantly know what it stores."},
+{topic:"Variables",question:"What is the output?",code:'message = "Hello"\nmessage = "Goodbye"\nprint(message)',options:["Hello","Goodbye","HelloGoodbye","An error"],correct:1,explanation:'Variables can change! Line 2 overwrites. Only "Goodbye" remains.'},
+{topic:"Variables",question:"Why do we use variables?",code:null,options:["Make code longer","Store values that can change","Delete data","Print text"],correct:1,explanation:"Variables store values we can use and update throughout our program."},
+{topic:"Variables",question:"What is the output?",code:'a = 5\nb = a\na = 10\nprint(b)',options:["5","10","15","An error"],correct:0,explanation:"Line 2 copies value 5 into b. Changing a later doesn't affect b."},
+{topic:"Variables",question:"What is the output?",code:'name = "Sam"\nprint("Hello " + name + "!")',options:["Hello Sam!","Hello name!","Hello + Sam + !","An error"],correct:0,explanation:'Joins all three: "Hello " + "Sam" + "!" = "Hello Sam!"'},
+// DATA TYPES
+{topic:"Data Types",question:'What data type is "42"?',code:'x = "42"',options:["Integer","Float","String","Number"],correct:2,explanation:"Speech marks make it a string! Even though 42 looks like a number."},
+{topic:"Data Types",question:"What data type is 3.14?",code:"x = 3.14",options:["String","Integer","Float","Double"],correct:2,explanation:"A float is a number with a decimal point."},
+{topic:"Data Types",question:"What data type is 100?",code:"x = 100",options:["String","Integer","Float","Boolean"],correct:1,explanation:"An integer is a whole number with no decimal point."},
+{topic:"Data Types",question:'What does int("7") do?',code:null,options:["Turns 7 into string",'Converts string "7" to integer 7',"Prints 7","Creates variable 7"],correct:1,explanation:"int() casts a string to integer so you can do maths."},
+{topic:"Data Types",question:"Why does this cause an error?",code:'age = input("Enter age: ")\nprint(age + 1)',options:["input() broken","Can't add 1","input() returns string, not integer","print() can't do maths"],correct:2,explanation:"input() ALWAYS returns a string. Need int() for maths."},
+{topic:"Data Types",question:"What is the output?",code:'x = int("5") + 3\nprint(x)',options:["53","8",'"53"',"An error"],correct:1,explanation:'int("5") converts to integer 5. Then 5 + 3 = 8.'},
+{topic:"Data Types",question:"What is the output?",code:'x = str(5) + str(3)\nprint(x)',options:["8","53",'"53"',"An error"],correct:1,explanation:'str(5)="5", str(3)="3". Concatenating: "5"+"3"="53".'},
+{topic:"Data Types",question:"What does input() always return?",code:null,options:["Integer","Whatever user types","String","Float"],correct:2,explanation:"input() ALWAYS returns a string, even if user types a number."},
+// OPERATORS
+{topic:"Operators",question:"What is the output?",code:"print(7 % 2)",options:["3.5","3","1","0"],correct:2,explanation:"% is modulus (remainder). 7÷2 = 3 remainder 1."},
+{topic:"Operators",question:"What is the output?",code:"print(10 % 2)",options:["5","2","1","0"],correct:3,explanation:"10÷2 = 5 with NO remainder. 10%2 = 0. 10 is even!"},
+{topic:"Operators",question:"What is the output?",code:"print(10 % 3)",options:["3","1","0","3.33"],correct:1,explanation:"10÷3 = 3 remainder 1. So 10%3 = 1."},
+{topic:"Operators",question:"How to check if a number is even?",code:null,options:["number % 2 == 0","number / 2 == 0","number % 0 == 2","number == even"],correct:0,explanation:"If number%2 gives 0, no remainder = divides evenly by 2!"},
+{topic:"Operators",question:"What is the output?",code:"x = 5\ny = 10\nprint(x + y * 2)",options:["30","25","20","15"],correct:1,explanation:"BIDMAS! Multiply first: 10*2=20. Then: 5+20=25."},
+{topic:"Operators",question:"What does < mean?",code:null,options:["Less than","Greater than","Equal to","Not equal to"],correct:0,explanation:"< means less than. Small end points to smaller value."},
+{topic:"Operators",question:"What is the output?",code:"x = 3\ny = 3\nprint(x <= y)",options:["True","False","3","An error"],correct:0,explanation:"<= means less than OR equal to. x equals y, so True."},
+{topic:"Operators",question:"What is the output?",code:"print(15 % 5)",options:["3","5","0","1"],correct:2,explanation:"15÷5 = 3 with NO remainder. 15%5 = 0."},
+// SELECTION
+{topic:"Selection",question:"Difference between = and ==?",code:null,options:["They're the same","= checks, == assigns","= assigns, == checks equality","== is for maths"],correct:2,explanation:"Single = gives a value. Double == asks 'are these equal?'"},
+{topic:"Selection",question:"What is the output?",code:'weather = "rain"\nif weather == "rain":\n    print("Take umbrella")\nelse:\n    print("Enjoy sun")',options:["Enjoy sun","Take umbrella","Both","An error"],correct:1,explanation:'weather is "rain", condition True, "Take umbrella" prints.'},
+{topic:"Selection",question:"What is the output?",code:'x = 10\nif x > 20:\n    print("Big")\nelif x > 5:\n    print("Medium")\nelse:\n    print("Small")',options:["Big","Medium","Small","Big and Medium"],correct:1,explanation:"10 not >20, skip. IS >5, print Medium. Stops at first True."},
+{topic:"Selection",question:"What's wrong here?",code:'if answer == "y" or "yes":\n    print("You said yes")',options:["Nothing wrong","Missing else","Must re-reference variable after or","Can't use or"],correct:2,explanation:'Correct: if answer == "y" or answer == "yes": — say variable again!'},
+{topic:"Selection",question:"User types 'no' — what happens?",code:'answer = input("yes or no? ")\nif answer == "y" or "yes":\n    print("You said yes")\nelse:\n    print("You said no")',options:["You said no","You said yes","An error","Nothing"],correct:1,explanation:'Common or bug! Python reads "yes" as always True.'},
+{topic:"Selection",question:"What is the output?",code:'score = 85\nif score >= 90:\n    print("A")\nelif score >= 80:\n    print("B")\nelif score >= 70:\n    print("C")\nelse:\n    print("D")',options:["A","B","C","D"],correct:1,explanation:"85 not >=90. IS >=80, print B. Stops at first match."},
+{topic:"Selection",question:"What does 'selection' mean?",code:null,options:["Every line runs","Some code runs based on conditions","Code backwards","Code repeats"],correct:1,explanation:"Selection = choosing which code to run using IF statements."},
+{topic:"Selection",question:"What is the output?",code:'x = 5\nif x == 5:\n    print("A")\n    print("B")\nprint("C")',options:["A B C (all three)","A B only","C only","A only"],correct:0,explanation:'Condition True: A and B print. C is NOT indented — ALWAYS prints.'},
+{topic:"Selection",question:"What is the output?",code:'x = 3\nif x == 5:\n    print("A")\n    print("B")\nprint("C")',options:["A B C","A B","C only","Nothing"],correct:2,explanation:"Condition False (3≠5), A and B skipped. C is outside if — always prints."},
+{topic:"Selection",question:"Correct way to check two values?",code:null,options:['if age == 12 or age == 13:','if age == 12 or 13:','if age = 12 or 13:','if age == 12, 13:'],correct:0,explanation:"Must re-reference variable after 'or'."},
+// LOOPS
+{topic:"Loops",question:"What type is a WHILE loop?",code:null,options:["Count controlled","Condition controlled","Time controlled","Random"],correct:1,explanation:"While loops keep going WHILE condition is True."},
+{topic:"Loops",question:"What type is a FOR loop?",code:null,options:["Condition controlled","Count controlled","Never-ending","Random"],correct:1,explanation:"For loops run a specific number of times using range()."},
+{topic:"Loops",question:"What is the output?",code:'for i in range(3):\n    print(i)',options:["1 2 3","0 1 2","0 1 2 3","1 2"],correct:1,explanation:"range(3) starts at 0, stops BEFORE 3. Gives 0, 1, 2."},
+{topic:"Loops",question:"How many times does 'Hi' print?",code:'for i in range(5):\n    print("Hi")',options:["4","5","6","Infinite"],correct:1,explanation:"range(5) runs 5 times (0,1,2,3,4). 'Hi' prints 5 times."},
+{topic:"Loops",question:"What is the output?",code:'x = 0\nwhile x < 3:\n    print(x)\n    x = x + 1',options:["0 1 2","0 1 2 3","1 2 3","Runs forever"],correct:0,explanation:"x: 0,1,2. At x=3, condition False. Prints 0, 1, 2."},
+{topic:"Loops",question:"How many times does 'hi' print?",code:'x = 1\nwhile x < 5:\n    print("hi")\n    x = x + 1',options:["3","4","5","Infinite"],correct:1,explanation:"x goes 1,2,3,4. At x=5, stops. That's 4 times."},
+{topic:"Loops",question:"What happens here?",code:'while True:\n    print("hello")',options:["Prints once","Prints 10 times","Runs forever!","An error"],correct:2,explanation:"Condition always True, never changes = infinite loop!"},
+{topic:"Loops",question:"Why is last line NOT in the loop?",code:'for i in range(3):\n    print("inside")\nprint("outside")',options:["Different colour","Not indented","Different quotes","Loops only run 3 lines"],correct:1,explanation:"Indentation controls what's inside. No indent = outside."},
+{topic:"Loops",question:"What is the LAST number printed?",code:'for i in range(4):\n    print(i)',options:["4","3","5","0"],correct:1,explanation:"range(4) gives 0,1,2,3. Stops BEFORE 4. Last is 3."},
+{topic:"Loops",question:"What is the output?",code:'for i in range(1, 4):\n    print(i)',options:["0 1 2 3","1 2 3","1 2 3 4","0 1 2"],correct:1,explanation:"range(1,4) starts at 1, stops BEFORE 4. Gives 1,2,3."},
+{topic:"Loops",question:"What is printed at the end?",code:'x = 10\nwhile x > 0:\n    x = x - 3\nprint(x)',options:["1","0","-2","10"],correct:2,explanation:"x: 10→7→4→1→-2. At -2, condition False. print gives -2."},
+{topic:"Loops",question:"How many times does 'Go' print?",code:'count = 0\nwhile count < 3:\n    print("Go")\n    count = count + 1\nprint("Done")',options:["2","3","4","Infinite"],correct:1,explanation:"count: 0,1,2. At 3, stops. 'Go' prints 3 times."},
+// RANDOM
+{topic:"Random",question:"What could randint(1,6) return?",code:'import random\nx = random.randint(1, 6)',options:["Only 1 or 6","Any number 1 to 6","Any decimal 1 to 6","A random letter"],correct:1,explanation:"randint picks random whole number 1 to 6. Like a dice!"},
+{topic:"Random",question:"What does this do?",code:'import random\ncolours = ["red", "blue", "green"]\nprint(random.choice(colours))',options:["Prints all","Prints first","Picks one random colour","Sorts them"],correct:2,explanation:"random.choice() picks ONE random item from the list."},
+{topic:"Random",question:"What must you do before using random?",code:null,options:["Nothing","import random at the top","random.start()","Install Python"],correct:1,explanation:"Must import the random library at the top first."},
+{topic:"Random",question:"Lowest this could print?",code:'import random\nprint(random.randint(5, 10))',options:["0","1","5","10"],correct:2,explanation:"randint(5,10) picks 5 to 10. Lowest is 5."},
+{topic:"Random",question:"What could this output?",code:'import random\nsnacks = ["apple", "crisps", "banana"]\nx = random.choice(snacks)\nprint("Picked: " + x)',options:["Picked: apple, crisps, banana","Picked: crisps (or any one)","Picked: snacks","An error"],correct:1,explanation:"choice picks ONE item, concatenated into the string."},
+// FUNCTIONS
+{topic:"Functions",question:"What does defining a function do?",code:'def greet():\n    print("Hello!")',options:["Runs it","Deletes it","Creates but doesn't run yet","Prints name"],correct:2,explanation:"def creates and stores. Won't run until you CALL it."},
+{topic:"Functions",question:"How do you CALL this function?",code:'def gameover():\n    print("Game Over!")',options:["def gameover():","gameover()","call gameover","run gameover()"],correct:1,explanation:"Call by writing name with brackets: gameover()"},
+{topic:"Functions",question:"What is the output?",code:'def hello():\n    print("Hi there!")\n\nhello()\nhello()',options:["Hi there! (once)","Hi there! Hi there! (twice)","An error","Nothing"],correct:1,explanation:"Defined once, called twice = prints twice."},
+{topic:"Functions",question:"What is the output?",code:'def hello():\n    print("Hi!")\n\nprint("Start")\nhello()\nprint("End")',options:["Start Hi! End","Hi! Start End","Start End Hi!","Start End"],correct:0,explanation:'In order: "Start", hello() prints "Hi!", then "End".'},
+{topic:"Functions",question:"Why use functions?",code:null,options:["Make code longer","Avoid repeating code & easier debugging","Slow program","Python requires them"],correct:1,explanation:"Write once, reuse everywhere. Easier to fix."},
+{topic:"Functions",question:"What is the output?",code:'def add():\n    print(2 + 3)\n\nadd()\nadd()\nadd()',options:["5 (once)","5 5 5 (three times)","15","An error"],correct:1,explanation:"Prints 5 each call. Called 3 times = three 5s."},
+{topic:"Functions",question:"What is wrong here?",code:'greet()\n\ndef greet():\n    print("Hello")',options:["Nothing","Called before defined!","greet is reserved","Missing brackets"],correct:1,explanation:"Must DEFINE before CALLING. greet() called before def."},
+{topic:"Functions",question:"Another name for a function?",code:null,options:["Variable","Sub-routine","Loop","Module"],correct:1,explanation:"Functions = sub-routines. Mini-programs inside your main program."},
+// TIME
+{topic:"Time",question:"What does time.sleep(3) do?",code:'import time\nprint("Wait...")\ntime.sleep(3)\nprint("Go!")',options:["Stops forever","Pauses 3 seconds","Speeds up","Prints 3"],correct:1,explanation:'Pauses 3 seconds between "Wait..." and "Go!"'},
+{topic:"Time",question:"What before time.sleep()?",code:null,options:["Nothing","import time at top","time.start()","Install clock"],correct:1,explanation:"Must import time library at the top first."},
+{topic:"Time",question:"Where does 'import time' go?",code:null,options:["End","Right before use","Very top of program","Inside function"],correct:2,explanation:"Import statements go at the very top."},
+// SEQUENCE
+{topic:"Sequence",question:"What does 'sequence' mean?",code:null,options:["Runs randomly","Only some lines run","Step by step, every line runs","Runs backwards"],correct:2,explanation:"Sequential = line by line, top to bottom. Every line runs."},
+{topic:"Sequence",question:"What is the output?",code:'print("A")\nprint("B")\nprint("C")',options:["C B A","A B C","ABC","Only A"],correct:1,explanation:"Sequential: A, then B, then C. Every line in order."},
+{topic:"Sequence",question:"What is the output?",code:'x = 5\nx = x + 3\nprint(x)',options:["5","3","8","x + 3"],correct:2,explanation:"x=5, then x=5+3=8, print(8). Sequential."}
+];
+
+const INTERP=[
+{title:"Hello World",code:'print("Hello World")',hint:"What's inside the brackets?"},
+{title:"Variable Swap",code:'x = 10\nx = 20\nprint(x)',hint:"x gets overwritten on line 2"},
+{title:"String Join",code:'a = "Hello"\nb = "World"\nprint(a + " " + b)',hint:"+ joins strings together"},
+{title:"Simple Maths",code:'x = 5\ny = 3\nprint(x + y)',hint:"5 + 3 = ?"},
+{title:"Modulus",code:'print(10 % 3)',hint:"Remainder of 10 ÷ 3?"},
+{title:"String Trap",code:'x = "5"\ny = "3"\nprint(x + y)',hint:"Both are strings in quotes..."},
+{title:"Casting",code:'x = int("5") + 3\nprint(x)',hint:'int("5") makes it a number first'},
+{title:"For Loop",code:'for i in range(3):\n    print(i)',hint:"range(3) starts at 0..."},
+{title:"While Count",code:'x = 0\nwhile x < 4:\n    print(x)\n    x = x + 1',hint:"x goes 0, 1, 2, 3 then stops"},
+{title:"IF Check",code:'x = 10\nif x > 5:\n    print("Big")\nelse:\n    print("Small")',hint:"Is 10 greater than 5?"},
+{title:"Loop Total",code:'total = 0\nfor i in range(4):\n    total = total + i\nprint(total)',hint:"0 + 1 + 2 + 3 = ?"},
+{title:"Function x2",code:'def shout():\n    print("HEY!")\n\nshout()\nshout()',hint:"Called twice..."},
+{title:"Step by Step",code:'x = 1\nx = x + 1\nx = x + 1\nprint(x)',hint:"x goes 1 → 2 → 3"},
+{title:"Grade Check",code:'score = 75\nif score >= 90:\n    print("A")\nelif score >= 70:\n    print("B")\nelse:\n    print("C")',hint:"75 not >=90 but IS >=70"},
+{title:"Countdown",code:'x = 3\nwhile x > 0:\n    print(x)\n    x = x - 1\nprint("Go!")',hint:"3, 2, 1 then what?"},
+{title:"Two Prints",code:'def greet():\n    print("Hi")\n    print("Bye")\n\ngreet()',hint:"Function has 2 prints"},
+{title:"Even or Odd?",code:'x = 8\nif x % 2 == 0:\n    print("Even")\nelse:\n    print("Odd")',hint:"8 ÷ 2 has no remainder"},
+{title:"Number Strings",code:'x = "5"\ny = "10"\nprint(x + y)',hint:"Both are strings!"},
+{title:"After Loop",code:'for i in range(2):\n    print("in")\nprint("out")',hint:"Last print NOT indented"},
+{title:"BIDMAS",code:'a = 2\nb = 3\nc = a + b * 4\nprint(c)',hint:"Multiply first! 3*4=12, then 2+12"}
+];
+
+const TC={Printing:"#FF6B6B",Variables:"#FFA94D","Data Types":"#51CF66",Operators:"#339AF0",Selection:"#B197FC",Loops:"#20C997",Random:"#F06595",Functions:"#FCC419",Time:"#845EF7",Sequence:"#FF922B"};
+const TI={Printing:"🖨️",Variables:"📦","Data Types":"🏷️",Operators:"🔢",Selection:"🔀",Loops:"🔁",Random:"🎲",Functions:"⚙️",Time:"⏱️",Sequence:"📋"};
+
+// ===== INTERPRETER ENGINE =====
+function simpleEval(code){
+const output=[],vars={},fns={};
+const lines=code.split("\n").map(l=>({text:l,indent:l.search(/\S|$/)}));
+function splitO(s,d){const p=[];let c='',iS=false,sc='';for(let i=0;i<s.length;i++){if(!iS&&(s[i]==='"'||s[i]==="'")){iS=true;sc=s[i];c+=s[i];}else if(iS&&s[i]===sc){iS=false;c+=s[i];}else if(!iS&&s[i]===d){p.push(c);c='';}else c+=s[i];}p.push(c);return p.length>1?p:[s];}
+function ev(e){e=e.trim();
+if(e.match(/^str\((.+)\)$/))return String(ev(e.match(/^str\((.+)\)$/)[1]));
+if(e.match(/^int\((.+)\)$/))return parseInt(ev(e.match(/^int\((.+)\)$/)[1]));
+if((e.startsWith('"')&&e.endsWith('"'))||(e.startsWith("'")&&e.endsWith("'")))return e.slice(1,-1);
+if(!isNaN(e)&&e!=='')return Number(e);if(e==='True')return true;if(e==='False')return false;
+for(const op of['==','!=','<=','>=','<','>']){const i=e.indexOf(op);if(i>0){const l=ev(e.slice(0,i)),r=ev(e.slice(i+op.length));if(op==='==')return l==r;if(op==='!=')return l!=r;if(op==='<=')return l<=r;if(op==='>=')return l>=r;if(op==='<')return l<r;if(op==='>')return l>r;}}
+if(e.includes('+')){const p=splitO(e,'+');if(p.length>1){const v=p.map(x=>ev(x));if(v.some(x=>typeof x==='string'))return v.join('');return v.reduce((a,b)=>a+b,0);}}
+if(e.includes('-')&&!e.startsWith('-')){const p=splitO(e,'-');if(p.length>1)return p.map(x=>ev(x)).reduce((a,b)=>a-b);}
+if(e.includes('*')){const p=splitO(e,'*');if(p.length>1)return p.map(x=>ev(x)).reduce((a,b)=>a*b);}
+if(e.includes('%')){const p=splitO(e,'%');if(p.length>1)return p.map(x=>ev(x)).reduce((a,b)=>a%b);}
+if(vars[e]!==undefined)return vars[e];return e;}
+function splitPA(s){const p=[];let c='',iS=false,sc='',d=0;for(let i=0;i<s.length;i++){if(!iS&&(s[i]==='"'||s[i]==="'")){iS=true;sc=s[i];c+=s[i];}else if(iS&&s[i]===sc){iS=false;c+=s[i];}else if(!iS&&s[i]==='('){d++;c+=s[i];}else if(!iS&&s[i]===')'){d--;c+=s[i];}else if(!iS&&d===0&&s[i]===','){p.push(c);c='';}else c+=s[i];}p.push(c);return p;}
+function run(si,ei){let i=si;while(i<=ei){const ln=lines[i],t=ln.text.trim();
+if(!t||t.startsWith('#')||t.startsWith('import ')){i++;continue;}
+if(t.startsWith('def ')){const fn=t.match(/def (\w+)\(/)?.[1];let be=i+1;while(be<=ei&&lines[be]&&(lines[be].text.trim()===''||lines[be].indent>ln.indent))be++;be--;if(fn)fns[fn]={s:i+1,e:be,ind:ln.indent};i=be+1;continue;}
+if(t.startsWith('print(')&&t.endsWith(')')){const inner=t.slice(6,-1),args=splitPA(inner),vals=args.map(a=>ev(a.trim()));output.push(vals.map(v=>v===true?'True':v===false?'False':String(v)).join(' '));i++;continue;}
+if(t.startsWith('if ')||t.startsWith('elif ')||t.startsWith('else')){const blocks=[];let j=i;while(j<=ei){const tt=lines[j].text.trim();const isI=tt.startsWith('if ')&&tt.endsWith(':');const isE=tt.startsWith('elif ')&&tt.endsWith(':');const isEl=tt==='else:';
+if((isI||isE||isEl)&&(lines[j].indent===ln.indent||j===i)){let c=null;if(isI)c=tt.slice(3,-1).trim();if(isE)c=tt.slice(5,-1).trim();let be=j+1;while(be<=ei&&lines[be]&&(lines[be].text.trim()===''||lines[be].indent>ln.indent))be++;blocks.push({c,s:j+1,e:be-1,t:isEl?'e':'i'});j=be;}else break;}
+let ran=false;for(const b of blocks){if(b.t==='e'&&!ran){run(b.s,b.e);ran=true;}else if(b.c&&!ran&&ev(b.c)){run(b.s,b.e);ran=true;}}i=blocks.length?blocks[blocks.length-1].e+1:i+1;continue;}
+if(t.startsWith('while ')&&t.endsWith(':')){const cond=t.slice(6,-1).trim();let be=i+1;while(be<=ei&&lines[be]&&(lines[be].text.trim()===''||lines[be].indent>ln.indent))be++;be--;let sf=0;while(ev(cond)&&sf<1000){run(i+1,be);sf++;}i=be+1;continue;}
+if(t.startsWith('for ')&&t.includes(' in range(')){const vn=t.match(/for (\w+)/)?.[1],rm=t.match(/range\(([^)]+)\)/);if(vn&&rm){const args=rm[1].split(',').map(a=>ev(a.trim()));let s=0,e=0;if(args.length===1)e=args[0];else{s=args[0];e=args[1];}let be=i+1;while(be<=ei&&lines[be]&&(lines[be].text.trim()===''||lines[be].indent>ln.indent))be++;be--;for(let v=s;v<e;v++){vars[vn]=v;run(i+1,be);}i=be+1;continue;}}
+const fc=t.match(/^(\w+)\(\)$/);if(fc&&fns[fc[1]]){const fn=fns[fc[1]];run(fn.s,fn.e);i++;continue;}
+if(t.includes('=')&&!t.includes('==')){const eq=t.indexOf('=');const vn=t.slice(0,eq).trim(),val=t.slice(eq+1).trim();if(vn&&!vn.includes(' '))vars[vn]=ev(val);i++;continue;}i++;}}
+try{run(0,lines.length-1);return{output,error:null};}catch(e){return{output,error:e.message};}}
+
+// ===== HELPERS =====
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function colorizeHTML(line){
+const kw=["print","if","elif","else","while","for","in","range","def","import","input","int","str","float","random","time","True","False","and","or","not","return"];
+if(line.trim().startsWith('#'))return'<span class="cm">'+esc(line)+'</span>';
+let r=line,out='';
+while(r.length>0){
+const sm=r.match(/^(["'])(.*?)\1/);if(sm){out+='<span class="st">'+esc(sm[0])+'</span>';r=r.slice(sm[0].length);continue;}
+const nm=r.match(/^\b(\d+\.?\d*)\b/);if(nm){out+='<span class="nm">'+esc(nm[0])+'</span>';r=r.slice(nm[0].length);continue;}
+const wm=r.match(/^\b([a-zA-Z_]\w*)\b/);if(wm){const w=wm[0];out+=kw.includes(w)?'<span class="kw">'+esc(w)+'</span>':'<span class="vr">'+esc(w)+'</span>';r=r.slice(w.length);continue;}
+const om=r.match(/^([+\-*/%=<>!]+)/);if(om){out+='<span class="op">'+esc(om[0])+'</span>';r=r.slice(om[0].length);continue;}
+out+=esc(r[0]);r=r.slice(1);}
+return out;}
+
+function codeHTML(code){
+return'<div class="code-block">'+code.split('\n').map((l,i)=>'<div class="code-line"><span class="code-num">'+(i+1)+'</span><span>'+colorizeHTML(l)+'</span></div>').join('')+'</div>';}
+
+// ===== STATE =====
+let state={mode:'home',qs:[],cq:0,sel:null,showAns:false,score:0,ans:0,streak:0,best:0,wrong:[],ct:0,qt:null,ii:0,iInput:'',iResult:null,iScore:0,iTotal:0,hint:false,ic:shuffle(INTERP)};
+function S(updates){Object.assign(state,updates);render();}
+
+// ===== RENDER =====
+function render(){
+const s=state,app=document.getElementById('app');
+const topics=[...new Set(QUESTIONS.map(q=>q.topic))];
+
+if(s.mode==='home'){
+app.innerHTML=`
+<div style="text-align:center;margin-bottom:32px;padding-top:12px">
+<div style="font-size:48px;margin-bottom:8px">🐍</div>
+<h1 style="font-size:28px;font-weight:900;margin:0 0 6px;background:linear-gradient(135deg,#FF6B6B,#FFA94D,#51CF66,#339AF0,#B197FC);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Python Revision</h1>
+<p style="color:#9898b8;font-size:15px;margin:0">Year 7 Exam Prep — You've got this! 💪</p>
+</div>
+<div class="main-grid">
+<button class="btn card" onclick="startQuiz(null)" style="text-align:center;background:linear-gradient(135deg,#FF6B6B22,#FF6B6B11);border-color:#FF6B6B44;cursor:pointer">
+<div style="font-size:30px;margin-bottom:6px">🚀</div>
+<div style="font-weight:800;font-size:15px;margin-bottom:3px">Full Quiz</div>
+<div style="color:#9898b8;font-size:12px">All ${QUESTIONS.length} Qs</div>
+</button>
+<button class="btn card" onclick="S({mode:'cheatsheet'})" style="text-align:center;background:linear-gradient(135deg,#51CF6622,#51CF6611);border-color:#51CF6644;cursor:pointer">
+<div style="font-size:30px;margin-bottom:6px">📖</div>
+<div style="font-weight:800;font-size:15px;margin-bottom:3px">Cheat Sheet</div>
+<div style="color:#9898b8;font-size:12px">Quick reference</div>
+</button>
+<button class="btn card" onclick="resetInterp()" style="text-align:center;background:linear-gradient(135deg,#339AF022,#339AF011);border-color:#339AF044;cursor:pointer">
+<div style="font-size:30px;margin-bottom:6px">💻</div>
+<div style="font-weight:800;font-size:15px;margin-bottom:3px">Code Runner</div>
+<div style="color:#9898b8;font-size:12px">${INTERP.length} challenges</div>
+</button>
+</div>
+<p style="color:#9898b8;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px">Quiz by Topic</p>
+<div class="topic-grid">
+${topics.map(t=>`<button class="btn" onclick="startQuiz('${t}')" style="background:linear-gradient(135deg,${TC[t]}22,${TC[t]}11);border:1px solid ${TC[t]}44;border-radius:14px;padding:14px 10px;color:#e8e8f0;text-align:center;font-family:inherit;cursor:pointer">
+<div style="font-size:22px">${TI[t]}</div>
+<div style="font-size:12px;font-weight:700;margin-top:4px">${t}</div>
+<div style="font-size:11px;color:#9898b8">${QUESTIONS.filter(q=>q.topic===t).length} Qs</div>
+</button>`).join('')}
+</div>`;
+return;}
+
+if(s.mode==='cheatsheet'){
+const sec=CHEAT_SHEET[s.ct];
+app.innerHTML=`
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+<button class="btn back-btn" onclick="S({mode:'home'})">← Back</button>
+<h2 style="font-size:20px;font-weight:900">📖 Cheat Sheet</h2>
+</div>
+<div class="tab-wrap">
+${CHEAT_SHEET.map((x,i)=>`<button class="btn tab-btn" onclick="S({ct:${i}})" style="background:${s.ct===i?x.color+'33':'rgba(255,255,255,0.05)'};border-color:${s.ct===i?x.color:'rgba(255,255,255,0.1)'};color:${s.ct===i?x.color:'#9898b8'}">${x.icon} ${x.title}</button>`).join('')}
+</div>
+<div class="card" style="border-color:${sec.color}44;background:linear-gradient(135deg,${sec.color}11,rgba(255,255,255,0.04))">
+<h3 style="margin:0 0 20px;font-size:22px;font-weight:900;color:${sec.color}">${sec.icon} ${sec.title}</h3>
+${sec.items.map(item=>`<div class="cheat-item"><code class="cheat-term" style="color:${sec.color}">${esc(item.term)}</code><div class="cheat-desc">${esc(item.desc)}</div></div>`).join('')}
+</div>
+<div style="display:flex;justify-content:space-between;margin-top:16px">
+<button class="btn back-btn" onclick="S({ct:Math.max(0,${s.ct}-1)})" ${s.ct===0?'disabled style="opacity:0.3;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:#e8e8f0;padding:8px 16px;font-weight:700;font-size:14px"':''}>← Previous</button>
+<button class="btn back-btn" onclick="S({ct:Math.min(${CHEAT_SHEET.length-1},${s.ct}+1)})" ${s.ct===CHEAT_SHEET.length-1?'disabled style="opacity:0.3;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:#e8e8f0;padding:8px 16px;font-weight:700;font-size:14px"':''}>Next →</button>
+</div>`;
+return;}
+
+if(s.mode==='quiz'&&s.qs.length){
+const q=s.qs[s.cq],tc=TC[q.topic]||'#339AF0',prog=((s.cq+(s.showAns?1:0))/s.qs.length)*100;
+app.innerHTML=`
+<div class="nav-row">
+<button class="btn back-btn" onclick="S({mode:'home'})" style="padding:6px 14px;font-size:13px">✕ Quit</button>
+<div class="score-bar"><span style="color:#51CF66">✓ ${s.score}</span><span style="color:#FF6B6B">✗ ${s.ans-s.score}</span>${s.streak>=2?`<span style="color:#FCC419">🔥 ${s.streak}</span>`:''}</div>
+</div>
+<div class="progress-bar"><div class="progress-fill" style="width:${prog}%;background:linear-gradient(90deg,${tc},${tc}cc)"></div></div>
+<div class="card ${s.showAns||true?'fade-in':'fade-out'}">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+<span style="background:${tc}22;color:${tc};padding:4px 12px;border-radius:8px;font-size:12px;font-weight:800;border:1px solid ${tc}44">${TI[q.topic]} ${q.topic}</span>
+<span style="color:#9898b8;font-size:13px;font-weight:600">${s.cq+1} / ${s.qs.length}</span>
+</div>
+<h3 style="font-size:17px;font-weight:800;margin:0 0 4px;line-height:1.5;color:#f0f0ff">${esc(q.question)}</h3>
+${q.code?codeHTML(q.code):''}
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+${q.options.map((opt,i)=>{
+let bg='rgba(255,255,255,0.04)',bd='rgba(255,255,255,0.1)',em='';
+if(s.showAns){if(i===q.correct){bg='rgba(81,207,102,0.15)';bd='#51CF66';em=' ✓';}else if(i===s.sel&&i!==q.correct){bg='rgba(255,107,107,0.15)';bd='#FF6B6B';em=' ✗';}}
+return`<button class="option-btn" onclick="pickAnswer(${i})" style="background:${bg};border-color:${bd};${s.showAns?'pointer-events:none':''}"><span class="option-letter" style="background:${tc}22;color:${tc}">${String.fromCharCode(65+i)}</span><span>${esc(opt)}${em}</span></button>`;}).join('')}
+</div>
+${s.showAns?`<div class="explanation-box ${s.sel===q.correct?'correct-bg':'wrong-bg'}">
+<div style="font-weight:800;font-size:14px;margin-bottom:4px;color:${s.sel===q.correct?'#51CF66':'#FF6B6B'}">${s.sel===q.correct?(s.streak>=3?'🔥 On fire!':['Nice! 🎉','Correct! ⭐','You got it! 💪'][Math.floor(Math.random()*3)]):'Not quite — learn from it! 💡'}</div>
+<div style="font-size:13px;color:#b8b8d0;line-height:1.6">${esc(q.explanation)}</div>
+</div>
+<button class="btn full-btn" onclick="nextQ()" style="background:linear-gradient(135deg,${tc},${tc}cc)">${s.cq+1>=s.qs.length?'See Results →':'Next Question →'}</button>`:''}
+</div>`;
+return;}
+
+if(s.mode==='results'){
+const pct=s.qs.length?Math.round((s.score/s.qs.length)*100):0;
+const g=pct>=90?{e:'🌟',m:'Outstanding! Exam-ready!',c:'#FCC419'}:pct>=70?{e:'💪',m:'Great job! Nearly there!',c:'#51CF66'}:pct>=50?{e:'📚',m:'Good effort! Review below.',c:'#339AF0'}:{e:'🔄',m:'Keep practising!',c:'#FF6B6B'};
+app.innerHTML=`
+<div class="card result-card" style="margin-bottom:20px">
+<div style="font-size:56px;margin-bottom:8px">${g.e}</div>
+<h2 style="margin:0 0 6px;font-size:28px;font-weight:900;color:${g.c}">${s.score} / ${s.qs.length}</h2>
+<div class="result-pct" style="background:linear-gradient(135deg,${g.c},${g.c}aa)">${pct}%</div>
+<p style="color:#b8b8d0;font-size:16px;margin:0 0 16px;font-weight:600">${g.m}</p>
+${s.best>=3?`<div style="display:inline-block;background:rgba(252,196,25,0.12);border:1px solid rgba(252,196,25,0.3);border-radius:10px;padding:6px 16px;font-size:14px;font-weight:700;color:#FCC419">🔥 Best streak: ${s.best}</div>`:''}
+</div>
+${s.wrong.length?`<div class="card" style="margin-bottom:20px">
+<h3 style="margin:0 0 16px;font-size:18px;font-weight:800;color:#FF6B6B">📝 Review These</h3>
+${s.wrong.map(q=>`<div class="review-item">
+<div style="font-size:12px;color:${TC[q.topic]};font-weight:800;margin-bottom:4px">${TI[q.topic]} ${q.topic}</div>
+<div style="font-size:14px;font-weight:700;margin-bottom:4px;white-space:pre-wrap">${esc(q.question)}</div>
+${q.code?codeHTML(q.code):''}
+<div style="font-size:13px;color:#51CF66;font-weight:600;margin-top:6px">✓ ${esc(q.options[q.correct])}</div>
+<div style="font-size:13px;color:#9898b8;margin-top:4px;line-height:1.5">${esc(q.explanation)}</div>
+</div>`).join('')}
+</div>`:''}
+<div class="bottom-grid">
+<button class="btn card" onclick="startQuiz(${s.qt?`'${s.qt}'`:'null'})" style="text-align:center;background:linear-gradient(135deg,#FF6B6B15,#FF6B6B05);border-color:#FF6B6B44;cursor:pointer;padding:16px"><div style="font-size:24px">🔄</div><div style="font-size:12px;font-weight:800;margin-top:6px">Try Again</div></button>
+<button class="btn card" onclick="S({mode:'cheatsheet'})" style="text-align:center;background:linear-gradient(135deg,#51CF6615,#51CF6605);border-color:#51CF6644;cursor:pointer;padding:16px"><div style="font-size:24px">📖</div><div style="font-size:12px;font-weight:800;margin-top:6px">Cheat Sheet</div></button>
+<button class="btn card" onclick="S({mode:'home'})" style="text-align:center;background:linear-gradient(135deg,#339AF015,#339AF005);border-color:#339AF044;cursor:pointer;padding:16px"><div style="font-size:24px">🏠</div><div style="font-size:12px;font-weight:800;margin-top:6px">Home</div></button>
+</div>`;
+return;}
+
+if(s.mode==='interpreter'&&s.ic.length){
+const ch=s.ic[s.ii],prog=((s.ii+(s.iResult?1:0))/s.ic.length)*100;
+app.innerHTML=`
+<div class="nav-row">
+<button class="btn back-btn" onclick="S({mode:'home'})">← Back</button>
+<div class="score-bar"><span style="color:#51CF66">✓ ${s.iScore}</span><span style="color:#FF6B6B">✗ ${s.iTotal-s.iScore}</span></div>
+</div>
+<div class="progress-bar"><div class="progress-fill" style="width:${prog}%;background:linear-gradient(90deg,#339AF0,#339AF0cc)"></div></div>
+<div class="card">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+<span style="background:#339AF022;color:#339AF0;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:800;border:1px solid #339AF044">💻 Code Runner</span>
+<span style="color:#9898b8;font-size:13px;font-weight:600">${s.ii+1} / ${s.ic.length}</span>
+</div>
+<h3 style="font-size:18px;font-weight:800;margin:10px 0 4px;color:#FCC419">${esc(ch.title)}</h3>
+<p style="color:#9898b8;font-size:14px;margin:0 0 2px">What does this code output?</p>
+<p style="color:#666;font-size:12px;margin:0 0 4px">(Multiple lines? Use Shift+Enter or put each on new line)</p>
+${codeHTML(ch.code)}
+${!s.iResult?`
+<div style="margin-top:16px">
+<textarea class="interp-input" id="interpTA" placeholder="Type the output here..." rows="3" onkeydown="interpKey(event)">${esc(s.iInput)}</textarea>
+</div>
+<div style="display:flex;gap:10px;margin-top:12px">
+<button class="btn full-btn" onclick="checkInterp()" style="background:${s.iInput.trim()?'linear-gradient(135deg,#339AF0,#339AF0cc)':'rgba(255,255,255,0.05)'};margin-top:0;flex:1;${s.iInput.trim()?'':'pointer-events:none;opacity:0.5'}">Check Answer</button>
+<button class="btn full-btn" onclick="S({hint:${!s.hint}})" style="background:rgba(252,196,25,0.12);border:1px solid rgba(252,196,25,0.3);color:#FCC419;margin-top:0;padding:14px 18px;width:auto;flex:none">💡 Hint</button>
+</div>
+${s.hint?`<div class="hint-box">💡 ${esc(ch.hint)}</div>`:''}
+`:`
+<div class="interp-result ${s.iResult==='correct'?'correct-bg':'wrong-bg'}">
+${s.iResult==='correct'?
+`<span style="font-weight:800;color:#51CF66;font-size:16px">✓ Correct!</span><span style="color:#b8b8d0;margin-left:8px;font-size:14px">Nice work!</span>`:
+`<div style="font-weight:800;color:#FF6B6B;font-size:16px;margin-bottom:8px">✗ Not quite!</div>
+<div style="font-size:13px;color:#9898b8;margin-bottom:4px">Your answer:</div>
+<div class="answer-block" style="color:#FF6B6B">${esc(s.iInput)||'(empty)'}</div>
+<div style="font-size:13px;color:#9898b8;margin-bottom:4px">Correct output:</div>
+<div class="answer-block" style="color:#51CF66">${esc(s.iResult.slice(6))}</div>`}
+</div>
+<button class="btn full-btn" onclick="nextInterp()" style="background:linear-gradient(135deg,#339AF0,#339AF0cc)">${s.ii+1>=s.ic.length?'See Results →':'Next Challenge →'}</button>
+`}
+</div>`;
+const ta=document.getElementById('interpTA');if(ta&&!s.iResult){ta.focus();ta.addEventListener('input',e=>{state.iInput=e.target.value;});}
+return;}
+
+if(s.mode==='ir'){
+const ipct=s.iTotal?Math.round((s.iScore/s.iTotal)*100):0;
+const g=ipct>=80?{e:'🌟',m:'Amazing! Code reading pro!',c:'#FCC419'}:ipct>=60?{e:'💪',m:'Great work! Keep going!',c:'#51CF66'}:{e:'📚',m:'Try cheat sheet first!',c:'#339AF0'};
+app.innerHTML=`
+<div class="card result-card">
+<div style="font-size:56px;margin-bottom:8px">${g.e}</div>
+<h2 style="margin:0 0 6px;font-size:28px;font-weight:900;color:${g.c}">${s.iScore} / ${s.iTotal}</h2>
+<div class="result-pct" style="background:linear-gradient(135deg,${g.c},${g.c}aa)">${ipct}%</div>
+<p style="color:#b8b8d0;font-size:16px;font-weight:600;margin:0 0 20px">${g.m}</p>
+<div class="bottom-grid">
+<button class="btn card" onclick="resetInterp()" style="text-align:center;background:linear-gradient(135deg,#339AF015,#339AF005);border-color:#339AF044;cursor:pointer;padding:16px"><div style="font-size:24px">🔄</div><div style="font-size:12px;font-weight:800;margin-top:6px">Try Again</div></button>
+<button class="btn card" onclick="S({mode:'cheatsheet'})" style="text-align:center;background:linear-gradient(135deg,#51CF6615,#51CF6605);border-color:#51CF6644;cursor:pointer;padding:16px"><div style="font-size:24px">📖</div><div style="font-size:12px;font-weight:800;margin-top:6px">Cheat Sheet</div></button>
+<button class="btn card" onclick="S({mode:'home'})" style="text-align:center;background:linear-gradient(135deg,#FF6B6B15,#FF6B6B05);border-color:#FF6B6B44;cursor:pointer;padding:16px"><div style="font-size:24px">🏠</div><div style="font-size:12px;font-weight:800;margin-top:6px">Home</div></button>
+</div>
+</div>`;
+return;}
+}
+
+// ===== ACTIONS =====
+function startQuiz(topic){
+let q=topic?QUESTIONS.filter(x=>x.topic===topic):[...QUESTIONS];
+q=shuffle(q).map(x=>{const idx=x.options.map((_,i)=>i);const sh=shuffle(idx);return{...x,options:sh.map(i=>x.options[i]),correct:sh.indexOf(x.correct)};});
+S({mode:'quiz',qs:q,cq:0,sel:null,showAns:false,score:0,ans:0,streak:0,best:0,wrong:[],qt:topic});}
+window.startQuiz=startQuiz;
+
+function pickAnswer(i){
+if(state.showAns)return;
+const correct=i===state.qs[state.cq].correct;
+const newStreak=correct?state.streak+1:0;
+S({sel:i,showAns:true,ans:state.ans+1,score:state.score+(correct?1:0),streak:newStreak,best:Math.max(state.best,newStreak),wrong:correct?state.wrong:[...state.wrong,state.qs[state.cq]]});}
+window.pickAnswer=pickAnswer;
+
+function nextQ(){if(state.cq+1>=state.qs.length)S({mode:'results'});else S({cq:state.cq+1,sel:null,showAns:false});}
+window.nextQ=nextQ;
+
+function checkInterp(){
+const ch=state.ic[state.ii];const{output}=simpleEval(ch.code);const exp=output.join("\n").trim();
+const correct=state.iInput.trim()===exp;
+S({iTotal:state.iTotal+1,iScore:state.iScore+(correct?1:0),iResult:correct?'correct':'wrong:'+exp});}
+window.checkInterp=checkInterp;
+
+function interpKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();state.iInput=e.target.value;if(state.iInput.trim())checkInterp();}}
+window.interpKey=interpKey;
+
+function nextInterp(){if(state.ii+1>=state.ic.length)S({mode:'ir'});else S({ii:state.ii+1,iInput:'',iResult:null,hint:false});}
+window.nextInterp=nextInterp;
+
+function resetInterp(){S({mode:'interpreter',ic:shuffle(INTERP),ii:0,iInput:'',iResult:null,iScore:0,iTotal:0,hint:false});}
+window.resetInterp=resetInterp;
+
+// Initial render
+render();
+</script>
+</body>
+</html>
