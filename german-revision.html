@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a0a2e">
+<title>🇩🇪 German Revision — Year 7</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100vh;min-height:100dvh;overflow-x:hidden}
+body{background:linear-gradient(135deg,#1a0a2e 0%,#16213e 40%,#0f3460 100%);font-family:'Nunito','Segoe UI',sans-serif;color:#e8e8f0}
+.stars{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(2px 2px at 30px 40px,#ffffff22,transparent),radial-gradient(2px 2px at 70px 80px,#ffffff18,transparent),radial-gradient(1px 1px at 110px 30px,#ffffff33,transparent);background-size:180px 120px;pointer-events:none;z-index:0}
+.wrap{padding:20px 16px;max-width:720px;margin:0 auto;position:relative;z-index:1;padding-bottom:40px}
+.card{background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 20px}
+@media(max-width:480px){.card{padding:18px 14px;border-radius:16px}}
+.btn{border:none;cursor:pointer;font-family:inherit;transition:all 0.2s;-webkit-appearance:none}
+.btn:active{transform:scale(0.97)!important}
+.back-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:#e8e8f0;padding:8px 16px;font-weight:700;font-size:14px}
+.progress-bar{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:20px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width 0.4s ease}
+.option-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:14px 16px;color:#e8e8f0;font-family:inherit;font-size:14px;font-weight:600;text-align:left;width:100%;transition:all 0.2s;line-height:1.4;cursor:pointer;display:flex;align-items:flex-start;gap:10px}
+@media(max-width:480px){.option-btn{padding:12px 14px;font-size:13px}}
+.option-btn:active{transform:scale(0.98)}
+.option-letter{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;min-width:24px;border-radius:7px;font-size:12px;font-weight:800;flex-shrink:0}
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:500px){.topic-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+.main-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:28px}
+@media(max-width:400px){.main-grid{grid-template-columns:1fr}}
+.tab-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.tab-btn{border-radius:10px;padding:6px 12px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;transition:all 0.2s;border:1px solid}
+.cheat-item{background:rgba(0,0,0,0.25);border-radius:12px;padding:14px 16px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.06)}.cheat-item:last-child{margin-bottom:0}
+.cheat-term{font-size:15px;font-weight:800;display:block;margin-bottom:4px}
+.cheat-desc{font-size:13px;color:#b8b8d0;line-height:1.5}
+.full-btn{width:100%;padding:14px;border:none;border-radius:14px;color:#fff;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px}
+@media(max-width:480px){.full-btn{font-size:15px;padding:13px}}
+.explanation-box{margin-top:16px;padding:14px 16px;border-radius:14px;border:1px solid}
+.correct-bg{background:rgba(81,207,102,0.08);border-color:rgba(81,207,102,0.2)}
+.wrong-bg{background:rgba(255,107,107,0.08);border-color:rgba(255,107,107,0.2)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.score-bar{display:flex;gap:16px;font-size:14px;font-weight:700}
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:20px}
+.result-pct{font-size:42px;font-weight:900;margin-bottom:8px;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.review-item{background:rgba(0,0,0,0.2);border-radius:12px;padding:14px 16px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.06)}
+.flash-card{min-height:180px;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none;border-radius:16px;padding:24px;transition:all 0.3s}
+.flash-front{background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03));border:2px solid rgba(255,255,255,0.15)}
+.flash-back{background:linear-gradient(135deg,rgba(81,207,102,0.12),rgba(81,207,102,0.04));border:2px solid rgba(81,207,102,0.3)}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap" id="app"></div>
+<script>
+const TC={Pets:"#e9a820","Plural Nouns":"#FF6B6B",Supertier:"#F06595",Family:"#B197FC",Appearance:"#20C997",Numbers:"#339AF0","Ordinal Numbers":"#FFA94D",Verbs:"#51CF66",Months:"#845EF7",Colours:"#FF922B"};
+const TI={Pets:"🐾","Plural Nouns":"📝",Supertier:"🦸",Family:"👨‍👩‍👧‍👦",Appearance:"👀",Numbers:"🔢","Ordinal Numbers":"📅",Verbs:"✏️",Months:"🗓️",Colours:"🎨"};
+
+const CHEAT_SHEET=[
+{title:"Haustiere (Pets)",icon:"🐾",color:"#e9a820",items:[
+{term:"Hast du ein Haustier?",desc:"Have you got a pet?"},
+{term:"Ich habe einen Hund / Hamster / Goldfisch",desc:"I have a dog/hamster/goldfish (masculine → einen)"},
+{term:"Ich habe eine Katze / Maus / Schlange",desc:"I have a cat/mouse/snake (feminine → eine)"},
+{term:"Ich habe ein Kaninchen / Meerschweinchen / Pferd",desc:"I have a rabbit/guinea pig/horse (neuter → ein)"},
+{term:"einen Wellensittich",desc:"a budgie"},
+{term:"kein Haustier",desc:"no pet"},
+{term:"Er/Sie/Es heißt Bruno",desc:"He/She/It is called Bruno"},
+{term:"Er heißt... (der Hund = masculine → Er)",desc:"Use Er for der words"},
+{term:"Sie heißt... (die Katze = feminine → Sie)",desc:"Use Sie for die words"},
+{term:"Es heißt... (das Kaninchen = neuter → Es)",desc:"Use Es for das words"},
+]},
+{title:"Plural Nouns",icon:"📝",color:"#FF6B6B",items:[
+{term:"no ending (–)",desc:"der Hamster → zwei Hamster"},
+{term:"add -n or -en",desc:"die Katze → zwei Katzen, die Mannschaft → Mannschaften"},
+{term:"add -e",desc:"der Hund → zwei Hunde, der Freund → Freunde"},
+{term:'add Umlaut (¨)',desc:"der Bruder → zwei Brüder, der Vater → Väter"},
+{term:'add Umlaut + -e (¨e)',desc:"die Maus → zwei Mäuse, der Wolf → Wölfe"},
+{term:"add -s",desc:"das Handy → zwei Handys, das Auto → Autos"},
+{term:"das Meerschweinchen → (–)",desc:"Meerschweinchen stays the same"},
+{term:"die Schwester → die Schwestern (-n)",desc:"Schwester adds -n"},
+]},
+{title:"Supertier & können",icon:"🦸",color:"#F06595",items:[
+{term:"Mein Supertier ist...",desc:"My super pet is..."},
+{term:"süß / gemein / kräftig / schlau",desc:"sweet / mean / strong / cunning"},
+{term:"schnell / superlustig / superintelligent",desc:"fast / hilarious / very clever"},
+{term:"können = can (modal verb)",desc:"ich kann, du kannst, er/sie/es kann"},
+{term:"Er kann schnell laufen",desc:"He can run quickly (infinitive at END)"},
+{term:"Sie kann gut schwimmen",desc:"She can swim well"},
+{term:"Activities: schwimmen, singen, laufen",desc:"swim, sing, run"},
+{term:"lesen, tanzen, springen, fliegen",desc:"read, dance, jump, fly"},
+{term:"Fußball spielen, Flöte spielen",desc:"play football, play the flute"},
+{term:"Rad fahren, Wii spielen",desc:"ride a bike, play on the Wii"},
+]},
+{title:"Meine Familie",icon:"👨‍👩‍👧‍👦",color:"#B197FC",items:[
+{term:"meine Mutter / mein Vater",desc:"my mother / my father"},
+{term:"mein Bruder / meine Schwester",desc:"my brother / my sister"},
+{term:"meine Eltern / Großeltern",desc:"my parents / grandparents"},
+{term:"mein Stiefbruder / Halbbruder",desc:"my stepbrother / half-brother"},
+{term:"meine Stiefschwester / Halbschwester",desc:"my stepsister / half-sister"},
+{term:"Hast du Geschwister?",desc:"Have you any brothers and sisters?"},
+{term:"Ich habe zwei Brüder / drei Schwestern",desc:"I have two brothers / three sisters"},
+{term:"Ich bin Einzelkind",desc:"I'm an only child"},
+{term:"Ich habe keine Geschwister",desc:"I have no brothers and sisters"},
+{term:"Es gibt 5 Personen in meiner Familie",desc:"There are 5 people in my family"},
+{term:"Er/Sie ist __ Jahre alt",desc:"He/She is __ years old"},
+{term:"Mein Bruder heißt Jens. Er ist freundlich und cool.",desc:"Describing family: name + qualities"},
+]},
+{title:"Aussehen & Eigenschaften",icon:"👀",color:"#20C997",items:[
+{term:"Er/Sie ist groß / klein",desc:"He/She is tall/big / small/short"},
+{term:"Er/Sie ist dick / schlank",desc:"He/She is fat / thin"},
+{term:"Er/Sie ist freundlich / lustig / launisch",desc:"friendly / funny / moody"},
+{term:"frech / niedlich / gemein / faul",desc:"cheeky / cute / mean / lazy"},
+{term:"laut / kreativ / intelligent / musikalisch",desc:"loud / creative / intelligent / musical"},
+{term:"Ich habe kurze/lange Haare",desc:"I have short/long hair"},
+{term:"schwarze/braune/blonde/rote Haare",desc:"black/brown/blond/red hair"},
+{term:"blaue/braune/grüne/graue Augen",desc:"blue/brown/green/grey eyes"},
+{term:"Er/Sie hat lange braune Haare und grüne Augen",desc:"Full description combining hair + eyes"},
+{term:"ziemlich = fairly/quite, sehr = very",desc:"Sie ist ziemlich groß = She is quite tall"},
+{term:"und = and, aber = but, oder = or",desc:"Er ist lustig, aber launisch = funny but moody"},
+]},
+{title:"Die Farben (Colours)",icon:"🎨",color:"#FF922B",items:[
+{term:"schwarz / weiß / grau",desc:"black / white / grey"},
+{term:"rot / blau / grün / gelb",desc:"red / blue / green / yellow"},
+{term:"braun / orange / rosa / lila",desc:"brown / orange / pink / purple"},
+{term:"violett / indigoblau",desc:"violet / indigo"},
+{term:"bunt",desc:"brightly coloured / multicoloured"},
+{term:"hell- = light, dunkel- = dark",desc:"hellblau = light blue, dunkelbraun = dark brown"},
+{term:"hellblau / dunkelblau",desc:"light blue / dark blue"},
+]},
+{title:"Zahlen 20–100",icon:"🔢",color:"#339AF0",items:[
+{term:"zwanzig (20), dreißig (30), vierzig (40)",desc:"20, 30, 40"},
+{term:"fünfzig (50), sechzig (60), siebzig (70)",desc:"50, 60, 70"},
+{term:"achtzig (80), neunzig (90), hundert (100)",desc:"80, 90, 100"},
+{term:"einundzwanzig (21)",desc:"ein + und + zwanzig (one-and-twenty)"},
+{term:"Pattern: units FIRST, then tens",desc:"fünfundvierzig = 45 (five-and-forty)"},
+{term:"dreiundsechzig (63)",desc:"drei + und + sechzig"},
+{term:"Er/Sie ist fünfundachtzig Jahre alt",desc:"He/She is 85 years old"},
+]},
+{title:"Die Monate & Datum",icon:"🗓️",color:"#845EF7",items:[
+{term:"Januar, Februar, März",desc:"January, February, March"},
+{term:"April, Mai, Juni",desc:"April, May, June"},
+{term:"Juli, August, September",desc:"July, August, September"},
+{term:"Oktober, November, Dezember",desc:"October, November, December"},
+{term:"Wann hast du Geburtstag?",desc:"When is your birthday?"},
+{term:"Ich habe am dritten März Geburtstag",desc:"My birthday is on 3rd March"},
+{term:"Alles Gute zum Geburtstag!",desc:"Happy birthday!"},
+{term:"am ersten (1st), am dritten (3rd)",desc:"1st–19th: add -ten to number"},
+{term:"am zwanzigsten (20th)",desc:"From 20th: add -sten"},
+{term:"am fünfzehnten Mai",desc:"on the 15th May"},
+{term:"am einundzwanzigsten Juni",desc:"on the 21st June"},
+]},
+{title:"Verben (haben, sein, wohnen, können)",icon:"✏️",color:"#51CF66",items:[
+{term:"haben: ich habe, du hast, er/sie/es hat",desc:"to have (singular)"},
+{term:"haben: wir haben, ihr habt, Sie/sie haben",desc:"to have (plural)"},
+{term:"sein: ich bin, du bist, er/sie/es ist",desc:"to be (singular)"},
+{term:"sein: wir sind, ihr seid, Sie/sie sind",desc:"to be (plural)"},
+{term:"wohnen: ich wohne, du wohnst, er/sie/es wohnt",desc:"to live (singular)"},
+{term:"wohnen: wir wohnen, ihr wohnt, Sie/sie wohnen",desc:"to live (plural)"},
+{term:"können: ich kann, du kannst, er/sie/es kann",desc:"can (singular) — irregular!"},
+{term:"Regular verb pattern: remove -en, add endings",desc:"-e, -st, -t, -en, -t, -en"},
+{term:"du = 1 friend, ihr = 2+ friends",desc:"informal 'you'"},
+{term:"Sie (capital S) = polite/formal 'you'",desc:"for teachers, adults, strangers"},
+{term:"Pronouns: der → Er, die → Sie, das → Es",desc:"Der Hund ist süß. Er heißt Max."},
+]},
+];
+
+const QUESTIONS=[
+// PETS (10)
+{topic:"Pets",question:"How do you say 'I have a dog'?",options:["Ich habe eine Hund","Ich habe einen Hund","Ich habe ein Hund","Ich haben einen Hund"],correct:1,explanation:"Hund is masculine → einen Hund. ich habe (not haben)."},
+{topic:"Pets",question:"What does 'Ich habe eine Katze' mean?",options:["I have a rabbit","I have a cat","I have a mouse","I want a cat"],correct:1,explanation:"eine Katze = a cat. Katze is feminine → eine."},
+{topic:"Pets",question:"How do you say 'a guinea pig'?",options:["ein Goldfisch","ein Kaninchen","ein Meerschweinchen","eine Schlange"],correct:2,explanation:"Meerschweinchen = guinea pig. Neuter → ein."},
+{topic:"Pets",question:"What does 'kein Haustier' mean?",options:["A small pet","No pet","My pet","One pet"],correct:1,explanation:"kein = no/not any. kein Haustier = no pet."},
+{topic:"Pets",question:"'Hast du ein Haustier?' means...",options:["What is your pet?","Do you like pets?","Have you got a pet?","Is that your pet?"],correct:2,explanation:"Hast du = have you, ein Haustier = a pet."},
+{topic:"Pets",question:"What is 'eine Schlange'?",options:["A hamster","A horse","A snake","A budgie"],correct:2,explanation:"Schlange = snake (feminine → die Schlange)."},
+{topic:"Pets",question:"Why is it 'einen Hund' not 'ein Hund'?",options:["Hund is feminine","Hund is plural","Masculine changes to 'einen' after 'ich habe'","It's always einen"],correct:2,explanation:"Masculine nouns change ein→einen in the accusative (after ich habe)."},
+{topic:"Pets",question:"'Er heißt Bruno' — why 'Er' not 'Sie'?",options:["Bruno is a boy's name","The pet is male","The noun (der Hund) is masculine → Er","Er is always used for pets"],correct:2,explanation:"Pronouns match the noun's gender: der Hund = masculine → Er heißt..."},
+{topic:"Pets",question:"A cat called Mimi: 'Die Katze heißt Mimi. ___ ist süß.'",options:["Er","Es","Sie","Wir"],correct:2,explanation:"die Katze is feminine → Sie. Sie ist süß = She is sweet."},
+{topic:"Pets",question:"A rabbit called Flopsy: 'Das Kaninchen heißt Flopsy. ___ ist klein.'",options:["Er","Sie","Es","Du"],correct:2,explanation:"das Kaninchen is neuter → Es. Es ist klein = It is small."},
+
+// PLURAL NOUNS (8)
+{topic:"Plural Nouns",question:"What is the plural of 'der Hund'?",options:["die Hunden","die Hünde","die Hunde","die Hunds"],correct:2,explanation:"Hund adds -e: Hunde. All plurals use 'die'."},
+{topic:"Plural Nouns",question:"What is the plural of 'die Katze'?",options:["die Katzen","die Kätze","die Katzes","die Katze"],correct:0,explanation:"Katze adds -n: Katzen."},
+{topic:"Plural Nouns",question:"What is the plural of 'der Hamster'?",options:["die Hamstern","die Hamsters","die Hamster","die Hämster"],correct:2,explanation:"Hamster has no change in plural: die Hamster."},
+{topic:"Plural Nouns",question:"What is the plural of 'die Maus'?",options:["die Mausen","die Mäuse","die Maüse","die Maus"],correct:1,explanation:"Maus gets Umlaut + e: Mäuse (a → ä)."},
+{topic:"Plural Nouns",question:"What is the plural of 'der Bruder'?",options:["die Bruders","die Bruder","die Brüder","die Brüdern"],correct:2,explanation:"Bruder gets an Umlaut: Brüder (u → ü)."},
+{topic:"Plural Nouns",question:"What is the plural of 'das Handy'?",options:["die Handys","die Handyen","die Hände","die Handies"],correct:0,explanation:"Handy adds -s: Handys."},
+{topic:"Plural Nouns",question:"What is the plural of 'die Schwester'?",options:["die Schwestern","die Schwester","die Schwesternen","die Schwesteren"],correct:0,explanation:"Schwester adds -n: Schwestern."},
+{topic:"Plural Nouns",question:"What is the plural of 'der Vater'?",options:["die Vaters","die Väter","die Vatern","die Vater"],correct:1,explanation:"Vater gets Umlaut: Väter (a → ä)."},
+
+// SUPERTIER & KÖNNEN (8)
+{topic:"Supertier",question:"What does 'schlau' mean?",options:["Fast","Strong","Cunning/clever","Sweet"],correct:2,explanation:"schlau = cunning or clever."},
+{topic:"Supertier",question:"What does 'kräftig' mean?",options:["Creative","Strong","Quick","Moody"],correct:1,explanation:"kräftig = strong."},
+{topic:"Supertier",question:"How do you say 'He can run quickly'?",options:["Er laufen schnell kann","Er kann schnell laufen","Er schnell kann laufen","Er kann laufen schnell"],correct:1,explanation:"können: Er kann + ... + infinitive at END. Er kann schnell laufen."},
+{topic:"Supertier",question:"What does 'gemein' mean?",options:["Friendly","Hilarious","Mean","Sweet"],correct:2,explanation:"gemein = mean."},
+{topic:"Supertier",question:"'Sie kann gut schwimmen' means...",options:["She can sing well","She can swim well","She can run well","He can swim well"],correct:1,explanation:"Sie = she, kann = can, gut = well, schwimmen = to swim."},
+{topic:"Supertier",question:"How do you say 'I can play football'?",options:["Ich kann Fußball spielen","Ich spielen Fußball kann","Ich Fußball kann spielen","Ich kann spielen Fußball"],correct:0,explanation:"Ich kann + object + infinitive at end: Ich kann Fußball spielen."},
+{topic:"Supertier",question:"What does 'lesen' mean?",options:["To run","To read","To sing","To dance"],correct:1,explanation:"lesen = to read."},
+{topic:"Supertier",question:"What does 'Rad fahren' mean?",options:["To drive a car","To ride a bike","To ride a horse","To run fast"],correct:1,explanation:"Rad fahren = to ride a bike. Rad = wheel/bike."},
+
+// FAMILY (8)
+{topic:"Family",question:"What does 'mein Bruder' mean?",options:["My sister","My father","My brother","My uncle"],correct:2,explanation:"Bruder = brother, mein = my (masculine)."},
+{topic:"Family",question:"How do you say 'my sister'?",options:["mein Schwester","meine Schwester","meinen Schwester","meiner Schwester"],correct:1,explanation:"Schwester is feminine → meine (not mein)."},
+{topic:"Family",question:"What does 'meine Großeltern' mean?",options:["My parents","My grandparents","My siblings","My great-aunt"],correct:1,explanation:"Großeltern = grandparents. Groß = big/grand."},
+{topic:"Family",question:"'Ich bin Einzelkind' means...",options:["I have one child","I am an only child","I have one sibling","I am young"],correct:1,explanation:"Einzelkind = only child. Einzel = single, Kind = child."},
+{topic:"Family",question:"How do you say 'I have two brothers'?",options:["Ich habe zwei Bruder","Ich habe zwei Brüder","Ich haben zwei Brüder","Ich habe zwei Brüdern"],correct:1,explanation:"Bruder → Brüder (Umlaut plural). ich habe (not haben)."},
+{topic:"Family",question:"'Hast du Geschwister?' means...",options:["Do you have children?","Have you any brothers and sisters?","Do you have cousins?","Is your family big?"],correct:1,explanation:"Geschwister = siblings (brothers and sisters)."},
+{topic:"Family",question:"How do you say 'He is 16 years old'?",options:["Er hat 16 Jahre alt","Er ist 16 Jahre alt","Er haben 16 Jahre alt","Er bist 16 Jahre alt"],correct:1,explanation:"Use sein (to be) for age in German: Er ist 16 Jahre alt."},
+{topic:"Family",question:"'Es gibt fünf Personen in meiner Familie' means...",options:["There are 5 pets","There are 5 people in my family","My family has 5 rooms","I have 5 friends"],correct:1,explanation:"Es gibt = there are. fünf Personen = 5 people."},
+
+// APPEARANCE (10)
+{topic:"Appearance",question:"What does 'freundlich' mean?",options:["Funny","Moody","Friendly","Cheeky"],correct:2,explanation:"freundlich = friendly (like 'friend-ly')."},
+{topic:"Appearance",question:"What does 'launisch' mean?",options:["Loud","Lazy","Funny","Moody"],correct:3,explanation:"launisch = moody."},
+{topic:"Appearance",question:"What does 'frech' mean?",options:["Fresh","Friendly","Free","Cheeky"],correct:3,explanation:"frech = cheeky (not 'fresh'!)."},
+{topic:"Appearance",question:"What does 'faul' mean?",options:["Foul","Lazy","Full","Loud"],correct:1,explanation:"faul = lazy."},
+{topic:"Appearance",question:"What does 'musikalisch' mean?",options:["Moody","Musical","Muscular","Mean"],correct:1,explanation:"musikalisch = musical. A cognate (similar to English)."},
+{topic:"Appearance",question:"How do you say 'She has long brown hair'?",options:["Sie hat lang braun Haare","Sie hat lange braune Haare","Sie haben lange braune Haare","Sie ist lange braune Haare"],correct:1,explanation:"Sie hat (she has) + lange braune Haare. Adjectives get -e endings."},
+{topic:"Appearance",question:"'Er ist ziemlich groß' means...",options:["He is very small","He is quite tall","He is very fat","He is fairly thin"],correct:1,explanation:"ziemlich = fairly/quite, groß = tall/big."},
+{topic:"Appearance",question:"What does 'Ich habe blaue Augen' mean?",options:["I have blue hair","I have brown eyes","I have blue eyes","I see blue"],correct:2,explanation:"blaue Augen = blue eyes. Augen = eyes."},
+{topic:"Appearance",question:"How do you say 'He is funny but moody'?",options:["Er ist lustig und launisch","Er ist lustig, aber launisch","Er ist lustig oder launisch","Er ist lustig, nicht launisch"],correct:1,explanation:"aber = but. Er ist lustig, aber launisch."},
+{topic:"Appearance",question:"What does 'sehr' mean?",options:["Fair","Quite","Very","So"],correct:2,explanation:"sehr = very. Sie ist sehr freundlich = She is very friendly."},
+
+// COLOURS (8)
+{topic:"Colours",question:"What colour is 'rot'?",options:["Blue","Green","Red","Brown"],correct:2,explanation:"rot = red."},
+{topic:"Colours",question:"What colour is 'gelb'?",options:["Yellow","Gold","Green","Grey"],correct:0,explanation:"gelb = yellow."},
+{topic:"Colours",question:"What does 'hellblau' mean?",options:["Dark blue","Light blue","Sky blue","Bright green"],correct:1,explanation:"hell = light, blau = blue. hellblau = light blue."},
+{topic:"Colours",question:"What does 'dunkelbraun' mean?",options:["Light brown","Dark brown","Dark blue","Brown-red"],correct:1,explanation:"dunkel = dark, braun = brown. dunkelbraun = dark brown."},
+{topic:"Colours",question:"What does 'bunt' mean?",options:["Burnt","Brown","Brightly coloured/multicoloured","Beautiful"],correct:2,explanation:"bunt = brightly coloured or multicoloured."},
+{topic:"Colours",question:"What colour is 'lila'?",options:["Light blue","Lilac/purple","Pink","Red"],correct:1,explanation:"lila = purple/lilac (like English 'lilac')."},
+{topic:"Colours",question:"What colour is 'rosa'?",options:["Red","Rose/Pink","Purple","Orange"],correct:1,explanation:"rosa = pink (like 'rose')."},
+{topic:"Colours",question:"What colour is 'grau'?",options:["Green","Brown","Grey","Gold"],correct:2,explanation:"grau = grey."},
+
+// MONTHS (8)
+{topic:"Months",question:"What month is 'März'?",options:["May","March","Monday","April"],correct:1,explanation:"März = March."},
+{topic:"Months",question:"What month is 'Juni'?",options:["January","July","June","Sunday"],correct:2,explanation:"Juni = June (not Juli which is July!)."},
+{topic:"Months",question:"How do you say 'February' in German?",options:["Feburar","Februar","Febuary","Fevrier"],correct:1,explanation:"Februar (note the spelling — no 'r' before 'u')."},
+{topic:"Months",question:"What month is 'Dezember'?",options:["September","November","October","December"],correct:3,explanation:"Dezember = December (cognate — very similar!)."},
+{topic:"Months",question:"How do you say 'Happy birthday!'?",options:["Frohe Weihnachten!","Alles Gute zum Geburtstag!","Guten Tag!","Herzlichen Glückwunsch!"],correct:1,explanation:"Alles Gute zum Geburtstag! = Happy birthday!"},
+{topic:"Months",question:"'Wann hast du Geburtstag?' means...",options:["Where is your party?","When is your birthday?","How old are you?","What present do you want?"],correct:1,explanation:"Wann = when, Geburtstag = birthday."},
+{topic:"Months",question:"'Ich habe am dritten März Geburtstag' means...",options:["My birthday is in March","My birthday is on 3rd March","I was born in March","I have three birthdays in March"],correct:1,explanation:"am dritten = on the 3rd, März = March, Geburtstag = birthday."},
+{topic:"Months",question:"What month is 'Oktober'?",options:["August","October","September","November"],correct:1,explanation:"Oktober = October (cognate)."},
+
+// ORDINAL NUMBERS (6)
+{topic:"Ordinal Numbers",question:"'am dritten März' means...",options:["On the 13th March","On the 30th March","On the 3rd March","In three months"],correct:2,explanation:"dritten = third (3rd). am = on the."},
+{topic:"Ordinal Numbers",question:"How do you say 'on the 1st January'?",options:["am eins Januar","am ersten Januar","am einsten Januar","am erst Januar"],correct:1,explanation:"1st = ersten (irregular). am ersten Januar."},
+{topic:"Ordinal Numbers",question:"'am zwanzigsten' means...",options:["On the 12th","On the 2nd","On the 22nd","On the 20th"],correct:3,explanation:"zwanzigsten = 20th. From 20+, add -sten."},
+{topic:"Ordinal Numbers",question:"How do you form ordinal numbers 1st–19th?",options:["Add -sten","Add -ten","Add -zig","Add -lich"],correct:1,explanation:"1st–19th: add -ten (erste/dritte are irregular). From 20th: -sten."},
+{topic:"Ordinal Numbers",question:"'am fünfzehnten Mai' means...",options:["5th May","15th March","15th May","50th May"],correct:2,explanation:"fünfzehnten = 15th, Mai = May."},
+{topic:"Ordinal Numbers",question:"How do you say 'on the 21st June'?",options:["am einundzwanzigsten Juni","am zwanzigersten Juni","am einzwanzig Juni","am einundzwanzigten Juni"],correct:0,explanation:"21st = einundzwanzigsten (21 + -sten ending). Juni = June."},
+
+// NUMBERS (8)
+{topic:"Numbers",question:"What is 'dreißig'?",options:["13","30","3","33"],correct:1,explanation:"dreißig = 30."},
+{topic:"Numbers",question:"How do you say 45 in German?",options:["vierzig fünf","fünfundvierzig","vierfünfzig","fünfvierzig"],correct:1,explanation:"45 = fünfundvierzig (five-and-forty). Units BEFORE tens!"},
+{topic:"Numbers",question:"What is 'einundzwanzig'?",options:["12","20","21","31"],correct:2,explanation:"ein(1) + und(and) + zwanzig(20) = 21."},
+{topic:"Numbers",question:"What is 'siebzig'?",options:["17","60","70","77"],correct:2,explanation:"siebzig = 70."},
+{topic:"Numbers",question:"How do you say 63?",options:["sechsunddreißig","dreiundsechzig","sechzigdrei","dreisechzig"],correct:1,explanation:"63 = dreiundsechzig (three-and-sixty)."},
+{topic:"Numbers",question:"What is 'hundert'?",options:["100","1000","10","50"],correct:0,explanation:"hundert = 100."},
+{topic:"Numbers",question:"'Sie ist fünfundachtzig Jahre alt' — how old?",options:["58","85","48","80"],correct:1,explanation:"fünfundachtzig = 85 (five-and-eighty)."},
+{topic:"Numbers",question:"What is 'neunzig'?",options:["19","9","90","99"],correct:2,explanation:"neunzig = 90."},
+
+// VERBS (12)
+{topic:"Verbs",question:"What is 'ich habe'?",options:["I am","I have","I live","I can"],correct:1,explanation:"haben = to have. ich habe = I have."},
+{topic:"Verbs",question:"What is 'du bist'?",options:["You have","You live","You are","You can"],correct:2,explanation:"sein = to be. du bist = you are."},
+{topic:"Verbs",question:"What is 'er wohnt'?",options:["He has","He is","He lives","He works"],correct:2,explanation:"wohnen = to live. er wohnt = he lives."},
+{topic:"Verbs",question:"What is 'wir haben'?",options:["We are","We live","We have","We can"],correct:2,explanation:"wir haben = we have."},
+{topic:"Verbs",question:"Complete: 'sie (she) ___ in Berlin'",options:["wohne","wohnst","wohnt","wohnen"],correct:2,explanation:"er/sie/es takes -t ending: sie wohnt."},
+{topic:"Verbs",question:"Complete: 'ich ___ 12 Jahre alt'",options:["habe","bin","hat","ist"],correct:1,explanation:"Use sein for age: ich bin 12 Jahre alt (I am 12 years old)."},
+{topic:"Verbs",question:"What form of 'you' for your teacher?",options:["du","ihr","Sie","er"],correct:2,explanation:"Sie (capital S) = formal you. For adults, teachers, strangers."},
+{topic:"Verbs",question:"What form of 'you' for two friends?",options:["du","ihr","Sie","wir"],correct:1,explanation:"ihr = you (plural informal). For 2+ friends."},
+{topic:"Verbs",question:"Complete: 'meine Eltern ___ in London'",options:["wohnt","wohne","wohnen","wohnst"],correct:2,explanation:"meine Eltern = they (plural) → wohnen."},
+{topic:"Verbs",question:"What is 'er/sie/es hat'?",options:["He/she/it has","He/she/it is","He/she/it lives","He/she/it can"],correct:0,explanation:"haben: er/sie/es hat (slightly irregular — 'hat' not 'habt')."},
+{topic:"Verbs",question:"Complete: 'wir ___ sehr freundlich'",options:["ist","bin","sind","seid"],correct:2,explanation:"wir sind = we are. sein: ich bin, du bist, er ist, wir sind, ihr seid, sie sind."},
+{topic:"Verbs",question:"Complete: 'ihr ___ in der Schweiz'",options:["wohne","wohnt","wohnen","wohnst"],correct:1,explanation:"ihr takes -t ending: ihr wohnt."},
+];
+
+const FLASHCARDS=[
+// Pets
+{de:"der Hund",en:"the dog",cat:"Pets"},{de:"die Katze",en:"the cat",cat:"Pets"},{de:"die Maus",en:"the mouse",cat:"Pets"},{de:"der Fisch",en:"the fish",cat:"Pets"},{de:"der Bär",en:"the bear",cat:"Pets"},{de:"das Kaninchen",en:"the rabbit",cat:"Pets"},{de:"der Hamster",en:"the hamster",cat:"Pets"},{de:"die Schlange",en:"the snake",cat:"Pets"},{de:"das Pferd",en:"the horse",cat:"Pets"},{de:"das Meerschweinchen",en:"the guinea pig",cat:"Pets"},{de:"der Goldfisch",en:"the goldfish",cat:"Pets"},{de:"der Wellensittich",en:"the budgie",cat:"Pets"},
+// Family
+{de:"die Mutter",en:"mother",cat:"Family"},{de:"der Vater",en:"father",cat:"Family"},{de:"der Bruder",en:"brother",cat:"Family"},{de:"die Schwester",en:"sister",cat:"Family"},{de:"die Eltern",en:"parents",cat:"Family"},{de:"die Großeltern",en:"grandparents",cat:"Family"},{de:"die Geschwister",en:"siblings",cat:"Family"},{de:"der Stiefbruder",en:"stepbrother",cat:"Family"},{de:"die Stiefschwester",en:"stepsister",cat:"Family"},{de:"Einzelkind",en:"only child",cat:"Family"},
+// Adjectives/Appearance
+{de:"freundlich",en:"friendly",cat:"Appearance"},{de:"launisch",en:"moody",cat:"Appearance"},{de:"lustig",en:"funny",cat:"Appearance"},{de:"frech",en:"cheeky",cat:"Appearance"},{de:"gemein",en:"mean",cat:"Appearance"},{de:"süß",en:"sweet/cute",cat:"Appearance"},{de:"schlau",en:"cunning",cat:"Appearance"},{de:"kräftig",en:"strong",cat:"Appearance"},{de:"schnell",en:"fast",cat:"Appearance"},{de:"groß",en:"big/tall",cat:"Appearance"},{de:"klein",en:"small/short",cat:"Appearance"},{de:"dick",en:"fat",cat:"Appearance"},{de:"schlank",en:"thin",cat:"Appearance"},{de:"niedlich",en:"cute",cat:"Appearance"},{de:"faul",en:"lazy",cat:"Appearance"},{de:"laut",en:"loud",cat:"Appearance"},{de:"kreativ",en:"creative",cat:"Appearance"},{de:"intelligent",en:"intelligent",cat:"Appearance"},{de:"musikalisch",en:"musical",cat:"Appearance"},
+// Colours
+{de:"schwarz",en:"black",cat:"Colours"},{de:"weiß",en:"white",cat:"Colours"},{de:"rot",en:"red",cat:"Colours"},{de:"blau",en:"blue",cat:"Colours"},{de:"grün",en:"green",cat:"Colours"},{de:"gelb",en:"yellow",cat:"Colours"},{de:"braun",en:"brown",cat:"Colours"},{de:"grau",en:"grey",cat:"Colours"},{de:"orange",en:"orange",cat:"Colours"},{de:"rosa",en:"pink",cat:"Colours"},{de:"lila",en:"purple",cat:"Colours"},{de:"bunt",en:"multicoloured",cat:"Colours"},{de:"hellblau",en:"light blue",cat:"Colours"},{de:"dunkelbraun",en:"dark brown",cat:"Colours"},
+// Numbers
+{de:"zwanzig",en:"20",cat:"Numbers"},{de:"dreißig",en:"30",cat:"Numbers"},{de:"vierzig",en:"40",cat:"Numbers"},{de:"fünfzig",en:"50",cat:"Numbers"},{de:"sechzig",en:"60",cat:"Numbers"},{de:"siebzig",en:"70",cat:"Numbers"},{de:"achtzig",en:"80",cat:"Numbers"},{de:"neunzig",en:"90",cat:"Numbers"},{de:"hundert",en:"100",cat:"Numbers"},
+// Months
+{de:"Januar",en:"January",cat:"Months"},{de:"Februar",en:"February",cat:"Months"},{de:"März",en:"March",cat:"Months"},{de:"April",en:"April",cat:"Months"},{de:"Mai",en:"May",cat:"Months"},{de:"Juni",en:"June",cat:"Months"},{de:"Juli",en:"July",cat:"Months"},{de:"August",en:"August",cat:"Months"},{de:"September",en:"September",cat:"Months"},{de:"Oktober",en:"October",cat:"Months"},{de:"November",en:"November",cat:"Months"},{de:"Dezember",en:"December",cat:"Months"},
+// Activities
+{de:"schwimmen",en:"to swim",cat:"Supertier"},{de:"singen",en:"to sing",cat:"Supertier"},{de:"laufen",en:"to run",cat:"Supertier"},{de:"lesen",en:"to read",cat:"Supertier"},{de:"tanzen",en:"to dance",cat:"Supertier"},{de:"springen",en:"to jump",cat:"Supertier"},{de:"fliegen",en:"to fly",cat:"Supertier"},{de:"Rad fahren",en:"to ride a bike",cat:"Supertier"},{de:"Fußball spielen",en:"to play football",cat:"Supertier"},{de:"Flöte spielen",en:"to play the flute",cat:"Supertier"},
+// Connectors
+{de:"und",en:"and",cat:"Appearance"},{de:"aber",en:"but",cat:"Appearance"},{de:"oder",en:"or",cat:"Appearance"},{de:"ziemlich",en:"fairly/quite",cat:"Appearance"},{de:"sehr",en:"very",cat:"Appearance"},
+];
+
+// ===== HELPERS =====
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+let state={mode:'home',qs:[],cq:0,sel:null,showAns:false,score:0,ans:0,streak:0,best:0,wrong:[],ct:0,qt:null,fc:[],fi:0,flipped:false,fcCat:null,fcScore:0,fcTotal:0};
+function S(u){Object.assign(state,u);render();}
+
+function render(){
+const s=state,app=document.getElementById('app');
+const topics=[...new Set(QUESTIONS.map(q=>q.topic))];
+
+if(s.mode==='home'){
+app.innerHTML=`
+<div style="text-align:center;margin-bottom:32px;padding-top:12px">
+<div style="font-size:48px;margin-bottom:8px">🇩🇪</div>
+<h1 style="font-size:28px;font-weight:900;margin:0 0 6px;background:linear-gradient(135deg,#e9a820,#FF6B6B,#F06595,#B197FC,#51CF66);-webkit-background-clip:text;-webkit-text-fill-color:transparent">German Revision</h1>
+<p style="color:#9898b8;font-size:15px;margin:0">Stimmt! 1 — Listening & Speaking Test 💪</p>
+</div>
+<div class="main-grid">
+<button class="btn card" onclick="startQuiz(null)" style="text-align:center;background:linear-gradient(135deg,#e9a82022,#e9a82011);border-color:#e9a82044;cursor:pointer">
+<div style="font-size:30px;margin-bottom:6px">🚀</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Full Quiz</div><div style="color:#9898b8;font-size:12px">All ${QUESTIONS.length} Qs</div>
+</button>
+<button class="btn card" onclick="S({mode:'cheatsheet',ct:0})" style="text-align:center;background:linear-gradient(135deg,#51CF6622,#51CF6611);border-color:#51CF6644;cursor:pointer">
+<div style="font-size:30px;margin-bottom:6px">📖</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Cheat Sheet</div><div style="color:#9898b8;font-size:12px">${CHEAT_SHEET.length} topics</div>
+</button>
+<button class="btn card" onclick="startFlash(null)" style="text-align:center;background:linear-gradient(135deg,#339AF022,#339AF011);border-color:#339AF044;cursor:pointer">
+<div style="font-size:30px;margin-bottom:6px">🔄</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Flashcards</div><div style="color:#9898b8;font-size:12px">${FLASHCARDS.length} words</div>
+</button>
+</div>
+<p style="color:#9898b8;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px">Quiz by Topic</p>
+<div class="topic-grid">
+${topics.map(t=>`<button class="btn" onclick="startQuiz('${t}')" style="background:linear-gradient(135deg,${TC[t]||'#888'}22,${TC[t]||'#888'}11);border:1px solid ${TC[t]||'#888'}44;border-radius:14px;padding:12px 10px;color:#e8e8f0;text-align:center;font-family:inherit;cursor:pointer">
+<div style="font-size:20px">${TI[t]||'📝'}</div><div style="font-size:11px;font-weight:700;margin-top:4px">${t}</div><div style="font-size:11px;color:#9898b8">${QUESTIONS.filter(q=>q.topic===t).length}Qs</div>
+</button>`).join('')}
+</div>`;return;}
+
+if(s.mode==='cheatsheet'){
+const sec=CHEAT_SHEET[s.ct];
+app.innerHTML=`
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><button class="btn back-btn" onclick="S({mode:'home'})">← Back</button><h2 style="font-size:20px;font-weight:900">📖 Cheat Sheet</h2></div>
+<div class="tab-wrap">${CHEAT_SHEET.map((x,i)=>`<button class="btn tab-btn" onclick="S({ct:${i}})" style="background:${s.ct===i?x.color+'33':'rgba(255,255,255,0.05)'};border-color:${s.ct===i?x.color:'rgba(255,255,255,0.1)'};color:${s.ct===i?x.color:'#9898b8'}">${x.icon} ${x.title.split('(')[0].split('&')[0].trim()}</button>`).join('')}</div>
+<div class="card" style="border-color:${sec.color}44;background:linear-gradient(135deg,${sec.color}11,rgba(255,255,255,0.04))">
+<h3 style="margin:0 0 20px;font-size:20px;font-weight:900;color:${sec.color}">${sec.icon} ${sec.title}</h3>
+${sec.items.map(item=>`<div class="cheat-item"><span class="cheat-term" style="color:${sec.color}">${esc(item.term)}</span><div class="cheat-desc">${esc(item.desc)}</div></div>`).join('')}
+</div>
+<div style="display:flex;justify-content:space-between;margin-top:16px">
+<button class="btn back-btn" onclick="S({ct:Math.max(0,${s.ct}-1)})" ${s.ct===0?'style="opacity:0.3"':''}>← Prev</button>
+<span style="color:#9898b8;font-size:13px;padding-top:10px">${s.ct+1}/${CHEAT_SHEET.length}</span>
+<button class="btn back-btn" onclick="S({ct:Math.min(${CHEAT_SHEET.length-1},${s.ct}+1)})" ${s.ct===CHEAT_SHEET.length-1?'style="opacity:0.3"':''}>Next →</button>
+</div>`;return;}
+
+if(s.mode==='flashcards'&&s.fc.length){
+const c=s.fc[s.fi],prog=((s.fi)/s.fc.length)*100;
+app.innerHTML=`
+<div class="nav-row"><button class="btn back-btn" onclick="S({mode:'home'})">← Back</button><div class="score-bar"><span style="color:#51CF66">✓${s.fcScore}</span><span style="color:#FF6B6B">✗${s.fcTotal-s.fcScore}</span></div></div>
+<div class="progress-bar"><div class="progress-fill" style="width:${prog}%;background:linear-gradient(90deg,#e9a820,#e9a820cc)"></div></div>
+<div class="card" style="text-align:center">
+<p style="color:#9898b8;font-size:13px;margin-bottom:4px;font-weight:600">${s.fi+1}/${s.fc.length}${c.cat?' — '+c.cat:''}</p>
+<p style="color:#9898b8;font-size:12px;margin-bottom:16px">Tap card to flip, then rate yourself</p>
+<div class="flash-card ${s.flipped?'flash-back':'flash-front'}" onclick="S({flipped:!state.flipped})">
+${s.flipped?`<div><div style="font-size:14px;color:#9898b8;margin-bottom:8px">English:</div><div style="font-size:26px;font-weight:900;color:#51CF66">${esc(c.en)}</div><div style="margin-top:12px;font-size:16px;color:#9898b8">${esc(c.de)}</div></div>`
+:`<div><div style="font-size:14px;color:#9898b8;margin-bottom:8px">German:</div><div style="font-size:28px;font-weight:900;color:#e9a820">${esc(c.de)}</div><div style="margin-top:12px;font-size:14px;color:#666">Tap to reveal</div></div>`}
+</div>
+${s.flipped?`<p style="color:#9898b8;font-size:14px;margin:16px 0 10px;font-weight:700">Did you know it?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button class="btn full-btn" onclick="fcRate(true)" style="background:linear-gradient(135deg,#51CF66,#51CF66cc);margin:0;font-size:18px">✓ Yes</button>
+<button class="btn full-btn" onclick="fcRate(false)" style="background:linear-gradient(135deg,#FF6B6B,#FF6B6Bcc);margin:0;font-size:18px">✗ No</button>
+</div>`:''}
+</div>`;return;}
+
+if(s.mode==='fc_results'){
+const ipct=s.fcTotal?Math.round((s.fcScore/s.fcTotal)*100):0;
+const g=ipct>=80?{e:'🌟',m:'Ausgezeichnet!',c:'#FCC419'}:ipct>=60?{e:'💪',m:'Gut gemacht!',c:'#51CF66'}:{e:'📚',m:'Weiter üben!',c:'#339AF0'};
+app.innerHTML=`<div class="card" style="text-align:center">
+<div style="font-size:56px;margin-bottom:8px">${g.e}</div>
+<h2 style="margin:0 0 6px;font-size:28px;font-weight:900;color:${g.c}">${s.fcScore}/${s.fcTotal}</h2>
+<div class="result-pct" style="background:linear-gradient(135deg,${g.c},${g.c}aa)">${ipct}%</div>
+<p style="color:#b8b8d0;font-size:16px;font-weight:600;margin:0 0 20px">${g.m}</p>
+<div class="bottom-grid">
+<button class="btn card" onclick="startFlash(${s.fcCat?`'${s.fcCat}'`:'null'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#e9a82015,#e9a82005);border-color:#e9a82044"><div style="font-size:24px">🔄</div><div style="font-size:12px;font-weight:800;margin-top:6px">Again</div></button>
+<button class="btn card" onclick="S({mode:'cheatsheet',ct:0})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#51CF6615,#51CF6605);border-color:#51CF6644"><div style="font-size:24px">📖</div><div style="font-size:12px;font-weight:800;margin-top:6px">Cheat Sheet</div></button>
+<button class="btn card" onclick="S({mode:'home'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#339AF015,#339AF005);border-color:#339AF044"><div style="font-size:24px">🏠</div><div style="font-size:12px;font-weight:800;margin-top:6px">Home</div></button>
+</div></div>`;return;}
+
+if(s.mode==='quiz'&&s.qs.length){
+const q=s.qs[s.cq],tc=TC[q.topic]||'#e9a820',prog=((s.cq+(s.showAns?1:0))/s.qs.length)*100;
+app.innerHTML=`
+<div class="nav-row"><button class="btn back-btn" onclick="S({mode:'home'})" style="padding:6px 14px;font-size:13px">✕ Quit</button>
+<div class="score-bar"><span style="color:#51CF66">✓${s.score}</span><span style="color:#FF6B6B">✗${s.ans-s.score}</span>${s.streak>=2?`<span style="color:#FCC419">🔥${s.streak}</span>`:''}</div></div>
+<div class="progress-bar"><div class="progress-fill" style="width:${prog}%;background:linear-gradient(90deg,${tc},${tc}cc)"></div></div>
+<div class="card">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+<span style="background:${tc}22;color:${tc};padding:4px 12px;border-radius:8px;font-size:12px;font-weight:800;border:1px solid ${tc}44">${TI[q.topic]||'📝'} ${q.topic}</span>
+<span style="color:#9898b8;font-size:13px;font-weight:600">${s.cq+1}/${s.qs.length}</span></div>
+<h3 style="font-size:17px;font-weight:800;margin:0 0 16px;line-height:1.5;color:#f0f0ff">${esc(q.question)}</h3>
+<div style="display:flex;flex-direction:column;gap:10px">
+${q.options.map((opt,i)=>{let bg='rgba(255,255,255,0.04)',bd='rgba(255,255,255,0.1)',em='';
+if(s.showAns){if(i===q.correct){bg='rgba(81,207,102,0.15)';bd='#51CF66';em=' ✓';}else if(i===s.sel&&i!==q.correct){bg='rgba(255,107,107,0.15)';bd='#FF6B6B';em=' ✗';}}
+return`<button class="option-btn" onclick="pickAnswer(${i})" style="background:${bg};border-color:${bd};${s.showAns?'pointer-events:none':''}"><span class="option-letter" style="background:${tc}22;color:${tc}">${String.fromCharCode(65+i)}</span><span>${esc(opt)}${em}</span></button>`;}).join('')}</div>
+${s.showAns?`<div class="explanation-box ${s.sel===q.correct?'correct-bg':'wrong-bg'}">
+<div style="font-weight:800;font-size:14px;margin-bottom:4px;color:${s.sel===q.correct?'#51CF66':'#FF6B6B'}">${s.sel===q.correct?(s.streak>=3?'🔥 Fantastisch!':['Richtig! 🎉','Genau! ⭐','Super! 💪'][Math.floor(Math.random()*3)]):'Nicht ganz! 💡'}</div>
+<div style="font-size:13px;color:#b8b8d0;line-height:1.6">${esc(q.explanation)}</div></div>
+<button class="btn full-btn" onclick="nextQ()" style="background:linear-gradient(135deg,${tc},${tc}cc)">${s.cq+1>=s.qs.length?'See Results →':'Nächste Frage →'}</button>`:''}
+</div>`;return;}
+
+if(s.mode==='results'){
+const pct=s.qs.length?Math.round((s.score/s.qs.length)*100):0;
+const g=pct>=90?{e:'🌟',m:'Ausgezeichnet! Exam-ready!',c:'#FCC419'}:pct>=70?{e:'💪',m:'Gut gemacht! Nearly there!',c:'#51CF66'}:pct>=50?{e:'📚',m:'Good effort! Review below.',c:'#339AF0'}:{e:'🔄',m:'Weiter üben!',c:'#FF6B6B'};
+app.innerHTML=`
+<div class="card" style="text-align:center;margin-bottom:20px">
+<div style="font-size:56px;margin-bottom:8px">${g.e}</div>
+<h2 style="margin:0 0 6px;font-size:28px;font-weight:900;color:${g.c}">${s.score}/${s.qs.length}</h2>
+<div class="result-pct" style="background:linear-gradient(135deg,${g.c},${g.c}aa)">${pct}%</div>
+<p style="color:#b8b8d0;font-size:16px;margin:0 0 16px;font-weight:600">${g.m}</p>
+${s.best>=3?`<div style="display:inline-block;background:rgba(252,196,25,0.12);border:1px solid rgba(252,196,25,0.3);border-radius:10px;padding:6px 16px;font-size:14px;font-weight:700;color:#FCC419">🔥 Streak: ${s.best}</div>`:''}</div>
+${s.wrong.length?`<div class="card" style="margin-bottom:20px"><h3 style="margin:0 0 16px;font-size:18px;font-weight:800;color:#FF6B6B">📝 Review These</h3>
+${s.wrong.map(q=>`<div class="review-item"><div style="font-size:12px;color:${TC[q.topic]||'#888'};font-weight:800;margin-bottom:4px">${TI[q.topic]||'📝'} ${q.topic}</div>
+<div style="font-size:14px;font-weight:700;margin-bottom:6px">${esc(q.question)}</div>
+<div style="font-size:13px;color:#51CF66;font-weight:600">✓ ${esc(q.options[q.correct])}</div>
+<div style="font-size:13px;color:#9898b8;margin-top:4px;line-height:1.5">${esc(q.explanation)}</div></div>`).join('')}</div>`:''}
+<div class="bottom-grid">
+<button class="btn card" onclick="startQuiz(${s.qt?`'${s.qt}'`:'null'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#FF6B6B15,#FF6B6B05);border-color:#FF6B6B44"><div style="font-size:24px">🔄</div><div style="font-size:12px;font-weight:800;margin-top:6px">Again</div></button>
+<button class="btn card" onclick="S({mode:'cheatsheet',ct:0})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#51CF6615,#51CF6605);border-color:#51CF6644"><div style="font-size:24px">📖</div><div style="font-size:12px;font-weight:800;margin-top:6px">Cheat Sheet</div></button>
+<button class="btn card" onclick="S({mode:'home'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#339AF015,#339AF005);border-color:#339AF044"><div style="font-size:24px">🏠</div><div style="font-size:12px;font-weight:800;margin-top:6px">Home</div></button>
+</div>`;return;}
+}
+
+function startQuiz(topic){
+let q=topic?QUESTIONS.filter(x=>x.topic===topic):[...QUESTIONS];
+q=shuffle(q).map(x=>{const idx=x.options.map((_,i)=>i);const sh=shuffle(idx);return{...x,options:sh.map(i=>x.options[i]),correct:sh.indexOf(x.correct)};});
+S({mode:'quiz',qs:q,cq:0,sel:null,showAns:false,score:0,ans:0,streak:0,best:0,wrong:[],qt:topic});}
+window.startQuiz=startQuiz;
+
+function pickAnswer(i){if(state.showAns)return;const correct=i===state.qs[state.cq].correct;const ns=correct?state.streak+1:0;
+S({sel:i,showAns:true,ans:state.ans+1,score:state.score+(correct?1:0),streak:ns,best:Math.max(state.best,ns),wrong:correct?state.wrong:[...state.wrong,state.qs[state.cq]]});}
+window.pickAnswer=pickAnswer;
+
+function nextQ(){if(state.cq+1>=state.qs.length)S({mode:'results'});else S({cq:state.cq+1,sel:null,showAns:false});}
+window.nextQ=nextQ;
+
+function startFlash(cat){let cards=cat?FLASHCARDS.filter(c=>c.cat===cat):[...FLASHCARDS];S({mode:'flashcards',fc:shuffle(cards),fi:0,flipped:false,fcCat:cat,fcScore:0,fcTotal:0});}
+window.startFlash=startFlash;
+
+function fcRate(knew){const next=state.fi+1>=state.fc.length;S({fcScore:state.fcScore+(knew?1:0),fcTotal:state.fcTotal+1,fi:next?state.fi:state.fi+1,flipped:false,mode:next?'fc_results':'flashcards'});}
+window.fcRate=fcRate;
+
+render();
+</script>
+</body>
+</html>
