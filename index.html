@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a1a">
+<title>📚 Revision Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100vh;min-height:100dvh;overflow-x:hidden}
+body{background:#0a0a1a;font-family:'Nunito','Segoe UI',sans-serif;color:#e8e8f0;display:flex;align-items:center;justify-content:center}
+.stars{position:fixed;top:0;left:0;right:0;bottom:0;background:
+radial-gradient(1px 1px at 10% 20%,#ffffff44,transparent),
+radial-gradient(1px 1px at 30% 60%,#ffffff22,transparent),
+radial-gradient(2px 2px at 50% 10%,#ffffff33,transparent),
+radial-gradient(1px 1px at 70% 40%,#ffffff22,transparent),
+radial-gradient(2px 2px at 90% 70%,#ffffff33,transparent),
+radial-gradient(1px 1px at 15% 80%,#ffffff22,transparent),
+radial-gradient(1px 1px at 60% 90%,#ffffff44,transparent),
+radial-gradient(2px 2px at 85% 25%,#ffffff22,transparent);
+pointer-events:none;z-index:0}
+.container{position:relative;z-index:1;padding:24px 20px;width:100%;max-width:540px;text-align:center}
+.logo{font-size:64px;margin-bottom:12px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+h1{font-size:32px;font-weight:900;margin-bottom:6px;background:linear-gradient(135deg,#FF6B6B,#FFA94D,#51CF66,#339AF0,#B197FC,#F06595);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitle{color:#9898b8;font-size:16px;margin-bottom:40px;font-weight:600}
+.card-link{display:block;text-decoration:none;border-radius:24px;padding:32px 28px;margin-bottom:20px;transition:all 0.3s ease;cursor:pointer;position:relative;overflow:hidden}
+.card-link:active{transform:scale(0.97)}
+@media(hover:hover){.card-link:hover{transform:translateY(-4px)}}
+.python-card{background:linear-gradient(135deg,#0f0c29,#1a1a40);border:2px solid rgba(81,207,102,0.3)}
+@media(hover:hover){.python-card:hover{border-color:rgba(81,207,102,0.6);box-shadow:0 12px 40px rgba(81,207,102,0.15)}}
+.german-card{background:linear-gradient(135deg,#1a0a2e,#16213e);border:2px solid rgba(233,168,32,0.3)}
+@media(hover:hover){.german-card:hover{border-color:rgba(233,168,32,0.6);box-shadow:0 12px 40px rgba(233,168,32,0.15)}}
+.card-icon{font-size:48px;margin-bottom:12px}
+.card-title{font-size:24px;font-weight:900;color:#e8e8f0;margin-bottom:6px}
+.card-sub{font-size:14px;color:#9898b8;font-weight:600;margin-bottom:14px}
+.card-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:700;padding:4px 12px;border-radius:8px;letter-spacing:0.5px}
+.python-tag{background:rgba(81,207,102,0.12);color:#51CF66;border:1px solid rgba(81,207,102,0.25)}
+.german-tag{background:rgba(233,168,32,0.12);color:#e9a820;border:1px solid rgba(233,168,32,0.25)}
+.glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;pointer-events:none}
+.glow-py{background:radial-gradient(circle at center,rgba(81,207,102,0.04) 0%,transparent 60%)}
+.glow-de{background:radial-gradient(circle at center,rgba(233,168,32,0.04) 0%,transparent 60%)}
+.footer{margin-top:20px;color:#555;font-size:12px;font-weight:600}
+.arrow{display:inline-block;margin-left:6px;transition:transform 0.2s}
+@media(hover:hover){.card-link:hover .arrow{transform:translateX(4px)}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="container">
+<div class="logo">📚</div>
+<h1>Revision Hub</h1>
+<p class="subtitle">Pick a subject and start revising!</p>
+
+<a href="python.html" class="card-link python-card">
+<div class="glow glow-py"></div>
+<div class="card-icon">🐍</div>
+<div class="card-title">Python <span class="arrow">→</span></div>
+<div class="card-sub">Computing — Year 7 Exam Prep</div>
+<div class="card-tags">
+<span class="tag python-tag">65 QUIZ Qs</span>
+<span class="tag python-tag">CODE RUNNER</span>
+<span class="tag python-tag">CHEAT SHEET</span>
+</div>
+</a>
+
+<a href="german.html" class="card-link german-card">
+<div class="glow glow-de"></div>
+<div class="card-icon">🇩🇪</div>
+<div class="card-title">German <span class="arrow">→</span></div>
+<div class="card-sub">Stimmt! 1 — Listening & Speaking Test</div>
+<div class="card-tags">
+<span class="tag german-tag">86 QUIZ Qs</span>
+<span class="tag german-tag">95+ FLASHCARDS</span>
+<span class="tag german-tag">CHEAT SHEET</span>
+</div>
+</a>
+
+<p class="footer">Good luck with your exams! 💪</p>
+</div>
+</body>
+</html>
