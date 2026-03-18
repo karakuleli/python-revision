@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a0a2e">
+<title>✝️ RE Revision — Year 7</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100vh;min-height:100dvh;overflow-x:hidden}
+body{background:linear-gradient(135deg,#1a0a2e 0%,#2d1b4e 40%,#1a1040 100%);font-family:'Nunito','Segoe UI',sans-serif;color:#e8e8f0}
+.stars{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(2px 2px at 30px 40px,#ffffff22,transparent),radial-gradient(1px 1px at 70px 80px,#ffffff18,transparent),radial-gradient(2px 2px at 110px 30px,#ffffff33,transparent);background-size:180px 120px;pointer-events:none;z-index:0}
+.wrap{padding:20px 16px;max-width:720px;margin:0 auto;position:relative;z-index:1;padding-bottom:40px}
+.card{background:rgba(255,255,255,0.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:24px 20px}
+@media(max-width:480px){.card{padding:18px 14px;border-radius:16px}}
+.btn{border:none;cursor:pointer;font-family:inherit;transition:all 0.2s;-webkit-appearance:none}.btn:active{transform:scale(0.97)!important}
+.back-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:#e8e8f0;padding:8px 16px;font-weight:700;font-size:14px}
+.progress-bar{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:20px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width 0.4s ease}
+.option-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:14px 16px;color:#e8e8f0;font-family:inherit;font-size:14px;font-weight:600;text-align:left;width:100%;transition:all 0.2s;line-height:1.4;cursor:pointer;display:flex;align-items:flex-start;gap:10px}
+@media(max-width:480px){.option-btn{padding:12px 14px;font-size:13px}}.option-btn:active{transform:scale(0.98)}
+.option-letter{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;min-width:24px;border-radius:7px;font-size:12px;font-weight:800;flex-shrink:0}
+.topic-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:400px){.topic-grid{grid-template-columns:1fr 1fr}}
+.main-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:28px}
+@media(max-width:400px){.main-grid{grid-template-columns:1fr}}
+.tab-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.tab-btn{border-radius:10px;padding:6px 10px;cursor:pointer;font-family:inherit;font-weight:700;font-size:11px;transition:all 0.2s;border:1px solid}
+.cheat-item{background:rgba(0,0,0,0.25);border-radius:12px;padding:14px 16px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.06)}.cheat-item:last-child{margin-bottom:0}
+.cheat-term{font-size:15px;font-weight:800;display:block;margin-bottom:4px}.cheat-desc{font-size:13px;color:#b8b8d0;line-height:1.5}
+.full-btn{width:100%;padding:14px;border:none;border-radius:14px;color:#fff;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px}
+.explanation-box{margin-top:16px;padding:14px 16px;border-radius:14px;border:1px solid}
+.correct-bg{background:rgba(81,207,102,0.08);border-color:rgba(81,207,102,0.2)}.wrong-bg{background:rgba(255,107,107,0.08);border-color:rgba(255,107,107,0.2)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.score-bar{display:flex;gap:16px;font-size:14px;font-weight:700}
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:20px}
+.result-pct{font-size:42px;font-weight:900;margin-bottom:8px;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.review-item{background:rgba(0,0,0,0.2);border-radius:12px;padding:14px 16px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.06)}
+.flash-card{min-height:180px;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none;border-radius:16px;padding:24px;transition:all 0.3s}
+.flash-front{background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03));border:2px solid rgba(255,255,255,0.15)}
+.flash-back{background:linear-gradient(135deg,rgba(81,207,102,0.12),rgba(81,207,102,0.04));border:2px solid rgba(81,207,102,0.3)}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap" id="app"></div>
+<script>
+const TC={Creation:"#FFA94D",Noah:"#339AF0",Passover:"#FF6B6B",Torah:"#e9a820",Palestine:"#20C997",Birth:"#F06595",Miracles:"#845EF7",Parables:"#51CF66",Death:"#FF922B",Resurrection:"#B197FC",Gospels:"#339AF0"};
+const TI={Creation:"🌍",Noah:"🌈",Passover:"🍷",Torah:"📜",Palestine:"🏛️",Birth:"⭐",Miracles:"✨",Parables:"📖",Death:"✝️",Resurrection:"🌅",Gospels:"📝"};
+
+const CHEAT_SHEET=[
+{title:"The Creation",icon:"🌍",color:"#FFA94D",items:[
+{term:"God created Heaven and Earth",desc:"In the beginning, God created everything from nothing"},
+{term:"'Let there be light'",desc:"God's first act of creation — separating light from darkness"},
+{term:"Day 1: Light & Dark",desc:"God separated light from darkness"},
+{term:"Day 2: Sky & Water",desc:"God separated the water from the sky"},
+{term:"Day 3: Land & Plants",desc:"Dry land appeared, plants created for oxygen"},
+{term:"Day 4: Day & Night",desc:"God made the sun, moon and stars"},
+{term:"Day 5: Sea & Sky creatures",desc:"God filled the sea and sky with living creatures"},
+{term:"Day 6: Land animals & Humans",desc:"God created livestock and humans"},
+{term:"Day 7: God rested",desc:"This is why Shabbat (Sabbath) is a day of rest"},
+{term:"Fables teach moral lessons",desc:"Dog fable: don't be greedy. Fox fable: don't judge by appearance"},
+]},
+{title:"Noah's Covenant",icon:"🌈",color:"#339AF0",items:[
+{term:"Why the flood?",desc:"Humanity had become wicked, violent and corrupt"},
+{term:"Noah was free from sin",desc:"Only Noah and his family were righteous"},
+{term:"The Ark",desc:"Noah built an ark with two of each creature to survive the flood"},
+{term:"40 days and 40 nights",desc:"How long the flood lasted"},
+{term:"The dove & olive branch",desc:"Sign that the flood was over and dry land was found"},
+{term:"God's promise (covenant)",desc:"God promised to NEVER flood the Earth again"},
+{term:"The rainbow",desc:"The sign of God's covenant/promise with humanity"},
+{term:"Covenant = religious contract",desc:"Humanity exchanges promises with God"},
+{term:"Universal covenant",desc:"'Universal' means with everyone — all of humanity"},
+{term:"7 Noahide Laws",desc:"Rules for humanity: justice, no murder, no stealing, no blasphemy, no idolatry, no adultery, no eating flesh of living animal"},
+]},
+{title:"Passover (Pesach)",icon:"🍷",color:"#FF6B6B",items:[
+{term:"What Jews remember",desc:"The Angel of Death passing over Jewish homes in Egypt"},
+{term:"Lamb's blood on doors",desc:"Jews smeared blood so the Angel of Death would pass over them"},
+{term:"Egyptian firstborns died",desc:"Pharaoh's firstborn died too, so he let the slaves go"},
+{term:"Story of freedom",desc:"Passover celebrates the Israelites' freedom from slavery in Egypt"},
+{term:"Zeroa (Shank Bone)",desc:"Symbolises the Paschal lamb sacrifice before the Exodus"},
+{term:"Beitzah (Egg)",desc:"Round shape = cycle of life and renewal of spring"},
+{term:"Maror (Bitter Herbs)",desc:"Represents the bitterness of slavery in Egypt (horseradish)"},
+{term:"Karpas (Green Veg)",desc:"Parsley dipped in salt water = tears of the slaves"},
+{term:"Charoset (Sweet Paste)",desc:"Apple, nuts, cinnamon, wine — looks like mortar/bricks the slaves made"},
+{term:"Matzah (Unleavened Bread)",desc:"Bread didn't rise because Israelites fled Egypt in a hurry"},
+]},
+{title:"Torah & Shabbat",icon:"📜",color:"#e9a820",items:[
+{term:"Torah = Jewish Holy Book",desc:"The first five books of the Old Testament"},
+{term:"Hand-written, 304,805 letters",desc:"42 lines per page, written by trained scribes"},
+{term:"Scribes repair the Torah",desc:"Takes 12–18 months to rewrite from scratch"},
+{term:"Cannot print or draw them",desc:"'You shall not paint them, you shall write them'"},
+{term:"Kosher = meets Jewish rules",desc:"If the Torah meets all rules, it's kosher/acceptable"},
+{term:"Shabbat = day of rest",desc:"The 4th commandment — begins Friday sunset, ends Saturday sunset"},
+{term:"Why Shabbat?",desc:"God created Earth in 6 days and rested on the 7th"},
+{term:"Shabbat activities",desc:"Family time, reading Torah, singing, celebrating God"},
+]},
+{title:"First Century Palestine",icon:"🏛️",color:"#20C997",items:[
+{term:"Jews & Romans relationship",desc:"Rocky — Romans gave gifts to temple but taxed Jews heavily"},
+{term:"Pontius Pilate",desc:"Roman governor of Judea who arrested and executed rebels"},
+{term:"The Pharisees",desc:"Believed in resurrection, soul, oral law + written Torah"},
+{term:"Pharisees & Romans",desc:"Opposed Roman rule but wouldn't rebel — worked to preserve traditions"},
+{term:"Pharisees & Temple",desc:"Acknowledged it but emphasised synagogue worship"},
+{term:"The Sadducees",desc:"Strictly followed written Torah only, rejected afterlife and angels"},
+{term:"Sadducees & Romans",desc:"Collaborated with Romans to keep their power"},
+{term:"Sadducees & Temple",desc:"Relied on temple — when destroyed, they declined"},
+{term:"The Essenes",desc:"Spiritual purity, strict good vs evil, thought temple was corrupt"},
+{term:"Essenes: Two Messiahs",desc:"Waited for a priestly Messiah AND a kingly Messiah"},
+]},
+{title:"Birth of Jesus",icon:"⭐",color:"#F06595",items:[
+{term:"Born in Bethlehem, in a stable",desc:"No room at the inn — a humble birth"},
+{term:"Angel Gabriel told Mary",desc:"A Saviour had been born, found in a manger"},
+{term:"Shepherds followed the star",desc:"Represent the humble and ordinary people"},
+{term:"Magi (wise men) brought gifts",desc:"Frankincense, Myrrh and Gold"},
+{term:"Gold = King",desc:"Jesus is a king"},
+{term:"Frankincense = Priest",desc:"Jesus is a priest (used in worship)"},
+{term:"Myrrh = Death/Prophet",desc:"Used for burial — foreshadows Jesus's death"},
+{term:"The Star = guide",desc:"Jesus is the guide all should follow"},
+{term:"The Stable = Noah's Ark link",desc:"Animals present at birth, like on the Ark — God's new creation"},
+{term:"The Animals = all creation",desc:"All of creation is under God's rule through Jesus"},
+]},
+{title:"Miracles of Jesus",icon:"✨",color:"#845EF7",items:[
+{term:"What is a miracle?",desc:"An event that cannot be explained by nature, caused by a supernatural being"},
+{term:"Feeding the 5,000",desc:"Fullness & Abundance — one fish and bread fed 5,000 people"},
+{term:"Healing the blind man",desc:"Healing — Jesus made a blind man see again"},
+{term:"The dying child",desc:"Renewed Life — Roman asked Jesus to save his sick daughter"},
+{term:"Water into wine",desc:"Conquering Celebration — at a wedding feast"},
+{term:"Miracles ≠ Parables!",desc:"Miracles = supernatural events. Parables = stories with meaning"},
+{term:"Why miracles matter today",desc:"About giving second chances and helping everyone, even enemies"},
+]},
+{title:"Parables of Jesus",icon:"📖",color:"#51CF66",items:[
+{term:"What is a parable?",desc:"An earthly story with a heavenly (spiritual) meaning"},
+{term:"Parables ≠ Miracles!",desc:"Parables are STORIES with moral meaning, not supernatural events"},
+{term:"Why tell stories?",desc:"To inspire, pass on knowledge, keep traditions, give warnings"},
+{term:"The Good Samaritan",desc:"Love your neighbour, show compassion to anyone in need"},
+{term:"Good Samaritan: treat everyone the same",desc:"Act like Jesus to please God — don't judge"},
+{term:"The Dishonest Steward",desc:"Use worldly wealth for godly purposes, not personal gain"},
+{term:"Steward: can't serve money AND God",desc:"Faithfulness in small things = trustworthiness"},
+{term:"Steward: prepare for eternity",desc:"Act urgently to prepare for the future while you can"},
+]},
+{title:"Death of Jesus",icon:"✝️",color:"#FF922B",items:[
+{term:"How did Jesus die?",desc:"By Roman crucifixion"},
+{term:"Who got death penalty?",desc:"Robbers, rebels, slaves, political activists, enemies of state"},
+{term:"Why was Jesus crucified?",desc:"Romans: political threat (rebel king). Jews: blasphemer challenging authority"},
+{term:"His death as SACRIFICE",desc:"He was sinless, voluntarily paying penalty for humanity's sins"},
+{term:"His death as VICTORY",desc:"Resurrection broke power of sin, death and devil"},
+{term:"He carried a cross up the hill",desc:"Simon helped him carry it"},
+{term:"Temple curtain ripped in half",desc:"When Jesus died, the curtain in the Jewish temple tore in two"},
+]},
+{title:"Resurrection",icon:"🌅",color:"#B197FC",items:[
+{term:"Jesus died and came back from the dead",desc:"TRUE — the central Christian belief"},
+{term:"Mary Magdalene was at the tomb",desc:"TRUE — she was present when the empty tomb was found"},
+{term:"Jesus resurrected on Saturday?",desc:"FALSE — Christians believe he rose on SUNDAY (Easter Sunday)"},
+{term:"Jesus appeared to disciples first?",desc:"FALSE — he appeared to women (Mary Magdalene) first"},
+{term:"4 different Gospel accounts",desc:"Different authors recorded from different perspectives"},
+{term:"Christians call Jesus the Messiah",desc:"TRUE — Messiah means 'the anointed one'"},
+{term:"Could the women have been mistaken?",desc:"Counter: when others came, they would have realised it was the wrong tomb"},
+]},
+{title:"The Gospels",icon:"📝",color:"#339AF0",items:[
+{term:"4 Gospel authors",desc:"Matthew, Mark, Luke and John"},
+{term:"What do the Gospels record?",desc:"Life, teachings, death and resurrection of Jesus"},
+{term:"Why are there differences?",desc:"Each author wrote from their own perspective"},
+{term:"Gospel = 'Good News'",desc:"The word 'Gospel' means good news"},
+]},
+];
+
+const QUESTIONS=[
+// CREATION (6)
+{topic:"Creation",question:"What did God create first?",options:["Animals","Light","Humans","Plants"],correct:1,explanation:"God said 'Let there be light' — light was the first creation."},
+{topic:"Creation",question:"What did God do on the 7th day?",options:["Created humans","Created animals","Rested","Made the stars"],correct:2,explanation:"God rested on the 7th day — this is why Jews observe Shabbat."},
+{topic:"Creation",question:"What is the moral of the Dog Fable?",options:["Be brave","Don't be greedy / be grateful","Work hard","Be patient"],correct:1,explanation:"The dog was greedy and lost what he had while trying to get more."},
+{topic:"Creation",question:"On which day were humans created?",options:["Day 3","Day 5","Day 6","Day 7"],correct:2,explanation:"God created land animals and humans on Day 6."},
+{topic:"Creation",question:"What was created on Day 3?",options:["Light","Sky creatures","Dry land and plants","Sun and moon"],correct:2,explanation:"Day 3: dry land appeared and plants were created."},
+{topic:"Creation",question:"What is the moral of the Fox Fable?",options:["Be brave","Don't be greedy","Don't judge by appearance / be polite","Run fast"],correct:2,explanation:"The Fox fable teaches: be polite and don't judge a book by its cover."},
+
+// NOAH (8)
+{topic:"Noah",question:"Why did God send the flood?",options:["He was bored","Humanity was wicked, violent and corrupt","Noah asked for it","The animals needed water"],correct:1,explanation:"Humanity had become excessively wicked, violent and corrupt."},
+{topic:"Noah",question:"How long did the flood last?",options:["7 days","40 days and 40 nights","100 days","1 year"],correct:1,explanation:"The flood lasted 40 days and 40 nights."},
+{topic:"Noah",question:"What sign did God give as His covenant?",options:["A star","A dove","A rainbow","Thunder"],correct:2,explanation:"God created a rainbow as the sign of His promise never to flood the Earth again."},
+{topic:"Noah",question:"What is a covenant?",options:["A type of boat","A religious contract/promise with God","A prayer","A type of flood"],correct:1,explanation:"A covenant is a religious contract where humanity exchanges promises with God."},
+{topic:"Noah",question:"What does 'universal' mean in the context of Noah's covenant?",options:["About the universe","With everyone / all of humanity","Only for Noah","About space"],correct:1,explanation:"Universal means the covenant is with everyone — all of humanity."},
+{topic:"Noah",question:"What did the dove bring back?",options:["A fish","Nothing","An olive branch","A feather"],correct:2,explanation:"The dove returned with an olive branch — a sign that dry land had been found."},
+{topic:"Noah",question:"Which is NOT one of the 7 Noahide Laws?",options:["Do not murder","Do not steal","Do not eat vegetables","Do not blaspheme God"],correct:2,explanation:"The law is 'do not eat flesh of a living animal' — not about vegetables!"},
+{topic:"Noah",question:"Why were only Noah's family saved?",options:["They were rich","They were the only ones free from sin","They could swim","They had a boat already"],correct:1,explanation:"Only Noah and his family were righteous and free from sin."},
+
+// PASSOVER (8)
+{topic:"Passover",question:"What do Jews remember at Passover?",options:["The creation","The flood","Freedom from slavery in Egypt","Jesus's birth"],correct:2,explanation:"Passover celebrates the Israelites' freedom from slavery in Egypt."},
+{topic:"Passover",question:"What did Jews put on their doors?",options:["Water","Lamb's blood","Paint","An olive branch"],correct:1,explanation:"They smeared lamb's blood so the Angel of Death would pass over their homes."},
+{topic:"Passover",question:"What does Maror (bitter herbs) represent?",options:["Spring","The bitterness of slavery","Sweet freedom","God's love"],correct:1,explanation:"Bitter herbs represent the bitterness and harshness of slavery in Egypt."},
+{topic:"Passover",question:"What does Matzah represent?",options:["The dove","Wealth","Bread that didn't rise — the Israelites fled in a hurry","A sacrifice"],correct:2,explanation:"There was no time for bread to rise as the Israelites fled Egypt in haste."},
+{topic:"Passover",question:"What is Charoset made of?",options:["Lamb and herbs","Apples, nuts, cinnamon and wine","Bread and water","Eggs and salt"],correct:1,explanation:"Charoset is a sweet paste resembling the mortar/bricks slaves were forced to make."},
+{topic:"Passover",question:"What does Karpas (green veg) dipped in salt water represent?",options:["The sea parting","Tears of the slaves","God's promise","Spring only"],correct:1,explanation:"The salt water represents the tears shed by the Israelite slaves."},
+{topic:"Passover",question:"What does Beitzah (egg) symbolise?",options:["New life only","The cycle of life and renewal of spring","Slavery","The flood"],correct:1,explanation:"Its round shape symbolises the cycle of life and the renewal of spring."},
+{topic:"Passover",question:"What happened to the Egyptian firstborns?",options:["They were freed","They fled","They all died including Pharaoh's son","Nothing"],correct:2,explanation:"All Egyptian firstborns died, which forced Pharaoh to let the Jewish slaves go."},
+
+// TORAH & SHABBAT (6)
+{topic:"Torah",question:"What is the Torah?",options:["A prayer","The Jewish Holy Book — first 5 books of Old Testament","A temple","A festival"],correct:1,explanation:"The Torah is the Jewish Holy Book — the first five books of the Old Testament."},
+{topic:"Torah",question:"How many letters are in the Torah?",options:["30,000","304,805","3 million","1,000"],correct:1,explanation:"The Torah contains exactly 304,805 hand-written letters."},
+{topic:"Torah",question:"When does Shabbat begin and end?",options:["Saturday morning to Sunday morning","Friday sunset to Saturday sunset","Sunday all day","Monday to Friday"],correct:1,explanation:"Shabbat begins at sunset on Friday and ends at sunset on Saturday."},
+{topic:"Torah",question:"Why do Jews observe Shabbat?",options:["Because Moses said so","Because God rested on the 7th day of creation","Because of Passover","Because of Noah"],correct:1,explanation:"God created the Earth in 6 days and rested on the 7th — Jews follow this example."},
+{topic:"Torah",question:"How long does it take a scribe to rewrite a Torah?",options:["1 week","1 month","12 to 18 months","10 years"],correct:2,explanation:"It takes the average scribe 12 to 18 months to rewrite a Torah from scratch."},
+{topic:"Torah",question:"What does 'Kosher' mean?",options:["Holy","Meets Jewish rules/acceptable","Old","Written"],correct:1,explanation:"Kosher means it meets Jewish rules and is acceptable."},
+
+// FIRST CENTURY PALESTINE (8)
+{topic:"Palestine",question:"What was the relationship like between Jews and Romans?",options:["Always peaceful","Always at war","Good but rocky — gifts but heavy taxes","They never met"],correct:2,explanation:"Romans gave impressive gifts to the temple but taxed Jews heavily."},
+{topic:"Palestine",question:"Who was Pontius Pilate?",options:["A Jewish priest","Roman governor of Judea","A Pharisee","An Essene"],correct:1,explanation:"Pilate was the Roman governor of Judea who arrested and executed rebels."},
+{topic:"Palestine",question:"What did the Pharisees believe in?",options:["Only the written Torah","Resurrection, immortality of soul, oral + written Torah","No afterlife","The temple was corrupt"],correct:1,explanation:"Pharisees believed in resurrection, the soul, and valued both oral and written Torah."},
+{topic:"Palestine",question:"How did the Sadducees view life after death?",options:["They believed in it strongly","They rejected it completely","They weren't sure","They thought only priests had afterlife"],correct:1,explanation:"Sadducees rejected the idea of life after death, angels, and prophecies."},
+{topic:"Palestine",question:"What happened to the Sadducees when the temple was destroyed?",options:["They thrived","They moved to Rome","They declined/disappeared","They became Pharisees"],correct:2,explanation:"They relied on the temple — when it was destroyed, they refused to adapt and declined."},
+{topic:"Palestine",question:"What did the Essenes believe about the temple?",options:["It was the holiest place","It was illegitimate and corrupted by Sadducees","It should be bigger","It was unimportant"],correct:1,explanation:"Essenes believed the temple was illegitimate and corrupted by the Sadducees."},
+{topic:"Palestine",question:"How many Messianic figures did the Essenes expect?",options:["None","One","Two — a priestly and a kingly Messiah","Three"],correct:2,explanation:"Essenes awaited TWO Messiahs: a priestly one and a kingly one."},
+{topic:"Palestine",question:"How did the Pharisees respond to Roman rule?",options:["They rebelled violently","They collaborated fully","They opposed it but wouldn't rebel","They ignored it"],correct:2,explanation:"Pharisees opposed Roman rule but worked practically to preserve Jewish traditions."},
+
+// BIRTH OF JESUS (8)
+{topic:"Birth",question:"Where was Jesus born?",options:["Jerusalem","Nazareth","Bethlehem","Rome"],correct:2,explanation:"Jesus was born in Bethlehem, in a stable because there was no room at the inn."},
+{topic:"Birth",question:"What gifts did the Magi bring?",options:["Bread, wine and oil","Gold, Frankincense and Myrrh","Silver, silk and spices","Food, clothes and money"],correct:1,explanation:"The three gifts were Gold (king), Frankincense (priest), and Myrrh (death/prophet)."},
+{topic:"Birth",question:"What does Gold symbolise?",options:["Jesus is a priest","Jesus is a prophet","Jesus is a king","Jesus is a shepherd"],correct:2,explanation:"Gold symbolises royalty — Jesus is a king."},
+{topic:"Birth",question:"What does Myrrh symbolise?",options:["Wealth","Jesus's kingship","Joy and celebration","Death — foreshadowing Jesus's death"],correct:3,explanation:"Myrrh was used in burial — it foreshadows Jesus's death."},
+{topic:"Birth",question:"What do the shepherds represent?",options:["Wealth and power","The humble and ordinary people","Roman soldiers","Jewish leaders"],correct:1,explanation:"Shepherds represent humble, ordinary people included in Jesus's saving work."},
+{topic:"Birth",question:"How does Jesus's birth link to Noah's Ark?",options:["Both happened in a stable","Animals were present at both — God's new creation","Both involved water","Both had a star"],correct:1,explanation:"Animals at the birth mirror the Ark — the stable is like a new Ark from which God's new creation flows."},
+{topic:"Birth",question:"What does the Star symbolise?",options:["A planet","Jesus is the guide all should follow","The Romans","Heaven"],correct:1,explanation:"The star represents Jesus as the guide by which all should follow to find the way."},
+{topic:"Birth",question:"Who told Mary about the birth of the Saviour?",options:["Joseph","King Herod","Angel Gabriel","The shepherds"],correct:2,explanation:"Angel Gabriel told Mary that a Saviour had been born."},
+
+// MIRACLES (6)
+{topic:"Miracles",question:"What is a miracle?",options:["A story with a moral","An event that can't be explained by nature, caused by a supernatural being","A prayer","A type of covenant"],correct:1,explanation:"A miracle is a supernatural event that cannot be explained by the laws of nature."},
+{topic:"Miracles",question:"What miracle involved feeding 5,000 people?",options:["Water to wine","Healing the blind","One fish and one bread feeding 5,000","Walking on water"],correct:2,explanation:"Jesus made one fish and one piece of bread enough for 5,000 — fullness and abundance."},
+{topic:"Miracles",question:"What is the difference between miracles and parables?",options:["They're the same thing","Miracles are supernatural events; parables are stories with meaning","Miracles are stories; parables are events","There is no difference"],correct:1,explanation:"Miracles = supernatural events. Parables = earthly stories with heavenly meaning. Very different!"},
+{topic:"Miracles",question:"What type of miracle was healing the blind man?",options:["Conquering Celebration","Fullness and Abundance","Healing","Renewed Life"],correct:2,explanation:"Jesus made a blind man see again — this is a Healing miracle."},
+{topic:"Miracles",question:"What miracle involved turning water to wine?",options:["Healing","Renewed Life","Fullness and Abundance","Conquering Celebration"],correct:3,explanation:"Water to wine = Conquering Celebration, at a wedding feast."},
+{topic:"Miracles",question:"What do Jesus's miracles teach Christians today?",options:["To be rich","About giving second chances and helping everyone","To avoid Romans","To build temples"],correct:1,explanation:"Miracles are about giving people second chances and helping everyone, even enemies."},
+
+// PARABLES (6)
+{topic:"Parables",question:"What IS a parable?",options:["A miracle","A prayer","An earthly story with a heavenly meaning","A law"],correct:2,explanation:"A parable is an earthly story (normal things) with a heavenly (spiritual) meaning."},
+{topic:"Parables",question:"What does the Good Samaritan teach?",options:["Be wealthy","Love your neighbour and show compassion to anyone","Only help friends","Obey the Romans"],correct:1,explanation:"The Good Samaritan teaches: love your neighbour, show compassion, treat everyone the same."},
+{topic:"Parables",question:"What does the Dishonest Steward teach?",options:["Stealing is okay","Use wealth for godly purposes, not personal gain","Money is evil","Save everything"],correct:1,explanation:"You cannot serve both money AND God. Use worldly wealth for eternal/godly purposes."},
+{topic:"Parables",question:"Are parables the same as miracles?",options:["Yes, exactly the same","No — parables are stories; miracles are supernatural events","Yes, both are supernatural","No — parables are prayers"],correct:1,explanation:"PARABLES ARE NOT MIRACLES! Parables = stories with moral meaning. Miracles = supernatural events."},
+{topic:"Parables",question:"Why do people tell stories/parables?",options:["Only for entertainment","To inspire, pass on knowledge, keep traditions, give warnings","To confuse people","Only to make money"],correct:1,explanation:"Stories inspire, keep memories alive, pass on knowledge and beliefs, and give warnings."},
+{topic:"Parables",question:"In the Dishonest Steward, what does 'prepare for the future' mean?",options:["Save money","Believers should urgently prepare for eternity","Build a house","Study hard"],correct:1,explanation:"The steward prepared quickly for his future — believers should prepare for eternity while they can."},
+
+// DEATH OF JESUS (6)
+{topic:"Death",question:"How did Jesus die?",options:["Old age","By Roman crucifixion","In a flood","In battle"],correct:1,explanation:"Jesus died by Roman crucifixion."},
+{topic:"Death",question:"Why was Jesus crucified?",options:["He stole something","Romans: political threat. Jewish leaders: blasphemer","He was a Roman soldier","He broke the Noahide laws"],correct:1,explanation:"Romans saw him as a political threat (rebel king), Jewish leaders saw him as a blasphemer."},
+{topic:"Death",question:"Why do Christians call his death a SACRIFICE?",options:["He paid money","He was sinless and voluntarily paid the penalty for humanity's sins","He sacrificed animals","He gave up food"],correct:1,explanation:"Jesus acted as a sinless substitute, paying the penalty for humanity's sins."},
+{topic:"Death",question:"Why do Christians call his death a VICTORY?",options:["He won a war","His resurrection broke the power of sin, death and the devil","He defeated the Romans","He escaped"],correct:1,explanation:"Through resurrection, he broke the power of sin, death and the devil — securing eternal life."},
+{topic:"Death",question:"What happened in the temple when Jesus died?",options:["It exploded","The curtain ripped in half","It flooded","Nothing"],correct:1,explanation:"The curtain in the Jewish temple ripped in two when Jesus died."},
+{topic:"Death",question:"Who helped Jesus carry the cross?",options:["Peter","Mary","Simon","Judas"],correct:2,explanation:"Simon helped Jesus carry the heavy cross up the hill."},
+
+// RESURRECTION (6)
+{topic:"Resurrection",question:"True or False: Jesus rose from the dead on Saturday.",options:["True","False — he rose on Sunday","False — he rose on Friday","False — he rose on Monday"],correct:1,explanation:"Christians believe Jesus rose on SUNDAY — this is why Easter Sunday is celebrated."},
+{topic:"Resurrection",question:"Who was present at the empty tomb?",options:["The disciples","The Romans","Mary Magdalene","Pontius Pilate"],correct:2,explanation:"Mary Magdalene was present at the tomb when it was found empty."},
+{topic:"Resurrection",question:"How many Gospel accounts of the resurrection are there?",options:["1","2","3","4"],correct:3,explanation:"There are 4 accounts — Matthew, Mark, Luke and John each wrote from their perspective."},
+{topic:"Resurrection",question:"True or False: Jesus was killed by a gun.",options:["True","False — crucifixion, not a gun","False — he was poisoned","False — he died naturally"],correct:1,explanation:"Jesus died by Roman crucifixion — guns didn't exist in that era!"},
+{topic:"Resurrection",question:"What does 'Messiah' mean?",options:["Teacher","The anointed one","King","Prophet"],correct:1,explanation:"Messiah means 'the anointed one' — Christians believe Jesus is the Messiah."},
+{topic:"Resurrection",question:"Why might the women NOT have been mistaken about the empty tomb?",options:["They were very clever","Others came and would have noticed the wrong tomb","They had a map","Angels told them"],correct:1,explanation:"When other people came to see, they would have realised if it was the wrong tomb."},
+
+// GOSPELS (4)
+{topic:"Gospels",question:"Who wrote the four Gospels?",options:["Moses, Noah, Abraham, David","Matthew, Mark, Luke and John","Peter, Paul, James, Thomas","Jesus wrote all four"],correct:1,explanation:"The four Gospel authors are Matthew, Mark, Luke and John."},
+{topic:"Gospels",question:"What do the Gospels record?",options:["The Old Testament","The creation story","The life, teachings, death and resurrection of Jesus","Jewish law"],correct:2,explanation:"The Gospels record Jesus's life, teachings, death and resurrection."},
+{topic:"Gospels",question:"Why are there differences between the Gospels?",options:["They're about different people","Each author wrote from their own perspective","Some are wrong","They were written in different languages"],correct:1,explanation:"Each author recorded events from their own perspective — that's why accounts differ."},
+{topic:"Gospels",question:"What does the word 'Gospel' mean?",options:["Holy book","God's word","Good news","Old story"],correct:2,explanation:"Gospel means 'Good News' — the good news of Jesus Christ."},
+];
+
+const FLASHCARDS=[
+{q:"What is a covenant?",a:"A religious contract where humanity exchanges promises with God",cat:"Noah"},
+{q:"How long did Noah's flood last?",a:"40 days and 40 nights",cat:"Noah"},
+{q:"What is the sign of God's covenant with Noah?",a:"A rainbow",cat:"Noah"},
+{q:"What does Maror represent?",a:"The bitterness of slavery in Egypt",cat:"Passover"},
+{q:"What does Matzah represent?",a:"Bread that didn't rise — Israelites fled in a hurry",cat:"Passover"},
+{q:"What does Charoset look like?",a:"Mortar/bricks the slaves made (apples, nuts, cinnamon, wine)",cat:"Passover"},
+{q:"What does Karpas in salt water represent?",a:"Tears of the Israelite slaves",cat:"Passover"},
+{q:"What is the Torah?",a:"Jewish Holy Book — first 5 books of the Old Testament",cat:"Torah"},
+{q:"When is Shabbat?",a:"Friday sunset to Saturday sunset",cat:"Torah"},
+{q:"Why observe Shabbat?",a:"God rested on the 7th day of creation",cat:"Torah"},
+{q:"What does Kosher mean?",a:"Meets Jewish rules / acceptable",cat:"Torah"},
+{q:"Who were the Pharisees?",a:"Believed in resurrection, oral + written Torah, opposed but didn't rebel against Rome",cat:"Palestine"},
+{q:"Who were the Sadducees?",a:"Written Torah only, no afterlife, collaborated with Romans, relied on temple",cat:"Palestine"},
+{q:"Who were the Essenes?",a:"Spiritual purity, temple was corrupt, awaited two Messiahs",cat:"Palestine"},
+{q:"What does Gold (gift) symbolise?",a:"Jesus is a King",cat:"Birth"},
+{q:"What does Frankincense symbolise?",a:"Jesus is a Priest",cat:"Birth"},
+{q:"What does Myrrh symbolise?",a:"Death — foreshadows Jesus's death",cat:"Birth"},
+{q:"What do the shepherds represent?",a:"The humble and ordinary people",cat:"Birth"},
+{q:"What is a miracle?",a:"An event that can't be explained by nature, caused by a supernatural being",cat:"Miracles"},
+{q:"What is a parable?",a:"An earthly story with a heavenly meaning",cat:"Parables"},
+{q:"Miracles vs Parables?",a:"Miracles = supernatural events. Parables = stories with moral meaning",cat:"Parables"},
+{q:"Good Samaritan teaches...",a:"Love your neighbour, show compassion to anyone, treat everyone the same",cat:"Parables"},
+{q:"Dishonest Steward teaches...",a:"Can't serve money AND God. Use wealth for godly purposes. Prepare for eternity.",cat:"Parables"},
+{q:"How did Jesus die?",a:"By Roman crucifixion",cat:"Death"},
+{q:"Why was Jesus crucified?",a:"Romans: political threat. Jewish leaders: blasphemer",cat:"Death"},
+{q:"Death as Sacrifice?",a:"Sinless Jesus voluntarily paid penalty for humanity's sins",cat:"Death"},
+{q:"Death as Victory?",a:"Resurrection broke the power of sin, death and the devil",cat:"Death"},
+{q:"Who helped carry the cross?",a:"Simon",cat:"Death"},
+{q:"When did Jesus rise?",a:"Sunday (Easter Sunday)",cat:"Resurrection"},
+{q:"Who found the empty tomb?",a:"Mary Magdalene",cat:"Resurrection"},
+{q:"Who wrote the 4 Gospels?",a:"Matthew, Mark, Luke and John",cat:"Gospels"},
+{q:"What does 'Gospel' mean?",a:"Good News",cat:"Gospels"},
+{q:"7 Noahide Laws include...",a:"Justice, no blasphemy, no idolatry, no murder, no adultery, no stealing, no eating living flesh",cat:"Noah"},
+{q:"What does 'universal' mean (Noah)?",a:"With everyone — all of humanity",cat:"Noah"},
+{q:"Zeroa (Shank Bone) symbolises...",a:"The Paschal lamb sacrifice before the Exodus",cat:"Passover"},
+{q:"What did God create on Day 1?",a:"Light — separated light from darkness",cat:"Creation"},
+{q:"What happened on Day 7?",a:"God rested — this is why Shabbat exists",cat:"Creation"},
+];
+
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+let state={mode:'home',qs:[],cq:0,sel:null,showAns:false,score:0,ans:0,streak:0,best:0,wrong:[],ct:0,qt:null,fc:[],fi:0,flipped:false,fcCat:null,fcScore:0,fcTotal:0};
+function S(u){Object.assign(state,u);render();}
+
+function render(){
+const s=state,app=document.getElementById('app'),topics=[...new Set(QUESTIONS.map(q=>q.topic))];
+if(s.mode==='home'){
+app.innerHTML=`<div style="text-align:center;margin-bottom:32px;padding-top:12px">
+<div style="font-size:48px;margin-bottom:8px">✝️</div>
+<h1 style="font-size:28px;font-weight:900;margin:0 0 6px;background:linear-gradient(135deg,#FFA94D,#FF6B6B,#845EF7,#51CF66,#F06595);-webkit-background-clip:text;-webkit-text-fill-color:transparent">RE Revision</h1>
+<p style="color:#9898b8;font-size:15px;margin:0">Year 7 — Nov 2025 to Mar 2026 💪</p></div>
+<div class="main-grid">
+<button class="btn card" onclick="startQuiz(null)" style="text-align:center;background:linear-gradient(135deg,#845EF722,#845EF711);border-color:#845EF744;cursor:pointer">
+<div style="font-size:30px;margin-bottom:6px">🚀</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Full Quiz</div><div style="color:#9898b8;font-size:12px">All ${QUESTIONS.length} Qs</div></button>
+<button class="btn card" onclick="S({mode:'cheatsheet',ct:0})" style="text-align:center;background:linear-gradient(135deg,#51CF6622,#51CF6611);border-color:#51CF6644;cursor:pointer">
+<div style="font-size:30px;margin-bottom:6px">📖</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Cheat Sheet</div><div style="color:#9898b8;font-size:12px">${CHEAT_SHEET.length} topics</div></button>
+<button class="btn card" onclick="startFlash(null)" style="text-align:center;background:linear-gradient(135deg,#FFA94D22,#FFA94D11);border-color:#FFA94D44;cursor:pointer">
+<div style="font-size:30px;margin-bottom:6px">🔄</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Flashcards</div><div style="color:#9898b8;font-size:12px">${FLASHCARDS.length} cards</div></button></div>
+<p style="color:#9898b8;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px">Quiz by Topic</p>
+<div class="topic-grid">${topics.map(t=>`<button class="btn" onclick="startQuiz('${t}')" style="background:linear-gradient(135deg,${TC[t]||'#888'}22,${TC[t]||'#888'}11);border:1px solid ${TC[t]||'#888'}44;border-radius:14px;padding:12px 8px;color:#e8e8f0;text-align:center;font-family:inherit;cursor:pointer">
+<div style="font-size:20px">${TI[t]||'📝'}</div><div style="font-size:11px;font-weight:700;margin-top:4px">${t}</div><div style="font-size:10px;color:#9898b8">${QUESTIONS.filter(q=>q.topic===t).length}Qs</div></button>`).join('')}</div>`;return;}
+if(s.mode==='cheatsheet'){const sec=CHEAT_SHEET[s.ct];
+app.innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><button class="btn back-btn" onclick="S({mode:'home'})">← Back</button><h2 style="font-size:20px;font-weight:900">📖 Cheat Sheet</h2></div>
+<div class="tab-wrap">${CHEAT_SHEET.map((x,i)=>`<button class="btn tab-btn" onclick="S({ct:${i}})" style="background:${s.ct===i?x.color+'33':'rgba(255,255,255,0.05)'};border-color:${s.ct===i?x.color:'rgba(255,255,255,0.1)'};color:${s.ct===i?x.color:'#9898b8'}">${x.icon} ${x.title.split('(')[0].split('—')[0].trim().substring(0,12)}</button>`).join('')}</div>
+<div class="card" style="border-color:${sec.color}44;background:linear-gradient(135deg,${sec.color}11,rgba(255,255,255,0.04))">
+<h3 style="margin:0 0 20px;font-size:20px;font-weight:900;color:${sec.color}">${sec.icon} ${sec.title}</h3>
+${sec.items.map(it=>`<div class="cheat-item"><span class="cheat-term" style="color:${sec.color}">${esc(it.term)}</span><div class="cheat-desc">${esc(it.desc)}</div></div>`).join('')}</div>
+<div style="display:flex;justify-content:space-between;margin-top:16px"><button class="btn back-btn" onclick="S({ct:Math.max(0,${s.ct}-1)})" ${s.ct===0?'style="opacity:0.3"':''}>← Prev</button><span style="color:#9898b8;font-size:13px;padding-top:10px">${s.ct+1}/${CHEAT_SHEET.length}</span><button class="btn back-btn" onclick="S({ct:Math.min(${CHEAT_SHEET.length-1},${s.ct}+1)})" ${s.ct===CHEAT_SHEET.length-1?'style="opacity:0.3"':''}>Next →</button></div>`;return;}
+if(s.mode==='flashcards'&&s.fc.length){const c=s.fc[s.fi],prog=((s.fi)/s.fc.length)*100;
+app.innerHTML=`<div class="nav-row"><button class="btn back-btn" onclick="S({mode:'home'})">← Back</button><div class="score-bar"><span style="color:#51CF66">✓${s.fcScore}</span><span style="color:#FF6B6B">✗${s.fcTotal-s.fcScore}</span></div></div>
+<div class="progress-bar"><div class="progress-fill" style="width:${prog}%;background:linear-gradient(90deg,#845EF7,#845EF7cc)"></div></div>
+<div class="card" style="text-align:center"><p style="color:#9898b8;font-size:13px;margin-bottom:4px;font-weight:600">${s.fi+1}/${s.fc.length}</p><p style="color:#9898b8;font-size:12px;margin-bottom:16px">Tap card to flip</p>
+<div class="flash-card ${s.flipped?'flash-back':'flash-front'}" onclick="S({flipped:!state.flipped})">
+${s.flipped?`<div><div style="font-size:14px;color:#9898b8;margin-bottom:8px">Answer:</div><div style="font-size:20px;font-weight:800;color:#51CF66;line-height:1.5">${esc(c.a)}</div></div>`
+:`<div><div style="font-size:14px;color:#9898b8;margin-bottom:8px">Question:</div><div style="font-size:20px;font-weight:800;color:#845EF7;line-height:1.5">${esc(c.q)}</div><div style="margin-top:12px;font-size:14px;color:#666">Tap to reveal</div></div>`}</div>
+${s.flipped?`<p style="color:#9898b8;font-size:14px;margin:16px 0 10px;font-weight:700">Did you know it?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><button class="btn full-btn" onclick="fcRate(true)" style="background:linear-gradient(135deg,#51CF66,#51CF66cc);margin:0;font-size:18px">✓ Yes</button><button class="btn full-btn" onclick="fcRate(false)" style="background:linear-gradient(135deg,#FF6B6B,#FF6B6Bcc);margin:0;font-size:18px">✗ No</button></div>`:''}</div>`;return;}
+if(s.mode==='fc_results'){const ipct=s.fcTotal?Math.round((s.fcScore/s.fcTotal)*100):0;const g=ipct>=80?{e:'🌟',m:'Outstanding!',c:'#FCC419'}:ipct>=60?{e:'💪',m:'Great work!',c:'#51CF66'}:{e:'📚',m:'Keep revising!',c:'#339AF0'};
+app.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:56px;margin-bottom:8px">${g.e}</div><h2 style="margin:0 0 6px;font-size:28px;font-weight:900;color:${g.c}">${s.fcScore}/${s.fcTotal}</h2><div class="result-pct" style="background:linear-gradient(135deg,${g.c},${g.c}aa)">${ipct}%</div><p style="color:#b8b8d0;font-size:16px;font-weight:600;margin:0 0 20px">${g.m}</p>
+<div class="bottom-grid"><button class="btn card" onclick="startFlash(null)" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#845EF715,#845EF705);border-color:#845EF744"><div style="font-size:24px">🔄</div><div style="font-size:12px;font-weight:800;margin-top:6px">Again</div></button><button class="btn card" onclick="S({mode:'cheatsheet',ct:0})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#51CF6615,#51CF6605);border-color:#51CF6644"><div style="font-size:24px">📖</div><div style="font-size:12px;font-weight:800;margin-top:6px">Cheat Sheet</div></button><button class="btn card" onclick="S({mode:'home'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#FF6B6B15,#FF6B6B05);border-color:#FF6B6B44"><div style="font-size:24px">🏠</div><div style="font-size:12px;font-weight:800;margin-top:6px">Home</div></button></div></div>`;return;}
+if(s.mode==='quiz'&&s.qs.length){const q=s.qs[s.cq],tc=TC[q.topic]||'#845EF7',prog=((s.cq+(s.showAns?1:0))/s.qs.length)*100;
+app.innerHTML=`<div class="nav-row"><button class="btn back-btn" onclick="S({mode:'home'})" style="padding:6px 14px;font-size:13px">✕ Quit</button><div class="score-bar"><span style="color:#51CF66">✓${s.score}</span><span style="color:#FF6B6B">✗${s.ans-s.score}</span>${s.streak>=2?`<span style="color:#FCC419">🔥${s.streak}</span>`:''}</div></div>
+<div class="progress-bar"><div class="progress-fill" style="width:${prog}%;background:linear-gradient(90deg,${tc},${tc}cc)"></div></div>
+<div class="card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span style="background:${tc}22;color:${tc};padding:4px 12px;border-radius:8px;font-size:12px;font-weight:800;border:1px solid ${tc}44">${TI[q.topic]||'📝'} ${q.topic}</span><span style="color:#9898b8;font-size:13px;font-weight:600">${s.cq+1}/${s.qs.length}</span></div>
+<h3 style="font-size:17px;font-weight:800;margin:0 0 16px;line-height:1.5;color:#f0f0ff">${esc(q.question)}</h3>
+<div style="display:flex;flex-direction:column;gap:10px">${q.options.map((opt,i)=>{let bg='rgba(255,255,255,0.04)',bd='rgba(255,255,255,0.1)',em='';
+if(s.showAns){if(i===q.correct){bg='rgba(81,207,102,0.15)';bd='#51CF66';em=' ✓';}else if(i===s.sel&&i!==q.correct){bg='rgba(255,107,107,0.15)';bd='#FF6B6B';em=' ✗';}}
+return`<button class="option-btn" onclick="pickAnswer(${i})" style="background:${bg};border-color:${bd};${s.showAns?'pointer-events:none':''}"><span class="option-letter" style="background:${tc}22;color:${tc}">${String.fromCharCode(65+i)}</span><span>${esc(opt)}${em}</span></button>`;}).join('')}</div>
+${s.showAns?`<div class="explanation-box ${s.sel===q.correct?'correct-bg':'wrong-bg'}"><div style="font-weight:800;font-size:14px;margin-bottom:4px;color:${s.sel===q.correct?'#51CF66':'#FF6B6B'}">${s.sel===q.correct?(s.streak>=3?'🔥 Amazing!':['Correct! 🎉','Well done! ⭐','You got it! 💪'][Math.floor(Math.random()*3)]):'Not quite — now you know! 💡'}</div><div style="font-size:13px;color:#b8b8d0;line-height:1.6">${esc(q.explanation)}</div></div>
+<button class="btn full-btn" onclick="nextQ()" style="background:linear-gradient(135deg,${tc},${tc}cc)">${s.cq+1>=s.qs.length?'See Results →':'Next Question →'}</button>`:''}</div>`;return;}
+if(s.mode==='results'){const pct=s.qs.length?Math.round((s.score/s.qs.length)*100):0;const g=pct>=90?{e:'🌟',m:'Outstanding! Exam-ready!',c:'#FCC419'}:pct>=70?{e:'💪',m:'Great job! Nearly there!',c:'#51CF66'}:pct>=50?{e:'📚',m:'Good effort! Review below.',c:'#339AF0'}:{e:'🔄',m:'Keep revising!',c:'#FF6B6B'};
+app.innerHTML=`<div class="card" style="text-align:center;margin-bottom:20px"><div style="font-size:56px;margin-bottom:8px">${g.e}</div><h2 style="margin:0 0 6px;font-size:28px;font-weight:900;color:${g.c}">${s.score}/${s.qs.length}</h2><div class="result-pct" style="background:linear-gradient(135deg,${g.c},${g.c}aa)">${pct}%</div><p style="color:#b8b8d0;font-size:16px;margin:0 0 16px;font-weight:600">${g.m}</p>${s.best>=3?`<div style="display:inline-block;background:rgba(252,196,25,0.12);border:1px solid rgba(252,196,25,0.3);border-radius:10px;padding:6px 16px;font-size:14px;font-weight:700;color:#FCC419">🔥 Streak: ${s.best}</div>`:''}</div>
+${s.wrong.length?`<div class="card" style="margin-bottom:20px"><h3 style="margin:0 0 16px;font-size:18px;font-weight:800;color:#FF6B6B">📝 Review These</h3>${s.wrong.map(q=>`<div class="review-item"><div style="font-size:12px;color:${TC[q.topic]||'#888'};font-weight:800;margin-bottom:4px">${TI[q.topic]||'📝'} ${q.topic}</div><div style="font-size:14px;font-weight:700;margin-bottom:6px">${esc(q.question)}</div><div style="font-size:13px;color:#51CF66;font-weight:600">✓ ${esc(q.options[q.correct])}</div><div style="font-size:13px;color:#9898b8;margin-top:4px;line-height:1.5">${esc(q.explanation)}</div></div>`).join('')}</div>`:''}
+<div class="bottom-grid"><button class="btn card" onclick="startQuiz(${s.qt?`'${s.qt}'`:'null'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#FF6B6B15,#FF6B6B05);border-color:#FF6B6B44"><div style="font-size:24px">🔄</div><div style="font-size:12px;font-weight:800;margin-top:6px">Again</div></button><button class="btn card" onclick="S({mode:'cheatsheet',ct:0})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#51CF6615,#51CF6605);border-color:#51CF6644"><div style="font-size:24px">📖</div><div style="font-size:12px;font-weight:800;margin-top:6px">Cheat Sheet</div></button><button class="btn card" onclick="S({mode:'home'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#339AF015,#339AF005);border-color:#339AF044"><div style="font-size:24px">🏠</div><div style="font-size:12px;font-weight:800;margin-top:6px">Home</div></button></div>`;return;}}
+
+function startQuiz(topic){let q=topic?QUESTIONS.filter(x=>x.topic===topic):[...QUESTIONS];q=shuffle(q).map(x=>{const idx=x.options.map((_,i)=>i);const sh=shuffle(idx);return{...x,options:sh.map(i=>x.options[i]),correct:sh.indexOf(x.correct)};});S({mode:'quiz',qs:q,cq:0,sel:null,showAns:false,score:0,ans:0,streak:0,best:0,wrong:[],qt:topic});}window.startQuiz=startQuiz;
+function pickAnswer(i){if(state.showAns)return;const c=i===state.qs[state.cq].correct;const ns=c?state.streak+1:0;S({sel:i,showAns:true,ans:state.ans+1,score:state.score+(c?1:0),streak:ns,best:Math.max(state.best,ns),wrong:c?state.wrong:[...state.wrong,state.qs[state.cq]]});}window.pickAnswer=pickAnswer;
+function nextQ(){if(state.cq+1>=state.qs.length)S({mode:'results'});else S({cq:state.cq+1,sel:null,showAns:false});}window.nextQ=nextQ;
+function startFlash(cat){let c=cat?FLASHCARDS.filter(x=>x.cat===cat):[...FLASHCARDS];S({mode:'flashcards',fc:shuffle(c),fi:0,flipped:false,fcCat:cat,fcScore:0,fcTotal:0});}window.startFlash=startFlash;
+function fcRate(k){const n=state.fi+1>=state.fc.length;S({fcScore:state.fcScore+(k?1:0),fcTotal:state.fcTotal+1,fi:n?state.fi:state.fi+1,flipped:false,mode:n?'fc_results':'flashcards'});}window.fcRate=fcRate;
+render();
+</script>
+</body>
+</html>
