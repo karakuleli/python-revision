@@ -19,12 +19,12 @@ body{background:linear-gradient(135deg,#1a0a2e 0%,#2d1b4e 40%,#1a1040 100%);font
 .back-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:#e8e8f0;padding:8px 16px;font-weight:700;font-size:14px}
 .progress-bar{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;margin-bottom:20px;overflow:hidden}
 .progress-fill{height:100%;border-radius:3px;transition:width 0.4s ease}
-.option-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:14px 16px;color:#e8e8f0;font-family:inherit;font-size:14px;font-weight:600;text-align:left;width:100%;transition:all 0.2s;line-height:1.4;cursor:pointer;display:flex;align-items:flex-start;gap:10px}
+.option-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:14px 16px;color:#e8e8f0;font-family:inherit;font-size:14px;font-weight:600;text-align:left;width:100%;transition:all 0.2s;line-height:1.5;cursor:pointer;display:flex;align-items:flex-start;gap:10px}
 @media(max-width:480px){.option-btn{padding:12px 14px;font-size:13px}}.option-btn:active{transform:scale(0.98)}
 .option-letter{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;min-width:24px;border-radius:7px;font-size:12px;font-weight:800;flex-shrink:0}
 .topic-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 @media(max-width:400px){.topic-grid{grid-template-columns:1fr 1fr}}
-.main-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:28px}
+.main-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
 @media(max-width:400px){.main-grid{grid-template-columns:1fr}}
 .tab-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
 .tab-btn{border-radius:10px;padding:6px 10px;cursor:pointer;font-family:inherit;font-weight:700;font-size:11px;transition:all 0.2s;border:1px solid}
@@ -38,268 +38,299 @@ body{background:linear-gradient(135deg,#1a0a2e 0%,#2d1b4e 40%,#1a1040 100%);font
 .bottom-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:20px}
 .result-pct{font-size:42px;font-weight:900;margin-bottom:8px;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .review-item{background:rgba(0,0,0,0.2);border-radius:12px;padding:14px 16px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.06)}
-.flash-card{min-height:180px;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none;border-radius:16px;padding:24px;transition:all 0.3s}
+.flash-card{min-height:200px;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none;border-radius:16px;padding:24px;transition:all 0.3s}
 .flash-front{background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03));border:2px solid rgba(255,255,255,0.15)}
 .flash-back{background:linear-gradient(135deg,rgba(81,207,102,0.12),rgba(81,207,102,0.04));border:2px solid rgba(81,207,102,0.3)}
+.diff-badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:800;margin-left:8px;letter-spacing:0.5px}
+.diff-1{background:rgba(81,207,102,0.15);color:#51CF66}
+.diff-2{background:rgba(255,169,77,0.15);color:#FFA94D}
+.diff-3{background:rgba(255,107,107,0.15);color:#FF6B6B}
 </style>
 </head>
 <body>
 <div class="stars"></div>
 <div class="wrap" id="app"></div>
 <script>
-const TC={Creation:"#FFA94D",Noah:"#339AF0",Passover:"#FF6B6B",Torah:"#e9a820",Palestine:"#20C997",Birth:"#F06595",Miracles:"#845EF7",Parables:"#51CF66",Death:"#FF922B",Resurrection:"#B197FC",Gospels:"#339AF0"};
-const TI={Creation:"🌍",Noah:"🌈",Passover:"🍷",Torah:"📜",Palestine:"🏛️",Birth:"⭐",Miracles:"✨",Parables:"📖",Death:"✝️",Resurrection:"🌅",Gospels:"📝"};
+const TC={Creation:"#FFA94D",Noah:"#339AF0",Passover:"#FF6B6B",Torah:"#e9a820",Palestine:"#20C997",Birth:"#F06595",Miracles:"#845EF7",Parables:"#51CF66",Death:"#FF922B",Resurrection:"#B197FC",Gospels:"#339AF0",Connections:"#FCC419"};
+const TI={Creation:"🌍",Noah:"🌈",Passover:"🍷",Torah:"📜",Palestine:"🏛️",Birth:"⭐",Miracles:"✨",Parables:"📖",Death:"✝️",Resurrection:"🌅",Gospels:"📝",Connections:"🔗"};
 
 const CHEAT_SHEET=[
 {title:"The Creation",icon:"🌍",color:"#FFA94D",items:[
-{term:"God created Heaven and Earth",desc:"In the beginning, God created everything from nothing"},
-{term:"'Let there be light'",desc:"God's first act of creation — separating light from darkness"},
-{term:"Day 1: Light & Dark",desc:"God separated light from darkness"},
-{term:"Day 2: Sky & Water",desc:"God separated the water from the sky"},
-{term:"Day 3: Land & Plants",desc:"Dry land appeared, plants created for oxygen"},
-{term:"Day 4: Day & Night",desc:"God made the sun, moon and stars"},
-{term:"Day 5: Sea & Sky creatures",desc:"God filled the sea and sky with living creatures"},
-{term:"Day 6: Land animals & Humans",desc:"God created livestock and humans"},
-{term:"Day 7: God rested",desc:"This is why Shabbat (Sabbath) is a day of rest"},
-{term:"Fables teach moral lessons",desc:"Dog fable: don't be greedy. Fox fable: don't judge by appearance"},
+{term:"Day 1–7 Order",desc:"1: Light/Dark → 2: Sky/Water → 3: Land/Plants → 4: Sun/Moon/Stars → 5: Sea/Sky creatures → 6: Land animals/Humans → 7: REST"},
+{term:"'Let there be light'",desc:"God's first act — creation ex nihilo (from nothing)"},
+{term:"Day 7 = Shabbat link",desc:"God rested → this is the theological basis for Shabbat"},
+{term:"Fables vs Creation story",desc:"Fables: moral lessons (don't be greedy, don't judge). Creation: theological truth about God's power"},
+{term:"Dog Fable morals",desc:"Don't be greedy + be grateful for what you have"},
+{term:"Fox Fable morals",desc:"Be polite + don't judge a book by its cover"},
+{term:"How fables influence daily life",desc:"People who always want more (money/fame) may lose what they actually have"},
 ]},
 {title:"Noah's Covenant",icon:"🌈",color:"#339AF0",items:[
-{term:"Why the flood?",desc:"Humanity had become wicked, violent and corrupt"},
-{term:"Noah was free from sin",desc:"Only Noah and his family were righteous"},
-{term:"The Ark",desc:"Noah built an ark with two of each creature to survive the flood"},
-{term:"40 days and 40 nights",desc:"How long the flood lasted"},
-{term:"The dove & olive branch",desc:"Sign that the flood was over and dry land was found"},
-{term:"God's promise (covenant)",desc:"God promised to NEVER flood the Earth again"},
-{term:"The rainbow",desc:"The sign of God's covenant/promise with humanity"},
-{term:"Covenant = religious contract",desc:"Humanity exchanges promises with God"},
-{term:"Universal covenant",desc:"'Universal' means with everyone — all of humanity"},
-{term:"7 Noahide Laws",desc:"Rules for humanity: justice, no murder, no stealing, no blasphemy, no idolatry, no adultery, no eating flesh of living animal"},
+{term:"Covenant = bilateral agreement",desc:"Both sides make promises: God promises protection, humanity promises to follow laws"},
+{term:"Why the flood?",desc:"Humanity was excessively wicked, violent AND corrupt — not just one thing"},
+{term:"'Universal' covenant",desc:"Applies to ALL humanity, not just Jews — unlike later covenants"},
+{term:"Rainbow = sign/symbol",desc:"Physical reminder of the covenant — God will NEVER flood Earth again"},
+{term:"Dove + olive branch",desc:"Symbol of peace and hope — land found, flood ending"},
+{term:"Crow vs dove",desc:"Crow and pigeon found nothing first — then dove found olive branch"},
+{term:"7 Noahide Laws",desc:"1. Courts of justice 2. No blasphemy 3. No idolatry 4. No murder 5. No adultery 6. No stealing 7. No eating flesh of living animal"},
+{term:"Laws = conditions of covenant",desc:"God's promise comes with conditions — humanity must follow these laws"},
+{term:"Noah was righteous",desc:"Only Noah and family were 'free from sin' — showing God rewards righteousness"},
 ]},
 {title:"Passover (Pesach)",icon:"🍷",color:"#FF6B6B",items:[
-{term:"What Jews remember",desc:"The Angel of Death passing over Jewish homes in Egypt"},
-{term:"Lamb's blood on doors",desc:"Jews smeared blood so the Angel of Death would pass over them"},
-{term:"Egyptian firstborns died",desc:"Pharaoh's firstborn died too, so he let the slaves go"},
-{term:"Story of freedom",desc:"Passover celebrates the Israelites' freedom from slavery in Egypt"},
-{term:"Zeroa (Shank Bone)",desc:"Symbolises the Paschal lamb sacrifice before the Exodus"},
-{term:"Beitzah (Egg)",desc:"Round shape = cycle of life and renewal of spring"},
-{term:"Maror (Bitter Herbs)",desc:"Represents the bitterness of slavery in Egypt (horseradish)"},
-{term:"Karpas (Green Veg)",desc:"Parsley dipped in salt water = tears of the slaves"},
-{term:"Charoset (Sweet Paste)",desc:"Apple, nuts, cinnamon, wine — looks like mortar/bricks the slaves made"},
-{term:"Matzah (Unleavened Bread)",desc:"Bread didn't rise because Israelites fled Egypt in a hurry"},
+{term:"Core story",desc:"Angel of Death killed Egyptian firstborns. Jews put lamb's blood on doors → 'passed over'"},
+{term:"Theme: FREEDOM from slavery",desc:"Not just remembering events — celebrating liberation and God's power"},
+{term:"Zeroa (Shank Bone)",desc:"Paschal lamb SACRIFICE before Exodus — links to idea of sacrifice for freedom"},
+{term:"Beitzah (Egg)",desc:"Cycle of life + renewal of spring — round shape = no beginning/end"},
+{term:"Maror (Bitter Herbs)",desc:"BITTERNESS of slavery — horseradish is deliberately unpleasant"},
+{term:"Karpas + salt water",desc:"Green veg = spring/hope. Salt water = slaves' TEARS. Contrast of hope and suffering"},
+{term:"Charoset",desc:"Apple, nuts, cinnamon, wine = looks like MORTAR. Sweet taste = hope despite suffering"},
+{term:"Matzah (unleavened bread)",desc:"'Bread of affliction' — fled so fast bread couldn't RISE. Connects to urgency of escape"},
+{term:"Chazeret (2nd bitter herb)",desc:"Romaine lettuce — used in Korech/Hillel sandwich with Matzah"},
+{term:"Why re-tell every year?",desc:"'In every generation, one must see oneself as having personally left Egypt' — keeps memory alive"},
 ]},
 {title:"Torah & Shabbat",icon:"📜",color:"#e9a820",items:[
-{term:"Torah = Jewish Holy Book",desc:"The first five books of the Old Testament"},
-{term:"Hand-written, 304,805 letters",desc:"42 lines per page, written by trained scribes"},
-{term:"Scribes repair the Torah",desc:"Takes 12–18 months to rewrite from scratch"},
-{term:"Cannot print or draw them",desc:"'You shall not paint them, you shall write them'"},
-{term:"Kosher = meets Jewish rules",desc:"If the Torah meets all rules, it's kosher/acceptable"},
-{term:"Shabbat = day of rest",desc:"The 4th commandment — begins Friday sunset, ends Saturday sunset"},
-{term:"Why Shabbat?",desc:"God created Earth in 6 days and rested on the 7th"},
-{term:"Shabbat activities",desc:"Family time, reading Torah, singing, celebrating God"},
+{term:"Torah = first 5 books of OT",desc:"Genesis, Exodus, Leviticus, Numbers, Deuteronomy"},
+{term:"Hand-written: 304,805 letters",desc:"42 lines per page — even ONE mistake means starting over"},
+{term:"'You shall write them'",desc:"Cannot print or draw — must be hand-written to be kosher"},
+{term:"Scribe training",desc:"Years of study required. 12–18 months to write one Torah scroll"},
+{term:"Testing with a child",desc:"A child reads it — if readable by someone untrained, it's kosher"},
+{term:"Shabbat: Friday sunset → Saturday sunset",desc:"4th commandment — 'Remember the Sabbath day, to keep it holy'"},
+{term:"Why 7th day?",desc:"God created in 6 days, rested on 7th — Jews follow God's example"},
+{term:"Shabbat activities",desc:"Family meals, Torah reading, singing, prayer, NO work"},
+{term:"Why repair rather than reprint?",desc:"Shows love and respect — the physical act of writing is sacred"},
 ]},
 {title:"First Century Palestine",icon:"🏛️",color:"#20C997",items:[
-{term:"Jews & Romans relationship",desc:"Rocky — Romans gave gifts to temple but taxed Jews heavily"},
-{term:"Pontius Pilate",desc:"Roman governor of Judea who arrested and executed rebels"},
-{term:"The Pharisees",desc:"Believed in resurrection, soul, oral law + written Torah"},
-{term:"Pharisees & Romans",desc:"Opposed Roman rule but wouldn't rebel — worked to preserve traditions"},
-{term:"Pharisees & Temple",desc:"Acknowledged it but emphasised synagogue worship"},
-{term:"The Sadducees",desc:"Strictly followed written Torah only, rejected afterlife and angels"},
-{term:"Sadducees & Romans",desc:"Collaborated with Romans to keep their power"},
-{term:"Sadducees & Temple",desc:"Relied on temple — when destroyed, they declined"},
-{term:"The Essenes",desc:"Spiritual purity, strict good vs evil, thought temple was corrupt"},
-{term:"Essenes: Two Messiahs",desc:"Waited for a priestly Messiah AND a kingly Messiah"},
+{term:"Jews-Romans: complicated",desc:"Augustus gave gifts to temple BUT taxed heavily → tension and rebellion"},
+{term:"Pilate: governor of Judea",desc:"Arrested rebels — represents Roman authority and control"},
+{term:"PHARISEES: key beliefs",desc:"Resurrection ✓ Immortal soul ✓ Written + Oral Torah ✓ God's will in everything ✓"},
+{term:"PHARISEES: pragmatic approach",desc:"Opposed Rome but DIDN'T rebel — preserved traditions under occupation"},
+{term:"PHARISEES: synagogue focus",desc:"Emphasised synagogue worship → Jewish life could survive WITHOUT the temple"},
+{term:"SADDUCEES: key beliefs",desc:"Written Torah ONLY ✓ NO afterlife ✗ NO angels ✗ NO oral law ✗ Focus on 'here and now'"},
+{term:"SADDUCEES: collaborated with Rome",desc:"Worked WITH Romans to keep power — politically motivated"},
+{term:"SADDUCEES: temple-dependent",desc:"When temple destroyed (70 CE) → they DECLINED because couldn't adapt"},
+{term:"ESSENES: key beliefs",desc:"Spiritual purity ✓ Good vs evil ✓ Temple is CORRUPT ✓ Two Messiahs expected"},
+{term:"ESSENES: two Messiahs",desc:"Priestly Messiah (restore worship) + Kingly Messiah (lead in righteousness)"},
+{term:"Compare: who survived?",desc:"Pharisees survived because they focused on synagogue/community. Sadducees didn't because they relied on temple."},
 ]},
 {title:"Birth of Jesus",icon:"⭐",color:"#F06595",items:[
-{term:"Born in Bethlehem, in a stable",desc:"No room at the inn — a humble birth"},
-{term:"Angel Gabriel told Mary",desc:"A Saviour had been born, found in a manger"},
-{term:"Shepherds followed the star",desc:"Represent the humble and ordinary people"},
-{term:"Magi (wise men) brought gifts",desc:"Frankincense, Myrrh and Gold"},
-{term:"Gold = King",desc:"Jesus is a king"},
-{term:"Frankincense = Priest",desc:"Jesus is a priest (used in worship)"},
-{term:"Myrrh = Death/Prophet",desc:"Used for burial — foreshadows Jesus's death"},
-{term:"The Star = guide",desc:"Jesus is the guide all should follow"},
-{term:"The Stable = Noah's Ark link",desc:"Animals present at birth, like on the Ark — God's new creation"},
-{term:"The Animals = all creation",desc:"All of creation is under God's rule through Jesus"},
+{term:"Bethlehem, stable, manger",desc:"Humble birth — no room at inn. Contrast: King of Kings born among animals"},
+{term:"Angel Gabriel → Mary",desc:"Annunciation — divine messenger announces the Saviour's birth"},
+{term:"Gifts: Gold = KING",desc:"Jesus has royal authority"},
+{term:"Gifts: Frankincense = PRIEST",desc:"Used in temple worship — Jesus is an intermediary between God and humanity"},
+{term:"Gifts: Myrrh = DEATH/suffering",desc:"Used in burial — foreshadows crucifixion from the very beginning"},
+{term:"Shepherds = the humble",desc:"God's message came to ordinary people FIRST, not kings or priests"},
+{term:"Kings/Magi = all nations",desc:"Wise men from far away = Jesus's message is for ALL people, not just Jews"},
+{term:"Star = divine guidance",desc:"Jesus is 'the way' — the guide for all humanity"},
+{term:"Stable → Noah's Ark link",desc:"Animals present at both. Stable = 'new Ark' from which God's new creation flows"},
+{term:"Animals = all creation under God",desc:"Every part of creation is included in Jesus's saving work"},
 ]},
-{title:"Miracles of Jesus",icon:"✨",color:"#845EF7",items:[
-{term:"What is a miracle?",desc:"An event that cannot be explained by nature, caused by a supernatural being"},
-{term:"Feeding the 5,000",desc:"Fullness & Abundance — one fish and bread fed 5,000 people"},
-{term:"Healing the blind man",desc:"Healing — Jesus made a blind man see again"},
-{term:"The dying child",desc:"Renewed Life — Roman asked Jesus to save his sick daughter"},
-{term:"Water into wine",desc:"Conquering Celebration — at a wedding feast"},
-{term:"Miracles ≠ Parables!",desc:"Miracles = supernatural events. Parables = stories with meaning"},
-{term:"Why miracles matter today",desc:"About giving second chances and helping everyone, even enemies"},
+{title:"Miracles",icon:"✨",color:"#845EF7",items:[
+{term:"Definition",desc:"Event that CANNOT be explained by laws of nature, caused by a SUPERNATURAL being, with a PURPOSE"},
+{term:"Feeding 5,000 = Fullness & Abundance",desc:"One fish + bread → 5,000 fed. Shows God provides beyond what seems possible"},
+{term:"Blind man = Healing",desc:"Restoring sight — physical AND spiritual healing"},
+{term:"Dying child = Renewed Life",desc:"Roman gladiator's daughter — Jesus helped even his ENEMIES"},
+{term:"Water to wine = Conquering Celebration",desc:"Joy, celebration, transformation"},
+{term:"⚠ MIRACLES ≠ PARABLES",desc:"Miracles = supernatural EVENTS. Parables = STORIES with moral meaning. NEVER confuse them!"},
+{term:"Why miracles matter today",desc:"Second chances, helping EVERYONE (even enemies), God's power is limitless"},
+{term:"Key theme: compassion crosses boundaries",desc:"Jesus helped a ROMAN's daughter despite Jewish-Roman tensions"},
 ]},
-{title:"Parables of Jesus",icon:"📖",color:"#51CF66",items:[
-{term:"What is a parable?",desc:"An earthly story with a heavenly (spiritual) meaning"},
-{term:"Parables ≠ Miracles!",desc:"Parables are STORIES with moral meaning, not supernatural events"},
-{term:"Why tell stories?",desc:"To inspire, pass on knowledge, keep traditions, give warnings"},
-{term:"The Good Samaritan",desc:"Love your neighbour, show compassion to anyone in need"},
-{term:"Good Samaritan: treat everyone the same",desc:"Act like Jesus to please God — don't judge"},
-{term:"The Dishonest Steward",desc:"Use worldly wealth for godly purposes, not personal gain"},
-{term:"Steward: can't serve money AND God",desc:"Faithfulness in small things = trustworthiness"},
-{term:"Steward: prepare for eternity",desc:"Act urgently to prepare for the future while you can"},
+{title:"Parables",icon:"📖",color:"#51CF66",items:[
+{term:"Definition",desc:"'An earthly story with a heavenly meaning' — everyday situations with spiritual lessons"},
+{term:"⚠ PARABLES ≠ MIRACLES",desc:"Parables are STORIES Jesus told. Miracles are supernatural EVENTS. Different!"},
+{term:"Good Samaritan: key lesson",desc:"Love your NEIGHBOUR = love EVERYONE. Compassion has no boundaries"},
+{term:"Good Samaritan: deeper point",desc:"A Samaritan (enemy of Jews) was the hero — challenges prejudice"},
+{term:"Dishonest Steward: wealth",desc:"Cannot serve BOTH money AND God — must choose"},
+{term:"Dishonest Steward: preparation",desc:"Prepare for ETERNITY urgently — the steward planned ahead for his future"},
+{term:"Dishonest Steward: faithfulness",desc:"How you handle SMALL things reveals your true character"},
+{term:"Why stories?",desc:"Inspire, preserve traditions, pass on knowledge, give warnings, keep memories alive"},
 ]},
 {title:"Death of Jesus",icon:"✝️",color:"#FF922B",items:[
-{term:"How did Jesus die?",desc:"By Roman crucifixion"},
-{term:"Who got death penalty?",desc:"Robbers, rebels, slaves, political activists, enemies of state"},
-{term:"Why was Jesus crucified?",desc:"Romans: political threat (rebel king). Jews: blasphemer challenging authority"},
-{term:"His death as SACRIFICE",desc:"He was sinless, voluntarily paying penalty for humanity's sins"},
-{term:"His death as VICTORY",desc:"Resurrection broke power of sin, death and devil"},
-{term:"He carried a cross up the hill",desc:"Simon helped him carry it"},
-{term:"Temple curtain ripped in half",desc:"When Jesus died, the curtain in the Jewish temple tore in two"},
+{term:"Method: Roman crucifixion",desc:"Reserved for the WORST criminals — robbers, rebels, slaves, enemies of state"},
+{term:"Why crucified?",desc:"TWO reasons: Romans saw political threat (rebel king) + Jewish leaders saw blasphemy"},
+{term:"SACRIFICE: substitutionary atonement",desc:"Jesus = sinless substitute. Voluntarily took the punishment humanity deserved"},
+{term:"VICTORY: over sin and death",desc:"Resurrection PROVED death could be conquered — eternal life now possible"},
+{term:"Simon carried the cross",desc:"Even Jesus needed help — shows his human suffering"},
+{term:"Temple curtain torn in two",desc:"HUGE symbolism: barrier between God and humanity was REMOVED by Jesus's death"},
+{term:"Curtain = access to God",desc:"Previously only priests could enter Holy of Holies. Now ALL people can approach God directly"},
 ]},
 {title:"Resurrection",icon:"🌅",color:"#B197FC",items:[
-{term:"Jesus died and came back from the dead",desc:"TRUE — the central Christian belief"},
-{term:"Mary Magdalene was at the tomb",desc:"TRUE — she was present when the empty tomb was found"},
-{term:"Jesus resurrected on Saturday?",desc:"FALSE — Christians believe he rose on SUNDAY (Easter Sunday)"},
-{term:"Jesus appeared to disciples first?",desc:"FALSE — he appeared to women (Mary Magdalene) first"},
-{term:"4 different Gospel accounts",desc:"Different authors recorded from different perspectives"},
-{term:"Christians call Jesus the Messiah",desc:"TRUE — Messiah means 'the anointed one'"},
-{term:"Could the women have been mistaken?",desc:"Counter: when others came, they would have realised it was the wrong tomb"},
+{term:"Rose on SUNDAY (not Saturday)",desc:"This is why Christians worship on Sunday — 'the Lord's Day'"},
+{term:"Mary Magdalene at the tomb",desc:"A WOMAN discovered it — revolutionary in a society where women's testimony wasn't valued"},
+{term:"4 Gospel accounts differ",desc:"Different perspectives ≠ contradictions. Like 4 witnesses at same event"},
+{term:"Why differences matter",desc:"Shows accounts weren't copied — each author recorded genuinely from their own perspective"},
+{term:"'Could women have been mistaken?'",desc:"Counter: other people came and confirmed. Also, why would they make up something that got them persecuted?"},
+{term:"Jesus = the Messiah/Christ",desc:"Messiah (Hebrew) = Christ (Greek) = 'The Anointed One' — promised saviour"},
+{term:"Resurrection = foundation of Christianity",desc:"Without it, Christianity wouldn't exist. Paul wrote: 'If Christ has not been raised, our faith is in vain'"},
 ]},
-{title:"The Gospels",icon:"📝",color:"#339AF0",items:[
-{term:"4 Gospel authors",desc:"Matthew, Mark, Luke and John"},
-{term:"What do the Gospels record?",desc:"Life, teachings, death and resurrection of Jesus"},
-{term:"Why are there differences?",desc:"Each author wrote from their own perspective"},
-{term:"Gospel = 'Good News'",desc:"The word 'Gospel' means good news"},
+{title:"Gospels & Cross-Links",icon:"📝",color:"#339AF0",items:[
+{term:"4 authors: Matthew, Mark, Luke, John",desc:"Each wrote from own perspective — that's why accounts differ but don't contradict"},
+{term:"Gospel = 'Good News'",desc:"The good news that Jesus is the Messiah, has died for sins, and risen again"},
+{term:"🔗 Noah → Birth of Jesus",desc:"Animals at Ark = animals at stable. Both = God's creation being preserved/renewed"},
+{term:"🔗 Passover → Death of Jesus",desc:"Passover lamb sacrificed for freedom. Jesus = 'Lamb of God' sacrificed for humanity's freedom from sin"},
+{term:"🔗 Creation → Sabbath",desc:"God rested on Day 7 → Jews observe Shabbat. Pattern of creation shapes daily life"},
+{term:"🔗 Sacrifice theme throughout",desc:"Passover lamb → temple sacrifices → Jesus as ultimate sacrifice"},
+{term:"🔗 Covenant theme",desc:"Noah's covenant (rainbow) → Moses' covenant (law) → New covenant (Jesus's death/resurrection)"},
 ]},
 ];
 
-const QUESTIONS=[
-// CREATION (6)
-{topic:"Creation",question:"What did God create first?",options:["Animals","Light","Humans","Plants"],correct:1,explanation:"God said 'Let there be light' — light was the first creation."},
-{topic:"Creation",question:"What did God do on the 7th day?",options:["Created humans","Created animals","Rested","Made the stars"],correct:2,explanation:"God rested on the 7th day — this is why Jews observe Shabbat."},
-{topic:"Creation",question:"What is the moral of the Dog Fable?",options:["Be brave","Don't be greedy / be grateful","Work hard","Be patient"],correct:1,explanation:"The dog was greedy and lost what he had while trying to get more."},
-{topic:"Creation",question:"On which day were humans created?",options:["Day 3","Day 5","Day 6","Day 7"],correct:2,explanation:"God created land animals and humans on Day 6."},
-{topic:"Creation",question:"What was created on Day 3?",options:["Light","Sky creatures","Dry land and plants","Sun and moon"],correct:2,explanation:"Day 3: dry land appeared and plants were created."},
-{topic:"Creation",question:"What is the moral of the Fox Fable?",options:["Be brave","Don't be greedy","Don't judge by appearance / be polite","Run fast"],correct:2,explanation:"The Fox fable teaches: be polite and don't judge a book by its cover."},
+const Q=[
+// ===== CREATION (10) =====
+{topic:"Creation",question:"Why is the ORDER of creation significant — why are humans created last on Day 6?",options:["Because they were hardest to make","Everything else had to be prepared for them first — they are the pinnacle of creation","It was random","Because animals needed to be created first to eat"],correct:1,explanation:"Humans come last because everything else — light, land, plants, animals — had to be ready first. Humans are the pinnacle and purpose of creation."},
+{topic:"Creation",question:"What is the theological link between Day 7 of creation and Shabbat?",options:["There is no link","God was tired so rested, and Jews copy this","God modelled the pattern of work and rest that Jews follow as a commandment","Day 7 was when humans were made"],correct:2,explanation:"God deliberately rested on Day 7, establishing the pattern. Shabbat isn't about being tired — it's a sacred commandment to follow God's example."},
+{topic:"Creation",question:"The Dog Fable teaches 'don't be greedy'. How might this apply to modern life?",options:["People should never want anything","People chasing more wealth or fame may lose what they already have","Dogs shouldn't eat too much","It only applies to animals"],correct:1,explanation:"The fable warns that people who are naive and always want more (money, fame) risk losing what they actually have — relevant to consumerism today."},
+{topic:"Creation",question:"What does 'creation ex nihilo' mean and why is it important?",options:["Creation from existing materials","Creation from nothing — it shows God's unlimited power","Creation from water","Creation by accident"],correct:1,explanation:"Ex nihilo = 'from nothing'. It's theologically important because it means God is all-powerful and independent — He didn't need pre-existing materials."},
+{topic:"Creation",question:"How do fables differ from the creation story in their PURPOSE?",options:["Fables are true, creation is false","Fables teach moral lessons about behaviour; creation teaches theological truth about God","They're exactly the same","Fables are in the Bible, creation isn't"],correct:1,explanation:"Fables (dog, fox) teach moral lessons about human behaviour. The creation story teaches theological truths about God's nature and power."},
+{topic:"Creation",question:"Which is created on Day 4, and why is this significant?",options:["Plants — they needed sunlight","Sun, moon and stars — they separate day and night permanently","Humans — they needed to see","Water — it was dark before"],correct:1,explanation:"Day 4: sun, moon and stars. Interestingly, light existed from Day 1 but the celestial bodies came later — showing God's light precedes natural light."},
+{topic:"Creation",question:"The Fox Fable teaches 'don't judge a book by its cover'. What deeper lesson does this carry?",options:["Always read books","Appearances can be deceiving — treat people with respect regardless of how they look","Foxes are wise","Books are important"],correct:1,explanation:"It challenges people to look beyond appearances and be polite to everyone, even if they don't look 'as nice' — a lesson about respect and equality."},
+{topic:"Creation",question:"In what order were living creatures created?",options:["Land animals → sea creatures → birds","Sea/sky creatures (Day 5) → land animals and humans (Day 6)","All at once on Day 5","Humans first, then animals"],correct:1,explanation:"Day 5: sea and sky creatures. Day 6: land animals then humans. This shows a progression from simple to complex."},
+{topic:"Creation",question:"Why might a religious person argue the creation story shouldn't be read as a scientific account?",options:["Because it's wrong","Its purpose is theological truth about WHO created, not HOW — it's about meaning, not mechanism","Because it's too short","Religious people don't believe in science"],correct:1,explanation:"Many religious scholars argue Genesis answers WHY and WHO (God, with purpose) rather than HOW (scientific process). It's about theological meaning."},
+{topic:"Creation",question:"What is significant about God 'separating' things throughout creation?",options:["God likes things tidy","Separation creates order from chaos — showing God brings structure and purpose","It was easier that way","Nothing — it's just description"],correct:1,explanation:"The repeated pattern of separation (light/dark, water/sky, land/sea) shows God bringing order from chaos — a key theological theme."},
 
-// NOAH (8)
-{topic:"Noah",question:"Why did God send the flood?",options:["He was bored","Humanity was wicked, violent and corrupt","Noah asked for it","The animals needed water"],correct:1,explanation:"Humanity had become excessively wicked, violent and corrupt."},
-{topic:"Noah",question:"How long did the flood last?",options:["7 days","40 days and 40 nights","100 days","1 year"],correct:1,explanation:"The flood lasted 40 days and 40 nights."},
-{topic:"Noah",question:"What sign did God give as His covenant?",options:["A star","A dove","A rainbow","Thunder"],correct:2,explanation:"God created a rainbow as the sign of His promise never to flood the Earth again."},
-{topic:"Noah",question:"What is a covenant?",options:["A type of boat","A religious contract/promise with God","A prayer","A type of flood"],correct:1,explanation:"A covenant is a religious contract where humanity exchanges promises with God."},
-{topic:"Noah",question:"What does 'universal' mean in the context of Noah's covenant?",options:["About the universe","With everyone / all of humanity","Only for Noah","About space"],correct:1,explanation:"Universal means the covenant is with everyone — all of humanity."},
-{topic:"Noah",question:"What did the dove bring back?",options:["A fish","Nothing","An olive branch","A feather"],correct:2,explanation:"The dove returned with an olive branch — a sign that dry land had been found."},
-{topic:"Noah",question:"Which is NOT one of the 7 Noahide Laws?",options:["Do not murder","Do not steal","Do not eat vegetables","Do not blaspheme God"],correct:2,explanation:"The law is 'do not eat flesh of a living animal' — not about vegetables!"},
-{topic:"Noah",question:"Why were only Noah's family saved?",options:["They were rich","They were the only ones free from sin","They could swim","They had a boat already"],correct:1,explanation:"Only Noah and his family were righteous and free from sin."},
+// ===== NOAH (12) =====
+{topic:"Noah",question:"A covenant is a bilateral agreement. What does THIS mean about the Noahide Laws?",options:["Only God has to follow them","They are suggestions, not rules","They are humanity's side of the deal — conditions humans must meet for God's protection","They only apply to Noah's family"],correct:2,explanation:"Bilateral = both sides. God promises never to flood again. In return, humanity must follow the 7 laws. Break the conditions → break the covenant."},
+{topic:"Noah",question:"Why is it significant that Noah's covenant is described as 'universal'?",options:["It means it's written in a universal language","It applies to ALL humanity, not just one group — unlike later covenants with just the Jews","It means it's universally agreed upon","It's the biggest covenant"],correct:1,explanation:"Universal = all humanity. This is different from later covenants (e.g., with Abraham/Moses) which apply specifically to the Jewish people."},
+{topic:"Noah",question:"What is the symbolic meaning of the dove returning with an olive branch?",options:["Doves like olives","It represents peace, hope, and new beginnings — the end of God's punishment","It means the flood is getting worse","The dove was hungry"],correct:1,explanation:"The olive branch symbolises peace and hope. It shows God's punishment has ended and a new beginning is possible — still used as a peace symbol today."},
+{topic:"Noah",question:"Why did God choose to save ANIMALS as well as Noah's family?",options:["Noah liked animals","To show that ALL of creation matters to God, not just humans","The animals built the ark","Animals are more important than humans"],correct:1,explanation:"Saving two of each creature shows God values ALL creation, not just humanity. This links to the birth narrative where animals are also present."},
+{topic:"Noah",question:"The 7 Noahide Laws include 'establish courts of justice'. Why is this first?",options:["It was written first","Without justice systems, none of the other laws can be enforced — it's the foundation","Courts are more important than God","It's alphabetical"],correct:1,explanation:"Justice is listed first because without a system to enforce laws, the other rules (no murder, no stealing etc.) would be meaningless. It's the foundation of civilised society."},
+{topic:"Noah",question:"How does the story of Noah present God's character as BOTH merciful AND just?",options:["God is only merciful","God is only just","Just: He punishes wickedness with the flood. Merciful: He saves the righteous and promises never to do it again","God is neither"],correct:2,explanation:"God shows justice by punishing humanity's wickedness, but mercy by saving Noah's family and making a covenant never to flood again. Both qualities coexist."},
+{topic:"Noah",question:"The flood lasted '40 days and 40 nights'. Why might the number 40 be significant in the Bible?",options:["It's a random number","40 represents a period of testing, trial or transformation — it appears repeatedly in scripture","It was exactly 40 days","40 was Noah's age"],correct:1,explanation:"40 is used repeatedly: 40 days of flood, 40 years in wilderness, Jesus fasted 40 days. It symbolises a period of testing and transformation."},
+{topic:"Noah",question:"'Do not eat the flesh of a living animal' — what does this Noahide Law suggest about Jewish ethics?",options:["Jews must be vegetarian","It shows concern for animal welfare and respect for all living creatures","Animals can't be eaten at all","It's about cooking properly"],correct:1,explanation:"This law shows that even when animals ARE eaten, it must be done humanely. It reflects a deep ethical concern for the welfare of all living creatures."},
+{topic:"Noah",question:"What would happen if one side broke the covenant?",options:["Nothing — covenants can't be broken","The covenant would be void — both sides must keep their promises","Only God's side matters","The rainbow would disappear"],correct:1,explanation:"A covenant is a contract. If humanity breaks the laws (their side of the deal), they break the covenant. This is why the Noahide Laws are so important."},
+{topic:"Noah",question:"How does Noah's story contrast with the creation story?",options:["They're completely unrelated","Creation = God making everything. Noah = God destroying and RE-creating — showing God can both create and judge","Noah came before creation","They tell the same story"],correct:1,explanation:"Creation is building up. The flood is tearing down. But then God re-creates through Noah's family — showing the cycle of creation, judgement, and renewal."},
+{topic:"Noah",question:"Why did Noah send a crow AND a pigeon before the dove?",options:["He had many birds","To show repeated failed attempts — building tension and making the dove's success more meaningful","The crow and pigeon were faster","He sent them by accident"],correct:1,explanation:"The failed attempts with the crow and pigeon build narrative tension and make the dove's olive branch more meaningful — persistence and hope rewarded."},
+{topic:"Noah",question:"How does Noah's covenant link to the later covenant at Passover?",options:["They're unrelated","Both involve God saving the righteous from destruction and establishing a new relationship with humanity","Both involve floods","Both involve doves"],correct:1,explanation:"Both follow the pattern: humanity in crisis → God intervenes to save the faithful → a new covenant/relationship established. Noah = universal. Passover = specifically with Israel."},
 
-// PASSOVER (8)
-{topic:"Passover",question:"What do Jews remember at Passover?",options:["The creation","The flood","Freedom from slavery in Egypt","Jesus's birth"],correct:2,explanation:"Passover celebrates the Israelites' freedom from slavery in Egypt."},
-{topic:"Passover",question:"What did Jews put on their doors?",options:["Water","Lamb's blood","Paint","An olive branch"],correct:1,explanation:"They smeared lamb's blood so the Angel of Death would pass over their homes."},
-{topic:"Passover",question:"What does Maror (bitter herbs) represent?",options:["Spring","The bitterness of slavery","Sweet freedom","God's love"],correct:1,explanation:"Bitter herbs represent the bitterness and harshness of slavery in Egypt."},
-{topic:"Passover",question:"What does Matzah represent?",options:["The dove","Wealth","Bread that didn't rise — the Israelites fled in a hurry","A sacrifice"],correct:2,explanation:"There was no time for bread to rise as the Israelites fled Egypt in haste."},
-{topic:"Passover",question:"What is Charoset made of?",options:["Lamb and herbs","Apples, nuts, cinnamon and wine","Bread and water","Eggs and salt"],correct:1,explanation:"Charoset is a sweet paste resembling the mortar/bricks slaves were forced to make."},
-{topic:"Passover",question:"What does Karpas (green veg) dipped in salt water represent?",options:["The sea parting","Tears of the slaves","God's promise","Spring only"],correct:1,explanation:"The salt water represents the tears shed by the Israelite slaves."},
-{topic:"Passover",question:"What does Beitzah (egg) symbolise?",options:["New life only","The cycle of life and renewal of spring","Slavery","The flood"],correct:1,explanation:"Its round shape symbolises the cycle of life and the renewal of spring."},
-{topic:"Passover",question:"What happened to the Egyptian firstborns?",options:["They were freed","They fled","They all died including Pharaoh's son","Nothing"],correct:2,explanation:"All Egyptian firstborns died, which forced Pharaoh to let the Jewish slaves go."},
+// ===== PASSOVER (10) =====
+{topic:"Passover",question:"Why is Passover described as a story of FREEDOM rather than just a story of survival?",options:["Because they survived the flood","The Israelites didn't just survive — they were LIBERATED from centuries of slavery, gaining self-determination","They were free to eat lamb","They survived the plagues"],correct:1,explanation:"Passover isn't just about avoiding death — it's about complete liberation from slavery. The Israelites went from being property to being free people."},
+{topic:"Passover",question:"Charoset tastes sweet but represents mortar used by slaves. Why this contradiction?",options:["It's a mistake","The sweetness represents HOPE that even in suffering, there is the promise of something better","They didn't have bitter ingredients","To make it taste nice"],correct:1,explanation:"The deliberate contrast between sweet taste and bitter meaning shows that even in the darkest times of slavery, there was hope for freedom. Suffering isn't permanent."},
+{topic:"Passover",question:"Why is Karpas (green vegetable) dipped in SALT WATER specifically?",options:["For taste","Green = spring/renewal/hope. Salt water = tears of slaves. The contrast shows the journey FROM suffering TO renewal","To clean the vegetable","Salt preserves food"],correct:1,explanation:"The combination is deliberate: the green vegetable represents new life and hope, while the salt water recalls tears. Together they symbolise the journey from slavery to freedom."},
+{topic:"Passover",question:"Why do Jews retell the Passover story EVERY year? Why not just remember it privately?",options:["They forget easily","'In every generation, one must see oneself as having personally left Egypt' — retelling keeps the experience ALIVE and PERSONAL","It's just tradition","To teach cooking"],correct:1,explanation:"The Haggadah instructs every Jew to feel as if THEY personally left Egypt. Annual retelling makes ancient history personally meaningful for each generation."},
+{topic:"Passover",question:"How does the Passover lamb sacrifice LINK to the Christian understanding of Jesus's death?",options:["There is no link","The lamb died so Israelites could be saved → Jesus (called 'Lamb of God') died so humanity could be saved from sin","Both involve animals","Both happened in spring"],correct:1,explanation:"This is a crucial cross-topic link: the Passover lamb was sacrificed so Jews could be free. Christians see Jesus as the ultimate 'Lamb of God' sacrificed for humanity's freedom from sin."},
+{topic:"Passover",question:"Why is Matzah called 'bread of affliction' AND a symbol of freedom?",options:["It's a contradiction that makes no sense","It represents BOTH: the suffering of slavery AND the urgency of escape to freedom — affliction and liberation are connected","Only one meaning is correct","It was named wrong"],correct:1,explanation:"Matzah holds both meanings simultaneously: the flatbread of poor slaves AND the bread of people fleeing so fast it couldn't rise. Suffering and liberation are two sides of the same story."},
+{topic:"Passover",question:"What happened to the Pharaoh's firstborn and why was this the final plague?",options:["Nothing happened to Pharaoh","Pharaoh's own firstborn died — this struck him PERSONALLY and finally broke his resistance","Pharaoh's firstborn escaped","The firstborn became a slave"],correct:1,explanation:"Previous plagues affected the nation, but Pharaoh didn't care. When HIS OWN son died, it became personal — finally breaking his resistance and freeing the slaves."},
+{topic:"Passover",question:"What does the Zeroa (shank bone) specifically symbolise?",options:["The ark","The Paschal lamb sacrifice offered in the temple BEFORE the Exodus — linking sacrifice to freedom","Noah's offering","Just a bone"],correct:1,explanation:"The shank bone represents the specific lamb sacrifice made in the temple before the Exodus. It connects the ideas of sacrifice and freedom."},
+{topic:"Passover",question:"Why might a non-religious person still find value in the Passover story?",options:["They wouldn't","It's a universal story about fighting oppression, valuing freedom, and remembering history — these themes transcend religion","Only for the food","It's good entertainment"],correct:1,explanation:"The themes of liberation, justice, remembering history, and fighting oppression are universal human values that resonate beyond any specific religion."},
+{topic:"Passover",question:"How does the Seder plate work as a TEACHING TOOL rather than just a meal?",options:["It's just food","Every item has symbolic meaning — by eating and discussing each one, the STORY is experienced through all the senses, making it memorable","It looks nice","It saves time"],correct:1,explanation:"The Seder plate is brilliant education: you SEE, TASTE, SMELL and DISCUSS each item. Using all senses makes the story far more memorable than just reading about it."},
 
-// TORAH & SHABBAT (6)
-{topic:"Torah",question:"What is the Torah?",options:["A prayer","The Jewish Holy Book — first 5 books of Old Testament","A temple","A festival"],correct:1,explanation:"The Torah is the Jewish Holy Book — the first five books of the Old Testament."},
-{topic:"Torah",question:"How many letters are in the Torah?",options:["30,000","304,805","3 million","1,000"],correct:1,explanation:"The Torah contains exactly 304,805 hand-written letters."},
-{topic:"Torah",question:"When does Shabbat begin and end?",options:["Saturday morning to Sunday morning","Friday sunset to Saturday sunset","Sunday all day","Monday to Friday"],correct:1,explanation:"Shabbat begins at sunset on Friday and ends at sunset on Saturday."},
-{topic:"Torah",question:"Why do Jews observe Shabbat?",options:["Because Moses said so","Because God rested on the 7th day of creation","Because of Passover","Because of Noah"],correct:1,explanation:"God created the Earth in 6 days and rested on the 7th — Jews follow this example."},
-{topic:"Torah",question:"How long does it take a scribe to rewrite a Torah?",options:["1 week","1 month","12 to 18 months","10 years"],correct:2,explanation:"It takes the average scribe 12 to 18 months to rewrite a Torah from scratch."},
-{topic:"Torah",question:"What does 'Kosher' mean?",options:["Holy","Meets Jewish rules/acceptable","Old","Written"],correct:1,explanation:"Kosher means it meets Jewish rules and is acceptable."},
+// ===== TORAH & SHABBAT (8) =====
+{topic:"Torah",question:"Why must the Torah be HAND-WRITTEN rather than printed?",options:["Printers didn't exist","The physical act of writing is considered SACRED — it shows love, respect and devotion. The process matters, not just the product","Hand-writing looks better","To create jobs for scribes"],correct:1,explanation:"'You shall write them' — the Torah itself commands hand-writing. The sacred act of writing each of the 304,805 letters IS an act of worship and devotion."},
+{topic:"Torah",question:"Why is a CHILD used to test if a Torah is kosher?",options:["Children are smarter","If someone UNTRAINED can read it correctly, the letters must be perfectly formed — it tests clarity, not intelligence","Children have better eyes","It's a reward for the child"],correct:1,explanation:"Using an untrained child is clever: if they can read it, the writing must be flawless. It's not about the child's ability — it's about the scribe's precision."},
+{topic:"Torah",question:"A scribe takes 12–18 months to write one Torah. What does this tell us about Jewish attitudes to their holy text?",options:["They're slow writers","The Torah is so sacred that its physical form deserves EXTREME care and dedication — quality over speed","They don't have enough scribes","It's not important to them"],correct:1,explanation:"The enormous time investment shows the Torah isn't just 'a book' — it's a sacred object deserving of the highest craftsmanship. The effort itself is an act of worship."},
+{topic:"Torah",question:"How does Shabbat observance LINK BACK to the creation story?",options:["It doesn't","God created for 6 days and rested on the 7th → Shabbat follows this exact pattern, connecting daily life to creation","Shabbat is about Noah","Shabbat celebrates Passover"],correct:1,explanation:"The theological basis for Shabbat is directly in Genesis: God worked 6 days, rested on the 7th. By observing Shabbat, Jews live according to the rhythm God established at creation."},
+{topic:"Torah",question:"What does 'kosher' mean in the context of the Torah scroll?",options:["Fit to eat","It meets all Jewish rules and standards — every letter is correctly formed and the scroll is acceptable for use","Old and valuable","Written by a rabbi"],correct:1,explanation:"Kosher literally means 'fit' or 'proper'. A kosher Torah meets every requirement — any mistake means it cannot be used in synagogue worship."},
+{topic:"Torah",question:"Why is Shabbat sometimes called a 'gift' from God rather than just a rule?",options:["God gives presents on Shabbat","It provides rest, family time, and spiritual renewal — it's designed to BENEFIT people, not just restrict them","It's not a gift","Because candles are lit"],correct:1,explanation:"Shabbat isn't just 'don't work' — it's a gift of rest, family connection, and spiritual renewal. The 'rules' exist to protect this sacred time of restoration."},
+{topic:"Torah",question:"If even ONE letter is wrong in a Torah scroll, the entire scroll cannot be used. What does this reveal?",options:["Scribes are stressed","Every single word is considered divinely inspired and sacred — accuracy reflects reverence for God's word","It's an overreaction","Nothing important"],correct:1,explanation:"The zero-tolerance policy shows that Jews believe every letter is sacred and divinely inspired. Even one error would disrespect God's word."},
+{topic:"Torah",question:"How does Shabbat bring Jews CLOSER to God?",options:["It doesn't","By stopping work and daily distractions, Jews create SPACE for prayer, Torah reading, and reflection — focusing entirely on God","By going to a special place","By fasting"],correct:1,explanation:"Shabbat removes the noise of daily life. Without work, phone, cooking etc., Jews can focus entirely on God, family, and spiritual matters."},
 
-// FIRST CENTURY PALESTINE (8)
-{topic:"Palestine",question:"What was the relationship like between Jews and Romans?",options:["Always peaceful","Always at war","Good but rocky — gifts but heavy taxes","They never met"],correct:2,explanation:"Romans gave impressive gifts to the temple but taxed Jews heavily."},
-{topic:"Palestine",question:"Who was Pontius Pilate?",options:["A Jewish priest","Roman governor of Judea","A Pharisee","An Essene"],correct:1,explanation:"Pilate was the Roman governor of Judea who arrested and executed rebels."},
-{topic:"Palestine",question:"What did the Pharisees believe in?",options:["Only the written Torah","Resurrection, immortality of soul, oral + written Torah","No afterlife","The temple was corrupt"],correct:1,explanation:"Pharisees believed in resurrection, the soul, and valued both oral and written Torah."},
-{topic:"Palestine",question:"How did the Sadducees view life after death?",options:["They believed in it strongly","They rejected it completely","They weren't sure","They thought only priests had afterlife"],correct:1,explanation:"Sadducees rejected the idea of life after death, angels, and prophecies."},
-{topic:"Palestine",question:"What happened to the Sadducees when the temple was destroyed?",options:["They thrived","They moved to Rome","They declined/disappeared","They became Pharisees"],correct:2,explanation:"They relied on the temple — when it was destroyed, they refused to adapt and declined."},
-{topic:"Palestine",question:"What did the Essenes believe about the temple?",options:["It was the holiest place","It was illegitimate and corrupted by Sadducees","It should be bigger","It was unimportant"],correct:1,explanation:"Essenes believed the temple was illegitimate and corrupted by the Sadducees."},
-{topic:"Palestine",question:"How many Messianic figures did the Essenes expect?",options:["None","One","Two — a priestly and a kingly Messiah","Three"],correct:2,explanation:"Essenes awaited TWO Messiahs: a priestly one and a kingly one."},
-{topic:"Palestine",question:"How did the Pharisees respond to Roman rule?",options:["They rebelled violently","They collaborated fully","They opposed it but wouldn't rebel","They ignored it"],correct:2,explanation:"Pharisees opposed Roman rule but worked practically to preserve Jewish traditions."},
+// ===== FIRST CENTURY PALESTINE (10) =====
+{topic:"Palestine",question:"Why is it important to understand the Pharisees, Sadducees and Essenes to understand Jesus's story?",options:["It's not important","Jesus lived among these groups — their beliefs and conflicts directly shaped the events of his life, death and the early Church","They were his friends","They're mentioned in every chapter"],correct:1,explanation:"Understanding these groups explains WHY Jewish leaders opposed Jesus, WHY Romans crucified him, and HOW early Christianity developed in response to these existing tensions."},
+{topic:"Palestine",question:"The Pharisees survived the destruction of the temple in 70 CE but the Sadducees didn't. Why?",options:["Pharisees were stronger","Pharisees focused on SYNAGOGUE worship and community — they could adapt. Sadducees DEPENDED on the temple and refused to change","Sadducees chose to leave","Romans liked Pharisees more"],correct:1,explanation:"This is a key comparison: Pharisees had built Jewish life around synagogues and community, so when the temple fell, they adapted. Sadducees' entire identity was temple-based, so they collapsed."},
+{topic:"Palestine",question:"The Sadducees collaborated with Rome. Was this purely selfish or could it be justified?",options:["Purely selfish","Arguably pragmatic: collaboration kept the temple functioning and preserved SOME Jewish autonomy — but it also served their power","It was brave","They had no choice"],correct:1,explanation:"This is nuanced. Collaboration kept the temple running (serving all Jews) but also preserved Sadducee power. Both motives likely coexisted — self-interest AND pragmatism."},
+{topic:"Palestine",question:"Why did the Essenes believe the temple was 'illegitimate'?",options:["It was too small","They believed the Sadducees had CORRUPTED it — the wrong people were running it improperly","They didn't believe in God","Temples aren't in the Torah"],correct:1,explanation:"The Essenes didn't reject the temple concept — they rejected its current LEADERSHIP. They believed the Sadducees had corrupted proper worship."},
+{topic:"Palestine",question:"Compare: How did each group view the MESSIAH?",options:["All three agreed","Pharisees: kingly figure restoring sovereignty. Essenes: TWO messiahs (priestly + kingly). Sadducees: cautious, avoided messianic politics","None believed in a Messiah","Only Essenes believed"],correct:1,explanation:"Key comparison: Pharisees expected one kingly Messiah. Essenes expected TWO (priestly + kingly). Sadducees avoided messianic talk to protect their Roman alliance."},
+{topic:"Palestine",question:"The Pharisees valued an 'oral law' alongside the written Torah. Why did the Sadducees reject this?",options:["They couldn't read","Sadducees believed ONLY the written Torah was authoritative — the oral law was human tradition, not God's word","They agreed with it","The oral law was lost"],correct:1,explanation:"Sadducees were strict literalists — only what was WRITTEN in Torah counted. The oral law (centuries of interpretation and rules) was, to them, merely human tradition."},
+{topic:"Palestine",question:"The Essenes 'didn't bother the Romans'. What does this tell us about their worldview?",options:["They were cowards","They believed Roman occupation was part of GOD'S PLAN — divine intervention would resolve it, not human rebellion","They liked Romans","They lived too far away"],correct:1,explanation:"The Essenes had a deeply theological view: everything was God's will. Roman occupation was part of God's plan, and God would sort it out through messianic intervention."},
+{topic:"Palestine",question:"Emperor Augustus gave expensive gifts to the Jewish temple. Why would a Roman emperor do this?",options:["He was Jewish","Political strategy — keeping the temple community happy helped maintain control over a potentially rebellious region","He was generous","He wanted to visit"],correct:1,explanation:"Roman emperors used gifts strategically to maintain loyalty and control. A happy temple community was less likely to rebel — it was political management, not generosity."},
+{topic:"Palestine",question:"Why were Jews taxed heavily by the Romans?",options:["Jews were wealthy","Taxation funded the Roman Empire and was imposed on all conquered peoples — but it caused resentment and rebellion attempts","Jews volunteered to pay","Taxes were low"],correct:1,explanation:"Heavy taxation was standard Roman practice for all conquered territories. For Jews, paying tax to a pagan empire was both financially and religiously offensive."},
+{topic:"Palestine",question:"Which group's beliefs are MOST similar to modern Judaism and why?",options:["Sadducees","Essenes","Pharisees — their emphasis on Torah interpretation, oral tradition, and synagogue-based worship shaped Rabbinic Judaism","None of them"],correct:2,explanation:"Modern Judaism evolved primarily from Pharisaic tradition. Their focus on Torah interpretation, oral law, and community-based worship (not temple-dependent) survived and thrived."},
 
-// BIRTH OF JESUS (8)
-{topic:"Birth",question:"Where was Jesus born?",options:["Jerusalem","Nazareth","Bethlehem","Rome"],correct:2,explanation:"Jesus was born in Bethlehem, in a stable because there was no room at the inn."},
-{topic:"Birth",question:"What gifts did the Magi bring?",options:["Bread, wine and oil","Gold, Frankincense and Myrrh","Silver, silk and spices","Food, clothes and money"],correct:1,explanation:"The three gifts were Gold (king), Frankincense (priest), and Myrrh (death/prophet)."},
-{topic:"Birth",question:"What does Gold symbolise?",options:["Jesus is a priest","Jesus is a prophet","Jesus is a king","Jesus is a shepherd"],correct:2,explanation:"Gold symbolises royalty — Jesus is a king."},
-{topic:"Birth",question:"What does Myrrh symbolise?",options:["Wealth","Jesus's kingship","Joy and celebration","Death — foreshadowing Jesus's death"],correct:3,explanation:"Myrrh was used in burial — it foreshadows Jesus's death."},
-{topic:"Birth",question:"What do the shepherds represent?",options:["Wealth and power","The humble and ordinary people","Roman soldiers","Jewish leaders"],correct:1,explanation:"Shepherds represent humble, ordinary people included in Jesus's saving work."},
-{topic:"Birth",question:"How does Jesus's birth link to Noah's Ark?",options:["Both happened in a stable","Animals were present at both — God's new creation","Both involved water","Both had a star"],correct:1,explanation:"Animals at the birth mirror the Ark — the stable is like a new Ark from which God's new creation flows."},
-{topic:"Birth",question:"What does the Star symbolise?",options:["A planet","Jesus is the guide all should follow","The Romans","Heaven"],correct:1,explanation:"The star represents Jesus as the guide by which all should follow to find the way."},
-{topic:"Birth",question:"Who told Mary about the birth of the Saviour?",options:["Joseph","King Herod","Angel Gabriel","The shepherds"],correct:2,explanation:"Angel Gabriel told Mary that a Saviour had been born."},
+// ===== BIRTH (8) =====
+{topic:"Birth",question:"Jesus was born in a STABLE among ANIMALS. Why is the humility of his birth theologically important?",options:["There were no hospitals","It shows God chose to enter the world through POVERTY and humility, not wealth and power — challenging expectations of what a 'king' looks like","The stable was nice","It was an accident"],correct:1,explanation:"The King of Kings born in a stable among animals overturns all expectations. It shows God values humility over wealth, and power comes through service, not status."},
+{topic:"Birth",question:"The Magi's gifts of Gold, Frankincense and Myrrh each represent an aspect of Jesus. Which combination is correct?",options:["King, Teacher, Healer","King (Gold), Priest (Frankincense), Death/Prophet (Myrrh)","Wealth, Smell, Medicine","Power, Prayer, Perfume"],correct:1,explanation:"Gold = kingship. Frankincense = priesthood (used in worship). Myrrh = death/burial (foreshadowing crucifixion). Together they summarise Jesus's entire life and purpose."},
+{topic:"Birth",question:"Why is it significant that SHEPHERDS (not kings or priests) heard the news first?",options:["Shepherds were closest","It shows God's message was for ORDINARY, humble people first — the gospel isn't just for the elite but for everyone","Shepherds were religious leaders","Angels prefer shepherds"],correct:1,explanation:"In Jewish society, shepherds were lowly workers. God chose them first, showing that Jesus's message is for ordinary people — not just the wealthy or powerful."},
+{topic:"Birth",question:"How does Jesus's birth narrative LINK to Noah's Ark?",options:["Both happened in December","Animals present at both. The stable = a 'new Ark' from which God's NEW creation flows, just as Noah's Ark preserved God's first creation","Both involved water","Both had angels"],correct:1,explanation:"Key cross-topic link: the Ark preserved creation during judgement. The stable (with animals) is where God's NEW creation begins through Jesus. Old Ark → New Ark."},
+{topic:"Birth",question:"The Magi came 'from far away'. What does this symbolise about Jesus's message?",options:["Foreign travel was common","Jesus's message is for ALL NATIONS and ALL PEOPLE, not just the Jews — it's universal, like Noah's covenant","They were lost","They wanted gold"],correct:1,explanation:"The Magi represent the Gentile (non-Jewish) world. Their journey shows Jesus's significance extends beyond Israel to all nations — a universal message."},
+{topic:"Birth",question:"Myrrh was used in burial. Why is it significant that this was given at Jesus's BIRTH?",options:["It's a coincidence","It foreshadows Jesus's DEATH from the very beginning — suggesting his purpose was always to sacrifice himself","Myrrh smells nice for babies","It was the cheapest gift"],correct:1,explanation:"Giving a burial spice at a birth is deeply symbolic. From his very first moments, Jesus's destiny — suffering and death for humanity — was being foretold."},
+{topic:"Birth",question:"What does the STAR symbolise and how does it relate to Jesus's role?",options:["It's just astronomy","The star GUIDES people to Jesus, just as Jesus himself is 'the way, the truth and the life' — a guide for all humanity","Stars were worshipped","It was very bright"],correct:1,explanation:"The star guided the Magi to Jesus. Symbolically, Jesus himself IS the guide — 'the way' by which all should follow to find salvation."},
+{topic:"Birth",question:"Jesus's birth was 'humble but special'. How do BOTH aspects work together?",options:["They contradict each other","Humility (stable, animals, shepherds) shows God values the lowly. Special (star, angels, Magi) shows divine purpose. God works through the unexpected","Only one aspect matters","Neither matters"],correct:1,explanation:"The combination is the whole point: God chose the MOST humble circumstances for the MOST important event. It challenges human expectations about where greatness comes from."},
 
-// MIRACLES (6)
-{topic:"Miracles",question:"What is a miracle?",options:["A story with a moral","An event that can't be explained by nature, caused by a supernatural being","A prayer","A type of covenant"],correct:1,explanation:"A miracle is a supernatural event that cannot be explained by the laws of nature."},
-{topic:"Miracles",question:"What miracle involved feeding 5,000 people?",options:["Water to wine","Healing the blind","One fish and one bread feeding 5,000","Walking on water"],correct:2,explanation:"Jesus made one fish and one piece of bread enough for 5,000 — fullness and abundance."},
-{topic:"Miracles",question:"What is the difference between miracles and parables?",options:["They're the same thing","Miracles are supernatural events; parables are stories with meaning","Miracles are stories; parables are events","There is no difference"],correct:1,explanation:"Miracles = supernatural events. Parables = earthly stories with heavenly meaning. Very different!"},
-{topic:"Miracles",question:"What type of miracle was healing the blind man?",options:["Conquering Celebration","Fullness and Abundance","Healing","Renewed Life"],correct:2,explanation:"Jesus made a blind man see again — this is a Healing miracle."},
-{topic:"Miracles",question:"What miracle involved turning water to wine?",options:["Healing","Renewed Life","Fullness and Abundance","Conquering Celebration"],correct:3,explanation:"Water to wine = Conquering Celebration, at a wedding feast."},
-{topic:"Miracles",question:"What do Jesus's miracles teach Christians today?",options:["To be rich","About giving second chances and helping everyone","To avoid Romans","To build temples"],correct:1,explanation:"Miracles are about giving people second chances and helping everyone, even enemies."},
+// ===== MIRACLES (8) =====
+{topic:"Miracles",question:"Jesus healed a Roman soldier's dying daughter. Why is it significant that he helped a ROMAN?",options:["Romans paid more","It shows Jesus's compassion crosses ALL boundaries — even helping people from the group oppressing his people. Love has no limits","He had to obey Romans","The Roman threatened him"],correct:1,explanation:"This is powerful: Romans oppressed Jews, didn't believe in Jesus, yet Jesus helped anyway. It demonstrates that divine compassion has NO boundaries — not ethnicity, religion, or politics."},
+{topic:"Miracles",question:"What THREE elements must an event have to be classified as a miracle?",options:["Big, impressive, public","Cannot be explained by nature, caused by a supernatural being, fulfils a purpose or aim","Unexpected, helpful, witnessed","Religious, ancient, written down"],correct:1,explanation:"All three elements are needed: 1) breaks natural law, 2) caused by supernatural being, 3) has a purpose. Remove any one and it's not technically a miracle."},
+{topic:"Miracles",question:"A student says 'The Good Samaritan is my favourite miracle.' What is WRONG with this statement?",options:["Nothing — it is a miracle","The Good Samaritan is a PARABLE (a story with moral meaning), NOT a miracle (a supernatural event) — they're completely different","It's actually a prayer","It's actually a law"],correct:1,explanation:"This is a crucial distinction exam boards love: PARABLES are stories with moral meaning. MIRACLES are supernatural events. The Good Samaritan is a PARABLE Jesus told, not something that supernaturally happened."},
+{topic:"Miracles",question:"The feeding of the 5,000 is called 'Fullness and Abundance'. What does this title reveal about the miracle's meaning?",options:["There was a lot of food","God provides MORE than enough — from almost nothing, there was abundance. It shows God's provision is limitless and exceeds expectations","5,000 is a big number","Bread is abundant in Israel"],correct:1,explanation:"The title captures the theological point: from almost nothing (one fish, one bread), God created abundance for 5,000. God's provision isn't just sufficient — it's overflowing."},
+{topic:"Miracles",question:"Why might a non-believer struggle with the concept of miracles?",options:["They're not smart enough","Miracles by definition break natural law — someone who believes only in natural explanations would find this contradictory","They haven't read the Bible","Non-believers can't understand stories"],correct:1,explanation:"Miracles require accepting the supernatural. Someone with a purely naturalistic worldview would argue there must be a natural explanation. This tension is important in RE."},
+{topic:"Miracles",question:"Water to wine is categorised as 'Conquering Celebration'. Why 'conquering'?",options:["Jesus conquered the Romans","Wine represents joy triumphing over shortage — Jesus CONQUERED the problem and transformed a potential embarrassment into celebration","He won a competition","Wine conquers thirst"],correct:1,explanation:"The wedding was about to fail (no wine = social disaster). Jesus didn't just fix the problem — he transformed it into abundance. Joy conquered shortage."},
+{topic:"Miracles",question:"How might believing in Jesus's miracles influence a Christian's daily life TODAY?",options:["They'd expect miracles daily","It gives them HOPE that God can transform impossible situations, encourages helping others (even enemies), and shows second chances are possible","It wouldn't affect them","They'd become doctors"],correct:1,explanation:"Belief in miracles provides hope (God can do the impossible), models compassion (help everyone, including enemies), and shows that transformation and second chances are always possible."},
+{topic:"Miracles",question:"The 'dying child' miracle shows Jesus helped a Roman's daughter. How does this connect to the Good Samaritan parable?",options:["They're unrelated","Both teach that compassion should cross boundaries — helping even those you might consider enemies or outsiders","Both involve children","Both happened in the same place"],correct:1,explanation:"Cross-topic link: the miracle (helping a Roman's child) and the parable (Samaritan helping a Jew) both teach that compassion must cross social, ethnic, and political boundaries."},
 
-// PARABLES (6)
-{topic:"Parables",question:"What IS a parable?",options:["A miracle","A prayer","An earthly story with a heavenly meaning","A law"],correct:2,explanation:"A parable is an earthly story (normal things) with a heavenly (spiritual) meaning."},
-{topic:"Parables",question:"What does the Good Samaritan teach?",options:["Be wealthy","Love your neighbour and show compassion to anyone","Only help friends","Obey the Romans"],correct:1,explanation:"The Good Samaritan teaches: love your neighbour, show compassion, treat everyone the same."},
-{topic:"Parables",question:"What does the Dishonest Steward teach?",options:["Stealing is okay","Use wealth for godly purposes, not personal gain","Money is evil","Save everything"],correct:1,explanation:"You cannot serve both money AND God. Use worldly wealth for eternal/godly purposes."},
-{topic:"Parables",question:"Are parables the same as miracles?",options:["Yes, exactly the same","No — parables are stories; miracles are supernatural events","Yes, both are supernatural","No — parables are prayers"],correct:1,explanation:"PARABLES ARE NOT MIRACLES! Parables = stories with moral meaning. Miracles = supernatural events."},
-{topic:"Parables",question:"Why do people tell stories/parables?",options:["Only for entertainment","To inspire, pass on knowledge, keep traditions, give warnings","To confuse people","Only to make money"],correct:1,explanation:"Stories inspire, keep memories alive, pass on knowledge and beliefs, and give warnings."},
-{topic:"Parables",question:"In the Dishonest Steward, what does 'prepare for the future' mean?",options:["Save money","Believers should urgently prepare for eternity","Build a house","Study hard"],correct:1,explanation:"The steward prepared quickly for his future — believers should prepare for eternity while they can."},
+// ===== PARABLES (8) =====
+{topic:"Parables",question:"'An earthly story with a heavenly meaning.' Why did Jesus use everyday situations rather than complex theology?",options:["He wasn't very educated","Everyday stories are ACCESSIBLE to everyone — farmers, fishermen, tax collectors could all understand. It's inclusive teaching","He couldn't think of better stories","People only liked simple stories"],correct:1,explanation:"Jesus's audience was ordinary people. By using farming, money, travel — things they knew — he made deep spiritual truths accessible to everyone, not just scholars."},
+{topic:"Parables",question:"In the Good Samaritan, why is it significant that the HERO is a Samaritan?",options:["Samaritans were popular","Samaritans were DESPISED by Jews — making a hated outsider the hero deliberately challenges prejudice and forces listeners to rethink who their 'neighbour' is","Samaritans were wealthy","It's random"],correct:1,explanation:"Jews and Samaritans were enemies. By making a Samaritan the hero (while a priest and Levite walked past), Jesus directly challenged his audience's prejudice."},
+{topic:"Parables",question:"The Dishonest Steward is confusing — why would Jesus PRAISE a dishonest person?",options:["Jesus approves of dishonesty","Jesus isn't praising dishonesty but the steward's SHREWDNESS and urgency in preparing for the future — believers should be equally urgent about eternity","It's a mistranslation","Jesus didn't understand the story"],correct:1,explanation:"The point isn't 'be dishonest'. It's 'be as CLEVER and URGENT about your spiritual future as this man was about his financial future.' It's about urgency, not morality."},
+{topic:"Parables",question:"'You cannot serve both God and money.' Why might this teaching be CHALLENGING for wealthy Christians?",options:["It's not challenging","It forces them to examine whether their wealth serves God's purposes or replaces God as their priority — are they generous or greedy?","Wealthy people don't read parables","Money is always evil in Christianity"],correct:1,explanation:"This doesn't say 'money is evil' — it says money can't be your MASTER. Wealthy Christians must ask: does my money serve God (charity, justice) or do I serve my money?"},
+{topic:"Parables",question:"How is a parable different from a fable?",options:["They're identical","Parables have SPIRITUAL/heavenly meaning about God's kingdom. Fables teach MORAL lessons about behaviour. Both use stories but for different purposes","Fables are longer","Parables are for adults, fables for children"],correct:1,explanation:"Fables (dog, fox) = moral behaviour lessons. Parables = spiritual truths about God's kingdom. The Good Samaritan teaches about God's love, not just 'be nice'."},
+{topic:"Parables",question:"'Faithfulness in small things is a test of trustworthiness' (from the Dishonest Steward). How does this apply to an 11-year-old?",options:["It doesn't apply to children","How you handle small responsibilities (homework, chores, keeping promises) shows your CHARACTER — if trustworthy in small things, you'll be trusted with bigger things","Only money counts","You should be dishonest about small things"],correct:1,explanation:"This is very practical: if you're honest about small things (homework, promises, being kind), people see your character. Trustworthiness in small matters leads to bigger opportunities."},
+{topic:"Parables",question:"Why do Christians study parables rather than just reading them once?",options:["They're forgetful","Parables have LAYERS of meaning that reveal themselves over time — deeper study uncovers new insights relevant to different situations in life","They're too short","They're hard to understand"],correct:1,explanation:"Parables are deceptively simple. The Good Samaritan seems straightforward but raises deep questions about prejudice, duty, and love that become more complex with study."},
+{topic:"Parables",question:"The Good Samaritan teaches 'act like Jesus to please God'. How does this connect to the miracles Jesus performed?",options:["No connection","Both parables AND miracles show the same principle: compassion without boundaries. Jesus TAUGHT it (parables) and DEMONSTRATED it (miracles)","Miracles are more important","Parables came first"],correct:1,explanation:"Cross-topic link: Jesus didn't just TELL stories about compassion (parables) — he SHOWED it through action (miracles like healing a Roman's daughter). Teaching and practice aligned."},
 
-// DEATH OF JESUS (6)
-{topic:"Death",question:"How did Jesus die?",options:["Old age","By Roman crucifixion","In a flood","In battle"],correct:1,explanation:"Jesus died by Roman crucifixion."},
-{topic:"Death",question:"Why was Jesus crucified?",options:["He stole something","Romans: political threat. Jewish leaders: blasphemer","He was a Roman soldier","He broke the Noahide laws"],correct:1,explanation:"Romans saw him as a political threat (rebel king), Jewish leaders saw him as a blasphemer."},
-{topic:"Death",question:"Why do Christians call his death a SACRIFICE?",options:["He paid money","He was sinless and voluntarily paid the penalty for humanity's sins","He sacrificed animals","He gave up food"],correct:1,explanation:"Jesus acted as a sinless substitute, paying the penalty for humanity's sins."},
-{topic:"Death",question:"Why do Christians call his death a VICTORY?",options:["He won a war","His resurrection broke the power of sin, death and the devil","He defeated the Romans","He escaped"],correct:1,explanation:"Through resurrection, he broke the power of sin, death and the devil — securing eternal life."},
-{topic:"Death",question:"What happened in the temple when Jesus died?",options:["It exploded","The curtain ripped in half","It flooded","Nothing"],correct:1,explanation:"The curtain in the Jewish temple ripped in two when Jesus died."},
-{topic:"Death",question:"Who helped Jesus carry the cross?",options:["Peter","Mary","Simon","Judas"],correct:2,explanation:"Simon helped Jesus carry the heavy cross up the hill."},
+// ===== DEATH (8) =====
+{topic:"Death",question:"Jesus was crucified — a punishment for the WORST criminals. Why is this significant for Christians?",options:["It's embarrassing","The most DEGRADING death possible makes the sacrifice GREATER — God's son endured the worst humanity could offer, showing the depth of divine love","It was the only option","Romans always crucified people"],correct:1,explanation:"Crucifixion was deliberately humiliating — for slaves and rebels. That God's son endured THIS makes the sacrifice more profound. The deeper the suffering, the greater the love shown."},
+{topic:"Death",question:"Jesus's death is called BOTH a sacrifice AND a victory. How can it be both simultaneously?",options:["It can't — only one is correct","SACRIFICE: he gave his life for humanity's sins. VICTORY: his resurrection proved death couldn't hold him — the sacrifice LED to the victory","They're the same thing","Victory came first"],correct:1,explanation:"They work together: the sacrifice (dying for sins) was the price. The victory (resurrection defeating death) was the result. Without sacrifice, no victory. Without victory, sacrifice would be meaningless."},
+{topic:"Death",question:"The temple curtain tore when Jesus died. What is the DEEPER symbolism of this?",options:["It was old fabric","The curtain separated ordinary people from God's presence (Holy of Holies). It tearing means Jesus's death REMOVED the barrier — ALL people can now access God directly","An earthquake ripped it","It was decorative"],correct:1,explanation:"This is hugely symbolic: previously only the High Priest could enter God's presence. The torn curtain means Jesus's death opened direct access to God for EVERYONE — no more barriers."},
+{topic:"Death",question:"Why did BOTH Roman AND Jewish authorities want Jesus dead?",options:["They always agreed","Romans saw a POLITICAL threat (potential rebel king). Jewish leaders saw RELIGIOUS threat (blasphemer challenging their authority). Different reasons, same outcome","He committed a crime","Only Romans wanted him dead"],correct:1,explanation:"Key distinction: Romans feared political rebellion ('King of the Jews' challenged Caesar). Jewish leaders feared religious disruption (claiming to be God's son = blasphemy). Both had reasons."},
+{topic:"Death",question:"'Substitutionary atonement' — what does this mean in simple terms?",options:["Jesus was a substitute teacher","Jesus (sinless) took the PUNISHMENT that humanity deserved for their sins — he stood in humanity's place as a substitute","Jesus replaced God","Humanity substituted for Jesus"],correct:1,explanation:"Like someone taking a detention you deserved: Jesus was sinless but took the punishment for everyone else's sins. He substituted himself to reconcile (atone) humanity with God."},
+{topic:"Death",question:"How does Jesus's death LINK to the Passover lamb?",options:["Both died in spring","The Passover lamb was SACRIFICED so Jews could be FREE. Jesus = 'Lamb of God' SACRIFICED so humanity could be free from sin. Same pattern, ultimate fulfilment","Both were animals","No connection"],correct:1,explanation:"Crucial connection: Passover lamb's blood saved firstborns → freedom from slavery. Jesus's blood (sacrifice) saves believers → freedom from sin. Christians see Jesus as the ultimate Passover lamb."},
+{topic:"Death",question:"Simon helped Jesus carry the cross. What might this symbolise?",options:["Simon was strong","Even ordinary people play a part in God's plan — and following Jesus may involve sharing in suffering and service","Simon was punished","It was random"],correct:1,explanation:"Simon represents how ordinary people are called to share in Christ's journey — including suffering. Christians are called to 'carry their cross' (face difficulties) in following Jesus."},
+{topic:"Death",question:"Why is it important that Jesus's death was VOLUNTARY, not forced?",options:["It doesn't matter","A forced death would just be execution. A VOLUNTARY death shows deliberate self-sacrifice out of LOVE — it changes the meaning entirely","He could have escaped","Romans forced everyone"],correct:1,explanation:"The voluntary nature transforms the meaning: this isn't just another execution. Jesus CHOSE to die, making it an act of love, not punishment. Choice is what makes it a sacrifice."},
 
-// RESURRECTION (6)
-{topic:"Resurrection",question:"True or False: Jesus rose from the dead on Saturday.",options:["True","False — he rose on Sunday","False — he rose on Friday","False — he rose on Monday"],correct:1,explanation:"Christians believe Jesus rose on SUNDAY — this is why Easter Sunday is celebrated."},
-{topic:"Resurrection",question:"Who was present at the empty tomb?",options:["The disciples","The Romans","Mary Magdalene","Pontius Pilate"],correct:2,explanation:"Mary Magdalene was present at the tomb when it was found empty."},
-{topic:"Resurrection",question:"How many Gospel accounts of the resurrection are there?",options:["1","2","3","4"],correct:3,explanation:"There are 4 accounts — Matthew, Mark, Luke and John each wrote from their perspective."},
-{topic:"Resurrection",question:"True or False: Jesus was killed by a gun.",options:["True","False — crucifixion, not a gun","False — he was poisoned","False — he died naturally"],correct:1,explanation:"Jesus died by Roman crucifixion — guns didn't exist in that era!"},
-{topic:"Resurrection",question:"What does 'Messiah' mean?",options:["Teacher","The anointed one","King","Prophet"],correct:1,explanation:"Messiah means 'the anointed one' — Christians believe Jesus is the Messiah."},
-{topic:"Resurrection",question:"Why might the women NOT have been mistaken about the empty tomb?",options:["They were very clever","Others came and would have noticed the wrong tomb","They had a map","Angels told them"],correct:1,explanation:"When other people came to see, they would have realised if it was the wrong tomb."},
+// ===== RESURRECTION (8) =====
+{topic:"Resurrection",question:"Why is it significant that WOMEN discovered the empty tomb?",options:["Women wake up earlier","In first-century Palestine, women's testimony wasn't legally valid. Including them suggests the authors recorded what ACTUALLY happened rather than inventing a more credible story","Women were more religious","It was a coincidence"],correct:1,explanation:"If you were INVENTING a story, you'd use male witnesses (legally valid). Including women — whose testimony was dismissed — actually SUPPORTS authenticity. It's too unlikely to be fabricated."},
+{topic:"Resurrection",question:"There are 4 different Gospel accounts of the resurrection. A critic says this proves they're unreliable. How might a Christian respond?",options:["The critics are always wrong","Different perspectives on the SAME event is exactly what you'd expect from genuine witnesses — if all accounts were identical, it would suggest they were COPIED","Only one account is true","The differences don't exist"],correct:1,explanation:"Think of 4 people witnessing a car accident — their accounts will differ in details but agree on the main event. Identical accounts would actually be MORE suspicious (suggesting copying)."},
+{topic:"Resurrection",question:"'If Christ has not been raised, our faith is in vain' (Paul). Why is the resurrection THE foundation of Christianity?",options:["It's just important, not foundational","Without resurrection, Jesus is just a dead teacher. Resurrection PROVES he conquered death, validates his claims to be God's son, and makes eternal life possible","Paul exaggerated","The crucifixion is more important"],correct:1,explanation:"The resurrection is what distinguishes Christianity. Without it: Jesus is just another executed preacher. With it: he conquered death, proved he was divine, and opened eternal life."},
+{topic:"Resurrection",question:"The argument that 'women went to the wrong tomb' is sometimes used to explain the empty tomb. What is the strongest counter-argument?",options:["Women can't make mistakes","If it was the wrong tomb, Jewish authorities could have simply shown everyone the RIGHT tomb with Jesus's body still in it — ending Christianity immediately","The tomb had a sign","Angels prevented mistakes"],correct:1,explanation:"This is the strongest counter: if the tomb was simply wrong, authorities would have opened the correct one, shown the body, and ended the whole movement instantly. They didn't — or couldn't."},
+{topic:"Resurrection",question:"Why do Christians worship on SUNDAY rather than Saturday (Jewish Shabbat)?",options:["Sunday is more convenient","Jesus rose on SUNDAY — Christians worship on the day of resurrection, making it 'the Lord's Day' rather than the Jewish Sabbath","The Romans changed it","Sunday was a holiday"],correct:1,explanation:"The shift from Saturday (Shabbat) to Sunday (Lord's Day) is directly because of the resurrection. It's one of the clearest ways the resurrection changed religious practice."},
+{topic:"Resurrection",question:"'Christians call Jesus the Messiah.' What does this actually MEAN and why did it matter?",options:["Messiah = good person","Messiah (Hebrew) / Christ (Greek) = 'The Anointed One' — the promised deliverer Jews had waited centuries for. Claiming this was revolutionary and controversial","It's just a name","It means teacher"],correct:1,explanation:"Messiah/Christ = 'Anointed One' — the prophesied saviour. Jews had waited centuries. Claiming Jesus was THE Messiah was either the most important truth in history or the worst blasphemy."},
+{topic:"Resurrection",question:"How does the resurrection complete the 'sacrifice and victory' theme of Jesus's death?",options:["It doesn't connect","Death = SACRIFICE (paying for sin). Resurrection = VICTORY (proving sacrifice worked and death was conquered). Without resurrection, the sacrifice would appear to have failed","Victory came first","Only sacrifice matters"],correct:1,explanation:"They're two halves of one event: sacrifice without victory = failure. Victory without sacrifice = no cost. Together: Jesus paid the ultimate price (death) and proved it worked (resurrection)."},
+{topic:"Resurrection",question:"Why might the resurrection be the HARDEST part of Christianity for a non-believer to accept?",options:["It's badly written","It claims a dead person physically came back to life — this fundamentally contradicts all scientific understanding of death and requires a leap of FAITH","Non-believers can't read","It's not hard to accept"],correct:1,explanation:"The resurrection is the ultimate supernatural claim. Unlike moral teachings (which anyone can appreciate), accepting bodily resurrection requires faith beyond scientific evidence."},
 
-// GOSPELS (4)
-{topic:"Gospels",question:"Who wrote the four Gospels?",options:["Moses, Noah, Abraham, David","Matthew, Mark, Luke and John","Peter, Paul, James, Thomas","Jesus wrote all four"],correct:1,explanation:"The four Gospel authors are Matthew, Mark, Luke and John."},
-{topic:"Gospels",question:"What do the Gospels record?",options:["The Old Testament","The creation story","The life, teachings, death and resurrection of Jesus","Jewish law"],correct:2,explanation:"The Gospels record Jesus's life, teachings, death and resurrection."},
-{topic:"Gospels",question:"Why are there differences between the Gospels?",options:["They're about different people","Each author wrote from their own perspective","Some are wrong","They were written in different languages"],correct:1,explanation:"Each author recorded events from their own perspective — that's why accounts differ."},
-{topic:"Gospels",question:"What does the word 'Gospel' mean?",options:["Holy book","God's word","Good news","Old story"],correct:2,explanation:"Gospel means 'Good News' — the good news of Jesus Christ."},
+// ===== GOSPELS & CONNECTIONS (8) =====
+{topic:"Connections",question:"How does the theme of COVENANT develop from Noah through to Jesus?",options:["It doesn't develop","Noah: universal covenant (rainbow, all humanity) → Moses: specific covenant (law, Jewish people) → Jesus: new covenant (sacrifice, all who believe). Each builds on the last","They're separate stories","Only Noah has a covenant"],correct:1,explanation:"The covenant theme DEVELOPS: Noah's is universal but basic. Moses's adds detailed law. Jesus's is presented as the ultimate fulfilment — each stage building toward God's complete plan."},
+{topic:"Connections",question:"The Passover lamb, the Zeroa bone, and Jesus's death all share a theme. What is it?",options:["They all involve bones","SACRIFICE leading to FREEDOM — the lamb's blood freed Israelites, the bone remembers that sacrifice, and Jesus's death frees humanity from sin","They all happened at Passover","They're unrelated"],correct:1,explanation:"Sacrifice → freedom is the thread: Passover lamb's sacrifice freed slaves. Zeroa recalls that sacrifice. Jesus is the 'Lamb of God' whose sacrifice frees from sin. One theme across centuries."},
+{topic:"Connections",question:"How does understanding the Pharisees and Sadducees help explain WHY Jesus was crucified?",options:["It doesn't help","The Pharisees' emphasis on religious law made Jesus's claims seem blasphemous. The Sadducees' alliance with Rome made Jesus a political risk. Understanding BOTH groups explains the combined opposition","Only Romans matter","Jesus upset everyone equally"],correct:1,explanation:"Without knowing these groups, the crucifixion seems random. WITH context: Pharisees saw religious threat, Sadducees saw political threat — together they created the forces that killed Jesus."},
+{topic:"Connections",question:"Noah's Ark had animals. Jesus's stable had animals. The Good Samaritan involves a journey. What COMMON THEME links these?",options:["They all involve animals","God works through UNEXPECTED and humble circumstances — an ark, a stable, a despised traveller. God's greatest acts happen in the most unlikely places","They're in the same book","There is no theme"],correct:1,explanation:"God consistently works through the unexpected: saving creation through a boat, entering the world through a stable, teaching love through an enemy. Humility and surprise are God's methods."},
+{topic:"Gospels",question:"If all 4 Gospels told the EXACT same story with NO differences, would this be MORE or LESS convincing?",options:["More convincing","LESS convincing — it would suggest the accounts were COPIED rather than independently written. Some variation actually SUPPORTS authenticity","It would make no difference","We can't know"],correct:1,explanation:"Counter-intuitive but true: identical accounts suggest copying. Different perspectives (like 4 witnesses at a crime scene) actually support genuine independent testimony."},
+{topic:"Gospels",question:"What does the word 'Gospel' mean and why is this significant?",options:["Old story","'GOOD NEWS' — the authors saw themselves as sharing the best news in human history: God entered the world, died for sins, and conquered death","Holy book","God's words"],correct:1,explanation:"Gospel = 'Good News' (from Greek 'evangelion'). This name reveals the authors' PURPOSE: they weren't writing history textbooks but sharing what they believed was the most important news ever."},
+{topic:"Connections",question:"How does the concept of SACRIFICE develop from Passover → Temple worship → Jesus's death?",options:["It doesn't develop","Passover: animal sacrifice for one event. Temple: regular animal sacrifices for ongoing sin. Jesus: ONE ultimate sacrifice for ALL sin, forever. Each stage increases in scope","They're all the same","Only Jesus's sacrifice counts"],correct:1,explanation:"The progression: Passover = one lamb, one event. Temple = many animals, ongoing. Jesus = one sacrifice, eternal. Christians believe Jesus made all other sacrifices unnecessary."},
+{topic:"Connections",question:"If you had to explain the WHOLE Year 7 RE course in ONE sentence, using the theme of covenant, what would it be?",options:["God made rules","God repeatedly made covenants (promises) with humanity — from creation through Noah, Moses, and finally Jesus — each time offering relationship in exchange for faithfulness","Jesus is important","The Bible has stories"],correct:1,explanation:"The entire course traces God's relationship with humanity through covenants: creating, judging (flood), freeing (Passover), guiding (Torah), and ultimately sacrificing (Jesus) — always offering relationship."},
 ];
 
 const FLASHCARDS=[
-{q:"What is a covenant?",a:"A religious contract where humanity exchanges promises with God",cat:"Noah"},
-{q:"How long did Noah's flood last?",a:"40 days and 40 nights",cat:"Noah"},
-{q:"What is the sign of God's covenant with Noah?",a:"A rainbow",cat:"Noah"},
-{q:"What does Maror represent?",a:"The bitterness of slavery in Egypt",cat:"Passover"},
-{q:"What does Matzah represent?",a:"Bread that didn't rise — Israelites fled in a hurry",cat:"Passover"},
-{q:"What does Charoset look like?",a:"Mortar/bricks the slaves made (apples, nuts, cinnamon, wine)",cat:"Passover"},
-{q:"What does Karpas in salt water represent?",a:"Tears of the Israelite slaves",cat:"Passover"},
-{q:"What is the Torah?",a:"Jewish Holy Book — first 5 books of the Old Testament",cat:"Torah"},
-{q:"When is Shabbat?",a:"Friday sunset to Saturday sunset",cat:"Torah"},
-{q:"Why observe Shabbat?",a:"God rested on the 7th day of creation",cat:"Torah"},
-{q:"What does Kosher mean?",a:"Meets Jewish rules / acceptable",cat:"Torah"},
-{q:"Who were the Pharisees?",a:"Believed in resurrection, oral + written Torah, opposed but didn't rebel against Rome",cat:"Palestine"},
-{q:"Who were the Sadducees?",a:"Written Torah only, no afterlife, collaborated with Romans, relied on temple",cat:"Palestine"},
-{q:"Who were the Essenes?",a:"Spiritual purity, temple was corrupt, awaited two Messiahs",cat:"Palestine"},
-{q:"What does Gold (gift) symbolise?",a:"Jesus is a King",cat:"Birth"},
-{q:"What does Frankincense symbolise?",a:"Jesus is a Priest",cat:"Birth"},
-{q:"What does Myrrh symbolise?",a:"Death — foreshadows Jesus's death",cat:"Birth"},
-{q:"What do the shepherds represent?",a:"The humble and ordinary people",cat:"Birth"},
-{q:"What is a miracle?",a:"An event that can't be explained by nature, caused by a supernatural being",cat:"Miracles"},
-{q:"What is a parable?",a:"An earthly story with a heavenly meaning",cat:"Parables"},
-{q:"Miracles vs Parables?",a:"Miracles = supernatural events. Parables = stories with moral meaning",cat:"Parables"},
-{q:"Good Samaritan teaches...",a:"Love your neighbour, show compassion to anyone, treat everyone the same",cat:"Parables"},
-{q:"Dishonest Steward teaches...",a:"Can't serve money AND God. Use wealth for godly purposes. Prepare for eternity.",cat:"Parables"},
-{q:"How did Jesus die?",a:"By Roman crucifixion",cat:"Death"},
-{q:"Why was Jesus crucified?",a:"Romans: political threat. Jewish leaders: blasphemer",cat:"Death"},
-{q:"Death as Sacrifice?",a:"Sinless Jesus voluntarily paid penalty for humanity's sins",cat:"Death"},
-{q:"Death as Victory?",a:"Resurrection broke the power of sin, death and the devil",cat:"Death"},
-{q:"Who helped carry the cross?",a:"Simon",cat:"Death"},
-{q:"When did Jesus rise?",a:"Sunday (Easter Sunday)",cat:"Resurrection"},
-{q:"Who found the empty tomb?",a:"Mary Magdalene",cat:"Resurrection"},
-{q:"Who wrote the 4 Gospels?",a:"Matthew, Mark, Luke and John",cat:"Gospels"},
-{q:"What does 'Gospel' mean?",a:"Good News",cat:"Gospels"},
-{q:"7 Noahide Laws include...",a:"Justice, no blasphemy, no idolatry, no murder, no adultery, no stealing, no eating living flesh",cat:"Noah"},
-{q:"What does 'universal' mean (Noah)?",a:"With everyone — all of humanity",cat:"Noah"},
-{q:"Zeroa (Shank Bone) symbolises...",a:"The Paschal lamb sacrifice before the Exodus",cat:"Passover"},
-{q:"What did God create on Day 1?",a:"Light — separated light from darkness",cat:"Creation"},
-{q:"What happened on Day 7?",a:"God rested — this is why Shabbat exists",cat:"Creation"},
+{q:"What is creation ex nihilo?",a:"Creation from NOTHING — shows God's unlimited power",cat:"Creation"},
+{q:"Why are humans created LAST (Day 6)?",a:"Everything had to be prepared first — humans are the pinnacle of creation",cat:"Creation"},
+{q:"What does 'bilateral' mean about a covenant?",a:"BOTH sides make promises — it's a two-way agreement",cat:"Noah"},
+{q:"Why is Noah's covenant 'universal'?",a:"Applies to ALL humanity, not just one group",cat:"Noah"},
+{q:"What does 40 symbolise in the Bible?",a:"A period of testing, trial or transformation (flood, wilderness, Jesus's fast)",cat:"Noah"},
+{q:"Name all 7 Noahide Laws",a:"1.Courts of justice 2.No blasphemy 3.No idolatry 4.No murder 5.No adultery 6.No stealing 7.No eating flesh of living animal",cat:"Noah"},
+{q:"What does Charoset look like and why?",a:"Looks like mortar/bricks slaves made — but tastes sweet (hope in suffering)",cat:"Passover"},
+{q:"Why retell Passover EVERY year?",a:"'In every generation, see yourself as having personally left Egypt' — keeps it alive and personal",cat:"Passover"},
+{q:"Link: Passover lamb → Jesus",a:"Lamb sacrificed for freedom from slavery → Jesus sacrificed for freedom from sin",cat:"Connections"},
+{q:"Why must Torah be hand-written?",a:"'You shall write them' — the physical act of writing is sacred worship",cat:"Torah"},
+{q:"What happens if ONE letter is wrong in a Torah?",a:"The entire scroll cannot be used — every letter is sacred",cat:"Torah"},
+{q:"Why use a child to test a Torah?",a:"If an untrained person can read it, the letters must be perfectly formed",cat:"Torah"},
+{q:"Pharisees: key beliefs (4 things)",a:"Resurrection ✓ Immortal soul ✓ Written + Oral Torah ✓ God's will in everything ✓",cat:"Palestine"},
+{q:"Sadducees: what did they REJECT?",a:"Afterlife, angels, oral law — only accepted written Torah",cat:"Palestine"},
+{q:"Why did Sadducees decline after 70 CE?",a:"They depended on the temple — when destroyed, they couldn't adapt",cat:"Palestine"},
+{q:"Essenes: how many Messiahs expected?",a:"TWO: a priestly Messiah + a kingly Messiah",cat:"Palestine"},
+{q:"Which group shaped modern Judaism?",a:"Pharisees — synagogue focus meant they could survive without the temple",cat:"Palestine"},
+{q:"Gold symbolises...",a:"Jesus is KING (royalty)",cat:"Birth"},
+{q:"Frankincense symbolises...",a:"Jesus is PRIEST (used in worship)",cat:"Birth"},
+{q:"Myrrh symbolises...",a:"Jesus's DEATH (burial spice — foreshadows crucifixion)",cat:"Birth"},
+{q:"How does stable link to Noah's Ark?",a:"Animals at both — stable is 'new Ark' from which God's new creation flows",cat:"Birth"},
+{q:"3 elements of a miracle",a:"1. Can't be explained by nature 2. Caused by supernatural being 3. Has a purpose",cat:"Miracles"},
+{q:"⚠ Miracle vs Parable?",a:"Miracle = supernatural EVENT. Parable = STORY with moral/spiritual meaning. NEVER confuse!",cat:"Miracles"},
+{q:"Good Samaritan: deeper point",a:"A HATED enemy (Samaritan) is the hero — challenges prejudice about who is your 'neighbour'",cat:"Parables"},
+{q:"Dishonest Steward: main lesson",a:"Be URGENT about spiritual matters. Can't serve BOTH money and God",cat:"Parables"},
+{q:"What does 'substitutionary atonement' mean?",a:"Jesus (sinless) took the PUNISHMENT humanity deserved — stood in our place",cat:"Death"},
+{q:"What does the torn temple curtain mean?",a:"Barrier between God and humanity REMOVED — all people can now access God directly",cat:"Death"},
+{q:"Link: sacrifice → victory",a:"Death = sacrifice (paying for sin). Resurrection = victory (proving sacrifice worked, death conquered)",cat:"Death"},
+{q:"Why is it significant WOMEN found the empty tomb?",a:"Women's testimony wasn't legally valid — including them suggests truth, not invention",cat:"Resurrection"},
+{q:"Best counter to 'wrong tomb' argument?",a:"Authorities could have simply opened the RIGHT tomb and shown the body — ending Christianity",cat:"Resurrection"},
+{q:"What does 'Messiah' / 'Christ' mean?",a:"'The Anointed One' — the promised deliverer/saviour",cat:"Resurrection"},
+{q:"4 Gospel authors",a:"Matthew, Mark, Luke, John",cat:"Gospels"},
+{q:"Why do differences between Gospels support authenticity?",a:"Identical accounts would suggest copying. Variation = genuine independent witnesses",cat:"Gospels"},
+{q:"Covenant progression (3 stages)",a:"Noah: universal (rainbow) → Moses: specific (law) → Jesus: ultimate (sacrifice for all who believe)",cat:"Connections"},
+{q:"Sacrifice progression (3 stages)",a:"Passover: one lamb, one event → Temple: many animals, ongoing → Jesus: one sacrifice, eternal",cat:"Connections"},
+{q:"One sentence: whole RE course theme",a:"God repeatedly made covenants with humanity — creation, Noah, Moses, Jesus — offering relationship in exchange for faithfulness",cat:"Connections"},
 ];
 
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
@@ -308,25 +339,27 @@ let state={mode:'home',qs:[],cq:0,sel:null,showAns:false,score:0,ans:0,streak:0,
 function S(u){Object.assign(state,u);render();}
 
 function render(){
-const s=state,app=document.getElementById('app'),topics=[...new Set(QUESTIONS.map(q=>q.topic))];
+const s=state,app=document.getElementById('app'),topics=[...new Set(Q.map(q=>q.topic))];
 if(s.mode==='home'){
 app.innerHTML=`<div style="text-align:center;margin-bottom:32px;padding-top:12px">
 <div style="font-size:48px;margin-bottom:8px">✝️</div>
 <h1 style="font-size:28px;font-weight:900;margin:0 0 6px;background:linear-gradient(135deg,#FFA94D,#FF6B6B,#845EF7,#51CF66,#F06595);-webkit-background-clip:text;-webkit-text-fill-color:transparent">RE Revision</h1>
-<p style="color:#9898b8;font-size:15px;margin:0">Year 7 — Nov 2025 to Mar 2026 💪</p></div>
+<p style="color:#9898b8;font-size:14px;margin:0">Year 7 — Competitive Level 🔥</p>
+<p style="color:#666;font-size:12px;margin-top:4px">${Q.length} questions · ${FLASHCARDS.length} flashcards · Analysis & evaluation</p></div>
 <div class="main-grid">
 <button class="btn card" onclick="startQuiz(null)" style="text-align:center;background:linear-gradient(135deg,#845EF722,#845EF711);border-color:#845EF744;cursor:pointer">
-<div style="font-size:30px;margin-bottom:6px">🚀</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Full Quiz</div><div style="color:#9898b8;font-size:12px">All ${QUESTIONS.length} Qs</div></button>
+<div style="font-size:30px;margin-bottom:6px">🚀</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Full Quiz</div><div style="color:#9898b8;font-size:12px">All ${Q.length} Qs</div></button>
 <button class="btn card" onclick="S({mode:'cheatsheet',ct:0})" style="text-align:center;background:linear-gradient(135deg,#51CF6622,#51CF6611);border-color:#51CF6644;cursor:pointer">
 <div style="font-size:30px;margin-bottom:6px">📖</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Cheat Sheet</div><div style="color:#9898b8;font-size:12px">${CHEAT_SHEET.length} topics</div></button>
-<button class="btn card" onclick="startFlash(null)" style="text-align:center;background:linear-gradient(135deg,#FFA94D22,#FFA94D11);border-color:#FFA94D44;cursor:pointer">
-<div style="font-size:30px;margin-bottom:6px">🔄</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Flashcards</div><div style="color:#9898b8;font-size:12px">${FLASHCARDS.length} cards</div></button></div>
+</div>
+<button class="btn card" onclick="startFlash(null)" style="text-align:center;background:linear-gradient(135deg,#FFA94D22,#FFA94D11);border-color:#FFA94D44;cursor:pointer;width:100%;margin-bottom:28px">
+<div style="font-size:30px;margin-bottom:6px">🔄</div><div style="font-weight:800;font-size:15px;margin-bottom:3px">Flashcards</div><div style="color:#9898b8;font-size:12px">${FLASHCARDS.length} cards — key concepts & cross-topic links</div></button>
 <p style="color:#9898b8;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px">Quiz by Topic</p>
 <div class="topic-grid">${topics.map(t=>`<button class="btn" onclick="startQuiz('${t}')" style="background:linear-gradient(135deg,${TC[t]||'#888'}22,${TC[t]||'#888'}11);border:1px solid ${TC[t]||'#888'}44;border-radius:14px;padding:12px 8px;color:#e8e8f0;text-align:center;font-family:inherit;cursor:pointer">
-<div style="font-size:20px">${TI[t]||'📝'}</div><div style="font-size:11px;font-weight:700;margin-top:4px">${t}</div><div style="font-size:10px;color:#9898b8">${QUESTIONS.filter(q=>q.topic===t).length}Qs</div></button>`).join('')}</div>`;return;}
+<div style="font-size:18px">${TI[t]||'📝'}</div><div style="font-size:10px;font-weight:700;margin-top:3px">${t}</div><div style="font-size:10px;color:#9898b8">${Q.filter(q=>q.topic===t).length}</div></button>`).join('')}</div>`;return;}
 if(s.mode==='cheatsheet'){const sec=CHEAT_SHEET[s.ct];
-app.innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><button class="btn back-btn" onclick="S({mode:'home'})">← Back</button><h2 style="font-size:20px;font-weight:900">📖 Cheat Sheet</h2></div>
-<div class="tab-wrap">${CHEAT_SHEET.map((x,i)=>`<button class="btn tab-btn" onclick="S({ct:${i}})" style="background:${s.ct===i?x.color+'33':'rgba(255,255,255,0.05)'};border-color:${s.ct===i?x.color:'rgba(255,255,255,0.1)'};color:${s.ct===i?x.color:'#9898b8'}">${x.icon} ${x.title.split('(')[0].split('—')[0].trim().substring(0,12)}</button>`).join('')}</div>
+app.innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><button class="btn back-btn" onclick="S({mode:'home'})">← Back</button><h2 style="font-size:18px;font-weight:900">📖 Cheat Sheet</h2></div>
+<div class="tab-wrap">${CHEAT_SHEET.map((x,i)=>`<button class="btn tab-btn" onclick="S({ct:${i}})" style="background:${s.ct===i?x.color+'33':'rgba(255,255,255,0.05)'};border-color:${s.ct===i?x.color:'rgba(255,255,255,0.1)'};color:${s.ct===i?x.color:'#9898b8'}">${x.icon}</button>`).join('')}</div>
 <div class="card" style="border-color:${sec.color}44;background:linear-gradient(135deg,${sec.color}11,rgba(255,255,255,0.04))">
 <h3 style="margin:0 0 20px;font-size:20px;font-weight:900;color:${sec.color}">${sec.icon} ${sec.title}</h3>
 ${sec.items.map(it=>`<div class="cheat-item"><span class="cheat-term" style="color:${sec.color}">${esc(it.term)}</span><div class="cheat-desc">${esc(it.desc)}</div></div>`).join('')}</div>
@@ -334,12 +367,11 @@ ${sec.items.map(it=>`<div class="cheat-item"><span class="cheat-term" style="col
 if(s.mode==='flashcards'&&s.fc.length){const c=s.fc[s.fi],prog=((s.fi)/s.fc.length)*100;
 app.innerHTML=`<div class="nav-row"><button class="btn back-btn" onclick="S({mode:'home'})">← Back</button><div class="score-bar"><span style="color:#51CF66">✓${s.fcScore}</span><span style="color:#FF6B6B">✗${s.fcTotal-s.fcScore}</span></div></div>
 <div class="progress-bar"><div class="progress-fill" style="width:${prog}%;background:linear-gradient(90deg,#845EF7,#845EF7cc)"></div></div>
-<div class="card" style="text-align:center"><p style="color:#9898b8;font-size:13px;margin-bottom:4px;font-weight:600">${s.fi+1}/${s.fc.length}</p><p style="color:#9898b8;font-size:12px;margin-bottom:16px">Tap card to flip</p>
+<div class="card" style="text-align:center"><p style="color:#9898b8;font-size:13px;margin-bottom:16px;font-weight:600">${s.fi+1}/${s.fc.length}</p>
 <div class="flash-card ${s.flipped?'flash-back':'flash-front'}" onclick="S({flipped:!state.flipped})">
-${s.flipped?`<div><div style="font-size:14px;color:#9898b8;margin-bottom:8px">Answer:</div><div style="font-size:20px;font-weight:800;color:#51CF66;line-height:1.5">${esc(c.a)}</div></div>`
-:`<div><div style="font-size:14px;color:#9898b8;margin-bottom:8px">Question:</div><div style="font-size:20px;font-weight:800;color:#845EF7;line-height:1.5">${esc(c.q)}</div><div style="margin-top:12px;font-size:14px;color:#666">Tap to reveal</div></div>`}</div>
-${s.flipped?`<p style="color:#9898b8;font-size:14px;margin:16px 0 10px;font-weight:700">Did you know it?</p>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><button class="btn full-btn" onclick="fcRate(true)" style="background:linear-gradient(135deg,#51CF66,#51CF66cc);margin:0;font-size:18px">✓ Yes</button><button class="btn full-btn" onclick="fcRate(false)" style="background:linear-gradient(135deg,#FF6B6B,#FF6B6Bcc);margin:0;font-size:18px">✗ No</button></div>`:''}</div>`;return;}
+${s.flipped?`<div><div style="font-size:13px;color:#9898b8;margin-bottom:8px">Answer:</div><div style="font-size:18px;font-weight:800;color:#51CF66;line-height:1.6">${esc(c.a)}</div></div>`
+:`<div><div style="font-size:13px;color:#9898b8;margin-bottom:8px">Question:</div><div style="font-size:18px;font-weight:800;color:#845EF7;line-height:1.6">${esc(c.q)}</div><div style="margin-top:14px;font-size:13px;color:#555">Tap to reveal</div></div>`}</div>
+${s.flipped?`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px"><button class="btn full-btn" onclick="fcRate(true)" style="background:linear-gradient(135deg,#51CF66,#51CF66cc);margin:0;font-size:18px">✓ Knew it</button><button class="btn full-btn" onclick="fcRate(false)" style="background:linear-gradient(135deg,#FF6B6B,#FF6B6Bcc);margin:0;font-size:18px">✗ Didn't</button></div>`:''}</div>`;return;}
 if(s.mode==='fc_results'){const ipct=s.fcTotal?Math.round((s.fcScore/s.fcTotal)*100):0;const g=ipct>=80?{e:'🌟',m:'Outstanding!',c:'#FCC419'}:ipct>=60?{e:'💪',m:'Great work!',c:'#51CF66'}:{e:'📚',m:'Keep revising!',c:'#339AF0'};
 app.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:56px;margin-bottom:8px">${g.e}</div><h2 style="margin:0 0 6px;font-size:28px;font-weight:900;color:${g.c}">${s.fcScore}/${s.fcTotal}</h2><div class="result-pct" style="background:linear-gradient(135deg,${g.c},${g.c}aa)">${ipct}%</div><p style="color:#b8b8d0;font-size:16px;font-weight:600;margin:0 0 20px">${g.m}</p>
 <div class="bottom-grid"><button class="btn card" onclick="startFlash(null)" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#845EF715,#845EF705);border-color:#845EF744"><div style="font-size:24px">🔄</div><div style="font-size:12px;font-weight:800;margin-top:6px">Again</div></button><button class="btn card" onclick="S({mode:'cheatsheet',ct:0})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#51CF6615,#51CF6605);border-color:#51CF6644"><div style="font-size:24px">📖</div><div style="font-size:12px;font-weight:800;margin-top:6px">Cheat Sheet</div></button><button class="btn card" onclick="S({mode:'home'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#FF6B6B15,#FF6B6B05);border-color:#FF6B6B44"><div style="font-size:24px">🏠</div><div style="font-size:12px;font-weight:800;margin-top:6px">Home</div></button></div></div>`;return;}
@@ -347,18 +379,18 @@ if(s.mode==='quiz'&&s.qs.length){const q=s.qs[s.cq],tc=TC[q.topic]||'#845EF7',pr
 app.innerHTML=`<div class="nav-row"><button class="btn back-btn" onclick="S({mode:'home'})" style="padding:6px 14px;font-size:13px">✕ Quit</button><div class="score-bar"><span style="color:#51CF66">✓${s.score}</span><span style="color:#FF6B6B">✗${s.ans-s.score}</span>${s.streak>=2?`<span style="color:#FCC419">🔥${s.streak}</span>`:''}</div></div>
 <div class="progress-bar"><div class="progress-fill" style="width:${prog}%;background:linear-gradient(90deg,${tc},${tc}cc)"></div></div>
 <div class="card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span style="background:${tc}22;color:${tc};padding:4px 12px;border-radius:8px;font-size:12px;font-weight:800;border:1px solid ${tc}44">${TI[q.topic]||'📝'} ${q.topic}</span><span style="color:#9898b8;font-size:13px;font-weight:600">${s.cq+1}/${s.qs.length}</span></div>
-<h3 style="font-size:17px;font-weight:800;margin:0 0 16px;line-height:1.5;color:#f0f0ff">${esc(q.question)}</h3>
+<h3 style="font-size:16px;font-weight:800;margin:0 0 16px;line-height:1.6;color:#f0f0ff">${esc(q.question)}</h3>
 <div style="display:flex;flex-direction:column;gap:10px">${q.options.map((opt,i)=>{let bg='rgba(255,255,255,0.04)',bd='rgba(255,255,255,0.1)',em='';
 if(s.showAns){if(i===q.correct){bg='rgba(81,207,102,0.15)';bd='#51CF66';em=' ✓';}else if(i===s.sel&&i!==q.correct){bg='rgba(255,107,107,0.15)';bd='#FF6B6B';em=' ✗';}}
 return`<button class="option-btn" onclick="pickAnswer(${i})" style="background:${bg};border-color:${bd};${s.showAns?'pointer-events:none':''}"><span class="option-letter" style="background:${tc}22;color:${tc}">${String.fromCharCode(65+i)}</span><span>${esc(opt)}${em}</span></button>`;}).join('')}</div>
-${s.showAns?`<div class="explanation-box ${s.sel===q.correct?'correct-bg':'wrong-bg'}"><div style="font-weight:800;font-size:14px;margin-bottom:4px;color:${s.sel===q.correct?'#51CF66':'#FF6B6B'}">${s.sel===q.correct?(s.streak>=3?'🔥 Amazing!':['Correct! 🎉','Well done! ⭐','You got it! 💪'][Math.floor(Math.random()*3)]):'Not quite — now you know! 💡'}</div><div style="font-size:13px;color:#b8b8d0;line-height:1.6">${esc(q.explanation)}</div></div>
+${s.showAns?`<div class="explanation-box ${s.sel===q.correct?'correct-bg':'wrong-bg'}"><div style="font-weight:800;font-size:14px;margin-bottom:6px;color:${s.sel===q.correct?'#51CF66':'#FF6B6B'}">${s.sel===q.correct?(s.streak>=3?'🔥 Brilliant!':['Correct! 🎉','Well analysed! ⭐','Spot on! 💪'][Math.floor(Math.random()*3)]):'Not quite — read the explanation carefully 💡'}</div><div style="font-size:13px;color:#b8b8d0;line-height:1.7">${esc(q.explanation)}</div></div>
 <button class="btn full-btn" onclick="nextQ()" style="background:linear-gradient(135deg,${tc},${tc}cc)">${s.cq+1>=s.qs.length?'See Results →':'Next Question →'}</button>`:''}</div>`;return;}
-if(s.mode==='results'){const pct=s.qs.length?Math.round((s.score/s.qs.length)*100):0;const g=pct>=90?{e:'🌟',m:'Outstanding! Exam-ready!',c:'#FCC419'}:pct>=70?{e:'💪',m:'Great job! Nearly there!',c:'#51CF66'}:pct>=50?{e:'📚',m:'Good effort! Review below.',c:'#339AF0'}:{e:'🔄',m:'Keep revising!',c:'#FF6B6B'};
-app.innerHTML=`<div class="card" style="text-align:center;margin-bottom:20px"><div style="font-size:56px;margin-bottom:8px">${g.e}</div><h2 style="margin:0 0 6px;font-size:28px;font-weight:900;color:${g.c}">${s.score}/${s.qs.length}</h2><div class="result-pct" style="background:linear-gradient(135deg,${g.c},${g.c}aa)">${pct}%</div><p style="color:#b8b8d0;font-size:16px;margin:0 0 16px;font-weight:600">${g.m}</p>${s.best>=3?`<div style="display:inline-block;background:rgba(252,196,25,0.12);border:1px solid rgba(252,196,25,0.3);border-radius:10px;padding:6px 16px;font-size:14px;font-weight:700;color:#FCC419">🔥 Streak: ${s.best}</div>`:''}</div>
-${s.wrong.length?`<div class="card" style="margin-bottom:20px"><h3 style="margin:0 0 16px;font-size:18px;font-weight:800;color:#FF6B6B">📝 Review These</h3>${s.wrong.map(q=>`<div class="review-item"><div style="font-size:12px;color:${TC[q.topic]||'#888'};font-weight:800;margin-bottom:4px">${TI[q.topic]||'📝'} ${q.topic}</div><div style="font-size:14px;font-weight:700;margin-bottom:6px">${esc(q.question)}</div><div style="font-size:13px;color:#51CF66;font-weight:600">✓ ${esc(q.options[q.correct])}</div><div style="font-size:13px;color:#9898b8;margin-top:4px;line-height:1.5">${esc(q.explanation)}</div></div>`).join('')}</div>`:''}
+if(s.mode==='results'){const pct=s.qs.length?Math.round((s.score/s.qs.length)*100):0;const g=pct>=90?{e:'🌟',m:'Outstanding! Top marks material!',c:'#FCC419'}:pct>=70?{e:'💪',m:'Strong performance! Review below.',c:'#51CF66'}:pct>=50?{e:'📚',m:'Decent effort — study the explanations.',c:'#339AF0'}:{e:'🔄',m:'Read the cheat sheet, then try again.',c:'#FF6B6B'};
+app.innerHTML=`<div class="card" style="text-align:center;margin-bottom:20px"><div style="font-size:56px;margin-bottom:8px">${g.e}</div><h2 style="margin:0 0 6px;font-size:28px;font-weight:900;color:${g.c}">${s.score}/${s.qs.length}</h2><div class="result-pct" style="background:linear-gradient(135deg,${g.c},${g.c}aa)">${pct}%</div><p style="color:#b8b8d0;font-size:16px;margin:0 0 16px;font-weight:600">${g.m}</p>${s.best>=3?`<div style="display:inline-block;background:rgba(252,196,25,0.12);border:1px solid rgba(252,196,25,0.3);border-radius:10px;padding:6px 16px;font-size:14px;font-weight:700;color:#FCC419">🔥 Best streak: ${s.best}</div>`:''}</div>
+${s.wrong.length?`<div class="card" style="margin-bottom:20px"><h3 style="margin:0 0 16px;font-size:18px;font-weight:800;color:#FF6B6B">📝 Review These (read explanations!)</h3>${s.wrong.map(q=>`<div class="review-item"><div style="font-size:12px;color:${TC[q.topic]||'#888'};font-weight:800;margin-bottom:4px">${TI[q.topic]||'📝'} ${q.topic}</div><div style="font-size:14px;font-weight:700;margin-bottom:6px">${esc(q.question)}</div><div style="font-size:13px;color:#51CF66;font-weight:600">✓ ${esc(q.options[q.correct])}</div><div style="font-size:13px;color:#9898b8;margin-top:4px;line-height:1.6">${esc(q.explanation)}</div></div>`).join('')}</div>`:''}
 <div class="bottom-grid"><button class="btn card" onclick="startQuiz(${s.qt?`'${s.qt}'`:'null'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#FF6B6B15,#FF6B6B05);border-color:#FF6B6B44"><div style="font-size:24px">🔄</div><div style="font-size:12px;font-weight:800;margin-top:6px">Again</div></button><button class="btn card" onclick="S({mode:'cheatsheet',ct:0})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#51CF6615,#51CF6605);border-color:#51CF6644"><div style="font-size:24px">📖</div><div style="font-size:12px;font-weight:800;margin-top:6px">Cheat Sheet</div></button><button class="btn card" onclick="S({mode:'home'})" style="text-align:center;cursor:pointer;padding:16px;background:linear-gradient(135deg,#339AF015,#339AF005);border-color:#339AF044"><div style="font-size:24px">🏠</div><div style="font-size:12px;font-weight:800;margin-top:6px">Home</div></button></div>`;return;}}
 
-function startQuiz(topic){let q=topic?QUESTIONS.filter(x=>x.topic===topic):[...QUESTIONS];q=shuffle(q).map(x=>{const idx=x.options.map((_,i)=>i);const sh=shuffle(idx);return{...x,options:sh.map(i=>x.options[i]),correct:sh.indexOf(x.correct)};});S({mode:'quiz',qs:q,cq:0,sel:null,showAns:false,score:0,ans:0,streak:0,best:0,wrong:[],qt:topic});}window.startQuiz=startQuiz;
+function startQuiz(topic){let q=topic?Q.filter(x=>x.topic===topic):[...Q];q=shuffle(q).map(x=>{const idx=x.options.map((_,i)=>i);const sh=shuffle(idx);return{...x,options:sh.map(i=>x.options[i]),correct:sh.indexOf(x.correct)};});S({mode:'quiz',qs:q,cq:0,sel:null,showAns:false,score:0,ans:0,streak:0,best:0,wrong:[],qt:topic});}window.startQuiz=startQuiz;
 function pickAnswer(i){if(state.showAns)return;const c=i===state.qs[state.cq].correct;const ns=c?state.streak+1:0;S({sel:i,showAns:true,ans:state.ans+1,score:state.score+(c?1:0),streak:ns,best:Math.max(state.best,ns),wrong:c?state.wrong:[...state.wrong,state.qs[state.cq]]});}window.pickAnswer=pickAnswer;
 function nextQ(){if(state.cq+1>=state.qs.length)S({mode:'results'});else S({cq:state.cq+1,sel:null,showAns:false});}window.nextQ=nextQ;
 function startFlash(cat){let c=cat?FLASHCARDS.filter(x=>x.cat===cat):[...FLASHCARDS];S({mode:'flashcards',fc:shuffle(c),fi:0,flipped:false,fcCat:cat,fcScore:0,fcTotal:0});}window.startFlash=startFlash;
